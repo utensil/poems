@@ -1,0 +1,74 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+%漢字自動注音
+\usepackage{xpinyin}
+%漢字注音設置
+\xpinyinsetup{ratio = .4,font =\ubufont,multiple={\color{black}}}
+%制作诗歌显示环境
+\usepackage{tcolorbox}
+
+%邊註交互引用
+\NewDocumentCommand\pref{m}
+{\marginpar{\ding{43}\HGB\ubufontc\hyperlink{#1}#1(\pageref{#1})}}
+%正文交互引用
+\NewDocumentCommand\lref{m}
+{{\HGB\ubufontc\hyperlink{#1}#1(\pageref{#1})}}
+
+\newenvironment{poem}[3] %code={\doublespacing},
+{\begin{tcolorbox}[left=1mm,right=1mm,top=3mm,bottom=2mm,enhanced,breakable,pad at break*=.5mm,title=\begin{pinyinscope}\begin{center}\linespread{1.4}\selectfont #2\end{center}\end{pinyinscope},
+		colframe=blue!50!black,colback=blue!10!white,colbacktitle=blue!5!myred!10!white,
+		fonttitle=\huge\HGBM,coltitle=black,attach boxed title to top center=
+		{yshift=-0.25mm-\tcboxedtitleheight/2,yshifttext=2mm-\tcboxedtitleheight/2},
+		boxed title style={boxrule=0.5mm,
+			frame code={ \path[tcb fill frame] ([xshift=-4mm]frame.west) -- (frame.north west) -- (frame.north east) -- ([xshift=4mm]frame.east) -- (frame.south east) -- (frame.south west) -- cycle; },
+			interior code={ \path[tcb fill interior] ([xshift=-2mm]interior.west) -- (interior.north west) -- (interior.north east) -- ([xshift=2mm]interior.east) -- (interior.south east) -- (interior.south west) -- cycle;} }]
+      \begin{pinyinscope}
+      
+      \begin{center}
+      
+      \LARGE\linespread{1.4}\selectfont #3  %\HGBUM\ZSKS
+	}
+{\end{center}\end{pinyinscope}\end{tcolorbox}}
+
+\title{冶文斋诗选}
+\author{心皿}
+
+\begin{document}
+\date{}
+\maketitle
+
+\section{丽江香格里拉之旅}
+
+\begin{poem}{}{回忆}
+日游仙境景，\\
+夜酌少年事。\\
+方外尽酣欢，\\
+归来锁阁思。
+\end{poem}
+
+\bigbreak
+
+% \newpage
+
+\begin{poem}{}{回忆}
+日游仙境景，\\
+夜酌少年事。\\
+方外尽酣欢，\\
+归来锁阁思。
+\end{poem}
+
+% \\[2in]
+
+\bigbreak
+
+% \newpage
+
+\begin{poem}{}{回忆}
+日游仙境景，\\
+夜酌少年事。\\
+方外尽酣欢，\\
+归来锁阁思。
+\end{poem}
+
+
+\end{document}
