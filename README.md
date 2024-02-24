@@ -14,6 +14,6 @@
 
 This repo is the LaTeX source code of Classical Chinese Poems written by me.
 
-Each poems is annotated with the context in which each poem was composed, as well as Hanyu Pinyin, including rare or polyphonic characters.
+Each poem is annotated with the context in which each poem was composed, as well as Hanyu Pinyin, including rare or polyphonic characters.
 
 With "A Little Experience of Writing Classical Chinese Poetry in Daily Life" as a postscript.
