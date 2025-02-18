@@ -1,14 +1,15 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage{csquotes}
+% \usepackage{fontspec}
+\usepackage{xeCJK}
 %漢字自動注音
 \usepackage{xpinyin}
+% \newfontfamily{\ubufont}[Scale=3]{PingFang SC}
 %漢字注音設置
-\xpinyinsetup{ratio = .4,font =\ubufont,multiple={\color{black}}}
+\xpinyinsetup{ratio = .4,multiple={\color{black}}}
 %制作诗歌显示环境
-\usepackage{tcolorbox}
-\usepackage{fontspec}
-
+\usepackage[skins,breakable]{tcolorbox}
 \usepackage{indentfirst}
 \setlength{\parindent}{2em}
 \setlength{\parskip}{1em}
@@ -16,37 +17,51 @@
 % \setmainfont{[fzfss.ttf]}
 % \setsansfont{[fzfss.ttf]} 
 % \setmonofont{[fzfss.ttf]}
+% 設置英文字體
+% \setsansfont[Mapping=tex-text]{DejaVu Sans}
+% \setmonofont[Mapping=tex-text]{DejaVu Sans Mono}
+% \setmainfont[Mapping=tex-text]{DejaVu Serif}
 % \setCJKmainfont{[fzfss.ttf]}
-\setCJKmainfont{FandolFang}
+% \setCJKmainfont{FandolFang}
+% 设置为楷体
+\setCJKmainfont{LXGW WenKai}
 %设置中文正体字体，BoldFont设置粗体和斜体样式对应的字体
-\setCJKsansfont{AR PL UKai CN}%设置无衬线样式对应字体
+% \setCJKsansfont{AR PL UKai CN}%设置无衬线样式对应字体
+% \setCJKsansfont{[fzfss.ttf]}
 % \setCJKmonofont{[fzfss.ttf]} %设置有衬线样式对应字体
+% \setCJKfallbackfamilyfont{rm}{SimSun}
+% \setCJKfallbackfamilyfont{sf}{KaiTi}
+% \setCJKfallbackfamilyfont{tt}{SimHei}
 
 % \newcommand{\fu}{氵\hspace*{-0.4em}伏}
 % {\xpinyin{\fu}{fu2}} 
 
 %邊註交互引用
-\NewDocumentCommand\pref{m}
-{\marginpar{\ding{43}\HGB\ubufontc\hyperlink{#1}#1(\pageref{#1})}}
+% \NewDocumentCommand\pref{m}
+% {\marginpar{\ding{43}\HGB\ubufontc\hyperlink{#1}#1(\pageref{#1})}}
 %正文交互引用
-\NewDocumentCommand\lref{m}
-{{\HGB\ubufontc\hyperlink{#1}#1(\pageref{#1})}}
+% \NewDocumentCommand\lref{m}
+% {{\HGB\ubufontc\hyperlink{#1}#1(\pageref{#1})}}
+%code={\doublespacing}, %\HGBUM\ZSKS
+% \newenvironment{poem}[3]{\begin{tcolorbox}[left=1mm,right=1mm,top=3mm,bottom=2mm,enhanced,breakable,pad at break*=.5mm,title=\begin{pinyinscope}\begin{center}\linespread{1.4}\selectfont #2\end{center}\end{pinyinscope},
+% 		colframe=blue!50!black,colback=blue!10!white,colbacktitle=blue!5!red!10!white,
+% 		coltitle=black,attach boxed title to top center=
+% 		{yshift=-0.25mm-\tcboxedtitleheight/2,yshifttext=2mm-\tcboxedtitleheight/2},
+% 		boxed title style={boxrule=0.5mm,
+% 			frame code={ \path[tcb fill frame] ([xshift=-4mm]frame.west) -- (frame.north west) -- (frame.north east) -- ([xshift=4mm]frame.east) -- (frame.south east) -- (frame.south west) -- cycle; },
+% 			interior code={ \path[tcb fill interior] ([xshift=-2mm]interior.west) -- (interior.north west) -- (interior.north east) -- ([xshift=2mm]interior.east) -- (interior.south east) -- (interior.south west) -- cycle;} }]
+%       \begin{pinyinscope}
+%       \begin{center}
+%       \LARGE\linespread{1.4}\selectfont #3
+% }{\end{center}\end{pinyinscope}\end{tcolorbox}}
 
-\newenvironment{poem}[3] %code={\doublespacing},
-{\begin{tcolorbox}[left=1mm,right=1mm,top=3mm,bottom=2mm,enhanced,breakable,pad at break*=.5mm,title=\begin{pinyinscope}\begin{center}\linespread{1.4}\selectfont #2\end{center}\end{pinyinscope},
-		colframe=blue!50!black,colback=blue!10!white,colbacktitle=blue!5!myred!10!white,
-		fonttitle=\huge\HGBM,coltitle=black,attach boxed title to top center=
-		{yshift=-0.25mm-\tcboxedtitleheight/2,yshifttext=2mm-\tcboxedtitleheight/2},
-		boxed title style={boxrule=0.5mm,
-			frame code={ \path[tcb fill frame] ([xshift=-4mm]frame.west) -- (frame.north west) -- (frame.north east) -- ([xshift=4mm]frame.east) -- (frame.south east) -- (frame.south west) -- cycle; },
-			interior code={ \path[tcb fill interior] ([xshift=-2mm]interior.west) -- (interior.north west) -- (interior.north east) -- ([xshift=2mm]interior.east) -- (interior.south east) -- (interior.south west) -- cycle;} }]
-      \begin{pinyinscope}
-      
-      \begin{center}
-      
-      \LARGE\linespread{1.4}\selectfont #3  %\HGBUM\ZSKS
-	}
-{\end{center}\end{pinyinscope}\end{tcolorbox}}
+\newenvironment{poem}[3]{
+\begin{pinyinscope}\begin{center}\Large\linespread{1.4}\selectfont #2\end{center}\end{pinyinscope}
+\begin{pinyinscope}
+	\begin{center}
+	\Large\linespread{1.4}\rmfamily\selectfont #3
+}{\end{center}
+\end{pinyinscope}}
 
 \title{冶文斋诗选}
 \author{心皿}
