@@ -1,3 +1,6 @@
+dev: build
+    open main.pdf
+
 build:
     tectonic --keep-logs main.tex
 

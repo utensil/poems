@@ -1,7 +1,7 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage{csquotes}
-\usepackage[bookmarks=true,colorlinks=true,linkcolor=blue]{hyperref}
+\usepackage[unicode,bookmarksopen=true,bookmarksdepth=5,colorlinks=true,linkcolor=blue,pdfusetitle]{hyperref}
 \usepackage{bookmark}
 % \usepackage{fontspec}
 \usepackage{xeCJK}
@@ -49,25 +49,30 @@
 % \NewDocumentCommand\lref{m}
 % {{\HGB\ubufontc\hyperlink{#1}#1(\pageref{#1})}}
 %code={\doublespacing}, %\HGBUM\ZSKS
-% \newenvironment{poem}[3]{\begin{tcolorbox}[left=1mm,right=1mm,top=3mm,bottom=2mm,enhanced,breakable,pad at break*=.5mm,title=\begin{pinyinscope}\begin{center}\linespread{1.4}\selectfont #2\end{center}\end{pinyinscope},
+% \newenvironment{poem}[3]{\begin{tcolorbox}[left=1mm,right=1mm,top=3mm,bottom=2mm,enhanced,breakable,pad at break*=.5mm,title=\begin{pinyinscope}\begin{center}\Large\linespread{1.4}\selectfont #2\end{center}\end{pinyinscope},
 % 		colframe=blue!50!black,colback=blue!10!white,colbacktitle=blue!5!red!10!white,
-% 		coltitle=black,attach boxed title to top center=
-% 		{yshift=-0.25mm-\tcboxedtitleheight/2,yshifttext=2mm-\tcboxedtitleheight/2},
+% 		coltitle=black,attach boxed title to top center={yshift=-0.25mm-\tcboxedtitleheight/2,yshifttext=2mm-\tcboxedtitleheight/2},
 % 		boxed title style={boxrule=0.5mm,
 % 			frame code={ \path[tcb fill frame] ([xshift=-4mm]frame.west) -- (frame.north west) -- (frame.north east) -- ([xshift=4mm]frame.east) -- (frame.south east) -- (frame.south west) -- cycle; },
 % 			interior code={ \path[tcb fill interior] ([xshift=-2mm]interior.west) -- (interior.north west) -- (interior.north east) -- ([xshift=2mm]interior.east) -- (interior.south east) -- (interior.south west) -- cycle;} }]
 %       \begin{pinyinscope}
 %       \begin{center}
-%       \LARGE\linespread{1.4}\selectfont #3
+%       \Large\linespread{1.4}\rmfamily\selectfont #3
 % }{\end{center}\end{pinyinscope}\end{tcolorbox}}
 
 \newenvironment{poem}[3]{
+% \begin{samepage}
+\begin{minipage}{\textwidth}
 \begin{pinyinscope}\begin{center}\Large\linespread{1.4}\selectfont #2\end{center}\end{pinyinscope}
+% \nopagebreak
 \begin{pinyinscope}
 	\begin{center}
 	\Large\linespread{1.4}\rmfamily\selectfont #3
 }{\end{center}
-\end{pinyinscope}}
+\end{pinyinscope}
+% \end{samepage}
+\end{minipage}
+}
 
 \title{冶文斋诗选}
 \author{心皿}
@@ -392,7 +397,7 @@
 放下乱成团。
 \end{poem}
 
-多艰之意分为事多、事艰。前两句说的是事情多，夜晚噩梦往往不是那些恐怖片桥段而是工作场景，TODO白日做不完以致入梦。
+多艰之意分为事多、事艰。前两句说的是事情多，夜晚噩梦往往不是那些恐怖片桥段而是工作场景， 待办事项白日做不完以致入梦。
 
 白天比晚上好过，因为白天有无数的事情涌来，你也会要立即响应，没有空给多余的情绪；然而晚上，所有的未解问题和今天新产生的问题，会再进行各种化学反应，产生深层次的情绪效应，而所有的措施都不能采取，只能在失眠或梦中徒劳，醒来又是头痛欲裂、几无寸进。
 
@@ -557,6 +562,18 @@
 \end{poem}
 
 有所爱恋，有所思念而作。
+
+\begin{poem}{}{夜会}
+别前相约衷情诉，
+
+厮磨飞霞染耳梢。
+
+托付此心{\xpinyin{长}{chang2}}久远，
+
+怎堪行去念思滔。
+\end{poem}
+
+别前相见后，启程途中回想所作。
 
 \begin{poem}{}{心意}
 唇间春意露，
