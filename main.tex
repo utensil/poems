@@ -2,6 +2,10 @@
 \usepackage[utf8]{inputenc}
 \usepackage{csquotes}
 \usepackage[unicode,bookmarksopen=true,bookmarksdepth=5,colorlinks=true,linkcolor=blue,pdfusetitle]{hyperref}
+% \usepackage{cleveref}
+% \crefname{subsection}{小节}{小节}
+% \Crefname{subsection}{小节}{小节}
+\usepackage{nameref}
 \usepackage{bookmark}
 % \usepackage{fontspec}
 \usepackage{xeCJK}
@@ -345,7 +349,9 @@
 半{\xpinyin{阙}{que4}}落潮洗心仁。
 \end{poem}
 
-徒步见景，有感于一切回到原点而作。\footnote{\hyperref[sec:fan-chu]{赏析}}
+徒步见景，有感于一切回到原点而作。
+
+赏析：\ref{sec:fan-chu}\nameref{sec:fan-chu}
 
 \section{压力阴郁}
 
@@ -573,7 +579,9 @@
 怎堪行去念思滔。
 \end{poem}
 
-别前相见后，启程途中回想所作。\footnote{\hyperref[sec:ye-hui]{赏析}}
+别前相见后，启程途中回想所作。
+
+赏析：\ref{sec:ye-hui}\nameref{sec:ye-hui}
 
 \begin{poem}{}{心意}
 唇间春意露，
