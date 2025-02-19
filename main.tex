@@ -19,6 +19,8 @@
 \usepackage{indentfirst}
 \setlength{\parindent}{2em}
 \setlength{\parskip}{1em}
+\usepackage{datetime2}
+\DTMlangsetup[zh-CN]{date}
 
 % \setmainfont{[fzfss.ttf]}
 % \setsansfont{[fzfss.ttf]} 
@@ -79,11 +81,14 @@
 }
 
 \title{冶文斋诗选}
-\author{心皿}
+\author{宋皿}
+\date{\DTMtoday}
 
 \begin{document}
-\date{}
 \maketitle
+\thispagestyle{empty}
+\setcounter{page}{0}
+\newpage
 
 \section{职业生涯}
 
