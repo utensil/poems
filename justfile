@@ -34,3 +34,7 @@ prep-xe:
 prep-tc:
     curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net |sh
     sudo mv tectonic /usr/local/bin/
+
+push:
+    jj bs master -r @-
+    jj psb master
