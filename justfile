@@ -18,10 +18,10 @@ prep-zq:
     # https://github.com/TrionesType/zhuque
     rm /tmp/zhuque.zip || true
     rm -rf /tmp/zhuque || true
-    curl -L https://github.com/TrionesType/zhuque/releases/download/v0.211/ZhuqueFangsong-v0.211.zip -o /tmp/zhuque.zip
+    curl -L https://github.com/TrionesType/zhuque/archive/refs/tags/v0.212.zip -o /tmp/zhuque.zip
     mkdir -p /tmp/zhuque
     unzip -o /tmp/zhuque.zip -d /tmp/zhuque
-    cp -r /tmp/zhuque/* ~/Library/Fonts/
+    cp -fr /tmp/zhuque/* ~/Library/Fonts/
 
 xe:
     xelatex main.tex
