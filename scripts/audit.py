@@ -4,6 +4,7 @@ from __future__ import annotations
 import subprocess
 import sys
 from pathlib import Path
+import re
 
 from common import ROOT
 
@@ -42,6 +43,20 @@ def main() -> int:
     text_path.parent.mkdir(parents=True, exist_ok=True)
     run(["pdftotext", str(pdf), str(text_path)])
     text = text_path.read_text(encoding="utf-8", errors="ignore")
+    layout_text_path = ROOT / "build" / "audit" / "poem-book-layout.txt"
+    run(["pdftotext", "-layout", str(pdf), str(layout_text_path)])
+    pages = layout_text_path.read_text(encoding="utf-8", errors="ignore").split("\f")
+
+    def pages_with(marker: str) -> list[int]:
+        return [index + 1 for index, page in enumerate(pages) if marker in page]
+
+    def page_with(marker: str) -> str:
+        matches = pages_with(marker)
+        if not matches:
+            print(f"ERROR: PDF text missing page marker {marker}", file=sys.stderr)
+            raise SystemExit(1)
+        return pages[matches[0] - 1]
+
     for required in ["冶文斋诗选", "宋皿", "凡例", "年谱", "代后记：在日常里写旧体诗的一点体会", "赏析编写说明"]:
         if required not in text:
             print(f"ERROR: PDF text missing {required}", file=sys.stderr)
@@ -55,10 +70,51 @@ def main() -> int:
     if "#let cover-title-font = poem-title-font" not in style_source:
         print("ERROR: cover title font is not tied to poem-title font role", file=sys.stderr)
         return 1
+    for role in [
+        "book-title-style",
+        "book-author-style",
+        "toc-title-style",
+        "toc-entry-style",
+        "chapter-divider-style",
+        "prose-title-style",
+        "prose-body-style",
+        "prose-quote-style",
+        "poem-title-style",
+        "poem-body-style",
+        "commentary-style",
+        "context-style",
+        "chronology-style",
+    ]:
+        if f"#let {role}" not in style_source:
+            print(f"ERROR: missing centralized style role {role}", file=sys.stderr)
+            return 1
+    for required_source in ["role-ground()", "grid(", "prose-quote-style", "chapter-divider-style"]:
+        if required_source not in style_source:
+            print(f"ERROR: book-style lacks required page-role renderer evidence {required_source}", file=sys.stderr)
+            return 1
+
+    poem_template = (ROOT / "templates" / "illustrated-poem-page.typ").read_text(encoding="utf-8")
+    for required_source in [
+        "title-body-gap-factor: 0.5",
+        "poem-line-gap: 1pt",
+        "long-poem = poem-lines.len() >= 14",
+        "continuation-page",
+        'panic("poem top row overflow',
+    ]:
+        if required_source not in poem_template:
+            print(f"ERROR: poem template lacks required split/spacing contract: {required_source}", file=sys.stderr)
+            return 1
 
     generated_source = (ROOT / "build" / "generated" / "book.generated.typ").read_text(encoding="utf-8")
     if "LLM" in generated_source:
         print("ERROR: generated Typst still contains LLM title text", file=sys.stderr)
+        return 1
+    if "本章收录" in generated_source:
+        print("ERROR: generated Typst still contains invented chapter divider count text", file=sys.stderr)
+        return 1
+    toc_page = page_with("目录")
+    if re.search(r"20\d{2}年[春夏秋冬]", toc_page):
+        print("ERROR: TOC includes chronology year/season child entries", file=sys.stderr)
         return 1
 
     for title in ["十月", "疹热", "自然", "启步"]:
@@ -72,6 +128,20 @@ def main() -> int:
             return 1
         if "【赏析】" not in window:
             print(f"ERROR: known page {title} missing commentary marker near poem text", file=sys.stderr)
+            return 1
+    qibu_page = page_with("启步")
+    if "此战持久莫急求" not in qibu_page:
+        print("ERROR: 启步 poem page is missing its final line; long poem overflow/clipping returned", file=sys.stderr)
+        return 1
+    for title in ["十月", "疹热", "自然", "启步"]:
+        title_pages = pages_with(title)
+        bg_pages = pages_with("【背景】")
+        commentary_pages = pages_with("【赏析】")
+        if not set(title_pages + [p + 1 for p in title_pages]).intersection(bg_pages):
+            print(f"ERROR: known page {title} does not place background on poem page or immediate continuation", file=sys.stderr)
+            return 1
+        if not set(title_pages + [p + 1 for p in title_pages]).intersection(commentary_pages):
+            print(f"ERROR: known page {title} does not place commentary on poem page or immediate continuation", file=sys.stderr)
             return 1
 
     info = run(["pdfinfo", str(pdf)])

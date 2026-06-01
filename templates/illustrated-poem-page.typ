@@ -30,23 +30,25 @@
   kait: "STKaiti",
   fsong: "STFangsong",
   pinyin-font: "Kaiti SC",
-  title-size: 36pt,
-  poem-size: 24pt,
+  title-size: 34pt,
+  poem-size: 22pt,
   pinyin-size: 8pt,
   title-pinyin-size: 8pt,
   context-size: 11pt,
   commentary-size: 11pt,
   commentary-fit-size: 10pt,
   commentary-fit-overflow: 56pt,
-  char-w: 24pt,
-  poem-line-h: 31pt,
-  annotated-line-h: 42pt,
+  char-w: 22pt,
+  poem-line-h: 27pt,
+  annotated-line-h: 36pt,
   title-gap: none,
+  title-body-gap-factor: 0.5,
   after-poem-gap: none,
-  poem-line-gap: 2pt,
-  paragraph-gap: 14pt,
-  context-commentary-gap: 31pt,
-  commentary-break-after: none,
+  poem-line-gap: 1pt,
+  paragraph-gap: 9pt,
+  context-commentary-gap: 14pt,
+  min-first-page-note-height: 88pt,
+  commentary-break-after: "auto",
   ink-absorb-edge: 2pt,
 ) = {
   let fg-w = page-w - fg-x * 2
@@ -55,20 +57,28 @@
   let content-y = fg-y + pad-top
   let content-w = fg-w - pad-x * 2
   let poem-cells = poem-lines.first().len()
-  let poem-w = char-w * poem-cells
-  let punct-visual-w = char-w / 3
-  let title-visual-shift = -(char-w - punct-visual-w) / 2
+  let long-poem = poem-lines.len() >= 14
+  let actual-title-size = if long-poem { 30pt } else { title-size }
+  let actual-poem-size = if long-poem { 19.5pt } else { poem-size }
+  let actual-pinyin-size = if long-poem { 6.8pt } else { pinyin-size }
+  let actual-title-pinyin-size = if long-poem { 7pt } else { title-pinyin-size }
+  let actual-char-w = if long-poem { 20pt } else { char-w }
+  let actual-poem-line-h = if long-poem { 24pt } else { poem-line-h }
+  let actual-annotated-line-h = if long-poem { 31pt } else { annotated-line-h }
+  let poem-w = actual-char-w * poem-cells
+  let punct-visual-w = actual-char-w / 3
+  let title-visual-shift = -(actual-char-w - punct-visual-w) / 2
   let resolved-title-gap = if title-gap == none {
-    if title-pinyin.len() > 0 { annotated-line-h * 0.75 } else { annotated-line-h * 1.35 }
+    (if title-pinyin.len() > 0 { actual-annotated-line-h * 0.75 } else { actual-annotated-line-h * 1.35 }) * title-body-gap-factor
   } else { title-gap }
   let resolved-after-poem-gap = if after-poem-gap == none { resolved-title-gap } else { after-poem-gap }
-  let title-pinyin-row-h = title-pinyin-size + 1pt
-  let title-block-h = if title-pinyin.len() > 0 { title-size + title-pinyin-row-h + 1pt } else { title-size }
+  let title-pinyin-row-h = actual-title-pinyin-size + 1pt
+  let title-block-h = if title-pinyin.len() > 0 { actual-title-size + title-pinyin-row-h + 1pt } else { actual-title-size }
   let ink-absorb-wash = rgb("#fff8e9").transparentize(96%)
 
   let columns = ()
   for _ in range(poem-cells) {
-    columns.push(char-w)
+    columns.push(actual-char-w)
   }
 
   let annotation-for(line-index, cell-index) = {
@@ -81,22 +91,22 @@
     found
   }
 
-  let poem-line(line-cells) = block(width: poem-w, height: poem-line-h)[
+  let poem-line(line-cells) = block(width: poem-w, height: actual-poem-line-h)[
     #{
       let body = ()
       for (i, cell) in line-cells.enumerate() {
-        let glyph = text(font: kait, size: poem-size)[#cell]
+        let glyph = text(font: kait, size: actual-poem-size)[#cell]
         if i == line-cells.len() - 1 {
           body.push(align(left + horizon, glyph))
         } else {
           body.push(glyph)
         }
       }
-      grid(columns: columns, rows: (poem-size,), align: center + horizon, ..body)
+      grid(columns: columns, rows: (actual-poem-size,), align: center + horizon, ..body)
     }
   ]
 
-  let annotated-line(line-index, line-cells) = block(width: poem-w, height: annotated-line-h)[
+  let annotated-line(line-index, line-cells) = block(width: poem-w, height: actual-annotated-line-h)[
     #{
       let py-row = ()
       let text-row = ()
@@ -105,10 +115,10 @@
         if ann == none {
           py-row.push([])
         } else {
-          py-row.push(text(font: pinyin-font, size: pinyin-size, fill: rgb("#8d8077"))[#ann])
+          py-row.push(text(font: pinyin-font, size: actual-pinyin-size, fill: rgb("#8d8077"))[#ann])
         }
 
-        let glyph = text(font: kait, size: poem-size)[#cell]
+        let glyph = text(font: kait, size: actual-poem-size)[#cell]
         if i == line-cells.len() - 1 {
           text-row.push(align(left + horizon, glyph))
         } else {
@@ -117,7 +127,7 @@
       }
       grid(
         columns: columns,
-        rows: (9pt, poem-size),
+        rows: (actual-pinyin-size + 1pt, actual-poem-size),
         row-gutter: 1pt,
         align: center + horizon,
         ..py-row,
@@ -127,22 +137,22 @@
   ]
 
   let title-block = if title-cells.len() > 0 and title-pinyin.len() == title-cells.len() {
-    let title-cell-w = title-size * 0.9
+    let title-cell-w = actual-title-size * 0.9
     let title-columns = ()
     for _ in title-cells {
       title-columns.push(title-cell-w)
     }
     let py-row = title-pinyin.map(py => if py == none or py == "" { [] } else {
-      text(font: pinyin-font, size: title-pinyin-size, fill: rgb("#8d8077"))[#py]
+      text(font: pinyin-font, size: actual-title-pinyin-size, fill: rgb("#8d8077"))[#py]
     })
-    let text-row = title-cells.map(cell => text(font: kait, size: title-size, tracking: 3pt, fill: rgb("#2b1c18"))[#cell])
+    let text-row = title-cells.map(cell => text(font: kait, size: actual-title-size, tracking: 3pt, fill: rgb("#2b1c18"))[#cell])
     box(width: poem-w, height: title-block-h)[
       #place(top + left, dx: title-visual-shift, dy: 0pt)[
         #box(width: poem-w)[
           #align(center)[
             #grid(
               columns: title-columns,
-              rows: (title-pinyin-row-h, title-size),
+              rows: (title-pinyin-row-h, actual-title-size),
               row-gutter: 1pt,
               align: center + horizon,
               ..py-row,
@@ -156,7 +166,7 @@
     box(width: poem-w, height: title-block-h)[
       #place(top + left, dx: title-visual-shift, dy: 0pt)[
         #box(width: poem-w)[
-          #align(center, text(font: kait, size: title-size, tracking: 3pt, fill: rgb("#2b1c18"))[#title])
+          #align(center, text(font: kait, size: actual-title-size, tracking: 3pt, fill: rgb("#2b1c18"))[#title])
         ]
       ]
     ]
@@ -201,7 +211,7 @@
 
   let commentary-block(start, stop: none, continued: false, size: commentary-size) = box(width: content-w)[
     #set text(font: fsong, size: size, tracking: 0.3pt, fill: rgb("#2f231f"))
-    #set par(leading: 0.58em, justify: false)
+    #set par(leading: 0.62em, justify: false)
     #if continued {
       block(above: 0pt, below: paragraph-gap)[#strong[【赏析】续]]
     }
@@ -225,10 +235,14 @@
     let poem-size-measured = measure(poem-block)
     let image-h-from-poem = poem-size-measured.height
     let image-w-from-poem = image-h-from-poem * image-aspect
-    let image-w = calc.min(image-w-from-poem, poem-w * image-max-poem-ratio)
+    let max-image-w = calc.max(30mm, content-w - poem-w - 20mm)
+    let image-w = calc.min(calc.min(image-w-from-poem, poem-w * image-max-poem-ratio), max-image-w)
     let image-h = image-w / image-aspect
     let image-y = (poem-size-measured.height - image-h) / 2
     let top-row-gap = (content-w - poem-w - image-w) / 3
+    if top-row-gap < 0pt {
+      panic("poem top row overflow: " + title)
+    }
     let top-row = grid(
       columns: (top-row-gap, poem-w, top-row-gap, image-w, top-row-gap),
       rows: (poem-size-measured.height,),
@@ -258,11 +272,13 @@
       [],
     )
 
+    let content-bottom = fg-y + fg-h
+    let continuation-h = content-bottom - content-y
     let context-y = poem-size-measured.height + resolved-after-poem-gap
     let context-size-measured = measure(context-block)
     let commentary-y = context-y + context-size-measured.height + context-commentary-gap
     let rule-y = context-y + context-size-measured.height + context-commentary-gap / 2
-    let available-h = fg-y + fg-h - (content-y + commentary-y)
+    let available-h = content-bottom - (content-y + commentary-y)
     let full-commentary-h = measure(commentary-block(0)).height
     let fit-commentary-h = measure(commentary-block(0, size: commentary-fit-size)).height
     let commentary-overflow = full-commentary-h - available-h
@@ -272,7 +288,10 @@
     } else {
       commentary-size
     }
-    let first-commentary-count = if commentary-break-after == none {
+    let has-room-for-notes = available-h >= min-first-page-note-height
+    let first-commentary-count = if not has-room-for-notes {
+      0
+    } else if commentary-break-after == none {
       commentary.len()
     } else if commentary-break-after == "auto" {
       let count = 0
@@ -289,22 +308,58 @@
     place(top + left, dx: content-x, dy: content-y)[
       #top-row
     ]
-    place(top + left, dx: content-x, dy: content-y + context-y)[
-      #context-block
-    ]
-    place(top + left, dx: content-x, dy: content-y + rule-y)[
-      #line(length: content-w, stroke: (paint: rgb("#7d5b4f").transparentize(76%), thickness: 0.5pt))
-    ]
-    place(top + left, dx: content-x, dy: content-y + commentary-y)[
-      #commentary-block(0, stop: first-commentary-count, size: first-page-commentary-size)
-    ]
+    if has-room-for-notes {
+      place(top + left, dx: content-x, dy: content-y + context-y)[
+        #context-block
+      ]
+      place(top + left, dx: content-x, dy: content-y + rule-y)[
+        #line(length: content-w, stroke: (paint: rgb("#7d5b4f").transparentize(76%), thickness: 0.5pt))
+      ]
+      place(top + left, dx: content-x, dy: content-y + commentary-y)[
+        #commentary-block(0, stop: first-commentary-count, size: first-page-commentary-size)
+      ]
+    }
 
-    if first-commentary-count < commentary.len() {
+    let continuation-page(start, with-context: false) = {
+      let y0 = if with-context { 0pt } else { 0pt }
+      let start-y = y0
+      let body-top = if with-context {
+        let ctx-h = measure(context-block).height
+        ctx-h + context-commentary-gap
+      } else {
+        0pt
+      }
+      let body-h = continuation-h - body-top
+      let stop = start
+      for i in range(start, commentary.len()) {
+        let h = measure(commentary-block(start, stop: i + 1, continued: start > 0)).height
+        if h <= body-h {
+          stop = i + 1
+        }
+      }
+      if stop <= start {
+        stop = start + 1
+      }
       pagebreak()
       page-background()
+      if with-context {
+        place(top + left, dx: content-x, dy: content-y + start-y)[
+          #context-block
+        ]
+        place(top + left, dx: content-x, dy: content-y + start-y + measure(context-block).height + context-commentary-gap / 2)[
+          #line(length: content-w, stroke: (paint: rgb("#7d5b4f").transparentize(76%), thickness: 0.5pt))
+        ]
+      }
       place(top + left, dx: content-x, dy: content-y)[
-        #commentary-block(first-commentary-count, continued: true)
+        #move(dy: body-top)[#commentary-block(start, stop: stop, continued: start > 0)]
       ]
+      if stop < commentary.len() {
+        continuation-page(stop)
+      }
+    }
+
+    if first-commentary-count < commentary.len() {
+      continuation-page(first-commentary-count, with-context: not has-room-for-notes)
     }
   }
 }

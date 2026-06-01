@@ -18,6 +18,9 @@
 #let ink = rgb("#2f231f")
 #let muted = rgb("#6f5a50")
 #let faint-rule = rgb("#8c6e5d").transparentize(70%)
+#let wash = rgb("#fff8e9")
+#let role-panel = wash.transparentize(30%)
+#let role-paper = rgb("#f3e7d3")
 
 #let book-title-style(body) = text(font: poem-title-font, size: 36pt, weight: "bold", tracking: 2pt)[#body]
 #let book-author-style(body) = text(font: author-font, size: 17pt)[#body]
@@ -38,15 +41,33 @@
   set text(lang: "zh", region: "cn", fill: ink)
 }
 
+#let role-ground(frame: true) = {
+  place(top + left, dx: 0pt, dy: 0pt)[
+    #rect(width: 210mm, height: 297mm, fill: role-paper)
+  ]
+  place(top + left, dx: 14mm, dy: 14mm)[
+    #rect(width: 182mm, height: 269mm, radius: 5pt, fill: role-panel)
+  ]
+  if frame {
+    place(top + left, dx: 21mm, dy: 21mm)[
+      #rect(width: 168mm, height: 255mm, radius: 2pt, stroke: (paint: faint-rule, thickness: 0.5pt))
+    ]
+  }
+}
+
 #let title-line(text-value, font: prose-heading-font, size: 26pt) = {
   align(center)[#text(font: font, size: size, weight: "bold", tracking: 1pt)[#text-value]]
 }
 
 #let cover-page(title, author, subtitle: none) = {
-  base-page()
+  set page(width: 210mm, height: 297mm, margin: 0pt, fill: role-paper)
+  set text(lang: "zh", region: "cn", fill: ink)
+  role-ground()
   align(center + horizon)[
     #book-title-style(title)
-    #v(22pt)
+    #v(20pt)
+    #line(length: 38mm, stroke: (paint: faint-rule, thickness: 0.6pt))
+    #v(18pt)
     #book-author-style(author)
     #if subtitle != none [
       #v(11pt)
@@ -56,67 +77,91 @@
 }
 
 #let prose-page(title, paragraphs, placeholder: false) = {
-  base-page()
+  set page(width: 210mm, height: 297mm, margin: (x: 28mm, y: 25mm), fill: paper)
+  set text(lang: "zh", region: "cn", fill: ink)
+  role-ground(frame: false)
   align(center)[#prose-title-style(title, size: if title.clusters().len() > 16 { 22pt } else { 26pt })]
-  v(18pt)
+  v(16pt)
+  align(center)[#line(length: 34mm, stroke: (paint: faint-rule, thickness: 0.5pt))]
+  v(15pt)
   set text(font: prose-body-font, size: 11.6pt)
-  set par(first-line-indent: 2em, leading: 0.78em, justify: true)
+  set par(first-line-indent: 2em, leading: 0.66em, justify: true)
   if placeholder {
-    align(center)[#text(font: prose-body-font, size: 12pt, fill: muted)[（待补）]]
+    align(center)[
+      #block(width: 110mm)[
+        #text(font: prose-body-font, size: 12pt, fill: muted)[（待补）]
+      ]
+    ]
   } else {
     for p in paragraphs [
       #if p.kind == "quote" {
         block(
-          inset: (left: 8mm, right: 6mm, y: 3mm),
-          above: 2pt,
-          below: 8pt,
+          inset: (left: 7mm, right: 6mm, y: 3mm),
+          above: 3pt,
+          below: 10pt,
           stroke: (left: (paint: faint-rule, thickness: 1pt)),
         )[
-          #set par(first-line-indent: 0pt, leading: 0.72em, justify: true)
+          #set par(first-line-indent: 0pt, leading: 0.62em, justify: true)
           #prose-quote-style(p.text)
         ]
       } else {
-        block(above: 0pt, below: 7pt)[#prose-body-style(p.text)]
+        block(above: 0pt, below: 10pt)[#prose-body-style(p.text)]
       }
     ]
   }
 }
 
 #let toc-page(entries) = {
-  base-page()
+  set page(width: 210mm, height: 297mm, margin: (x: 30mm, y: 26mm), fill: paper)
+  set text(lang: "zh", region: "cn", fill: ink)
+  role-ground()
   align(center)[#toc-title-style[目录]]
-  v(16pt)
-  set text(font: toc-font, size: 12pt)
-  for entry in entries [
-    #block(above: 0pt, below: 7pt)[
-      #toc-entry-style(entry)
-    ]
+  v(13pt)
+  align(center)[#line(length: 32mm, stroke: (paint: faint-rule, thickness: 0.5pt))]
+  v(18pt)
+  set text(font: toc-font, size: 13.2pt)
+  set par(leading: 0.55em, justify: false)
+  align(center)[
+    #grid(
+      columns: (1fr, 1fr),
+      column-gutter: 18mm,
+      row-gutter: 8pt,
+      ..entries.map(entry => block(width: 54mm)[
+        #toc-entry-style(entry)
+        #v(4pt)
+        #line(length: 100%, stroke: (paint: faint-rule, thickness: 0.35pt))
+      ]),
+    )
   ]
 }
 
 #let chapter-divider(title-lines, count) = {
-  set page(width: 210mm, height: 297mm, margin: 0pt, fill: rgb("#f3e7d3"))
+  set page(width: 210mm, height: 297mm, margin: 0pt, fill: role-paper)
   set text(lang: "zh", region: "cn", fill: ink)
-  place(top + left, dx: 12mm, dy: 10mm)[
-    #rect(width: 186mm, height: 277mm, radius: 6pt, fill: rgb("#fff8e9").transparentize(36%))
-  ]
+  role-ground()
   align(center + horizon)[
-    #for line in title-lines [
-      #chapter-divider-style(line)
-      #v(6pt)
+    #block(width: 126mm)[
+      #for (i, line) in title-lines.enumerate() [
+        #align(center)[#chapter-divider-style(line)]
+        #if i < title-lines.len() - 1 { v(8pt) }
+      ]
     ]
   ]
 }
 
 #let chronology-page(entries) = {
-  base-page()
-  align(center)[#text(font: prose-heading-font, size: 26pt, weight: "bold")[年谱]]
+  set page(width: 210mm, height: 297mm, margin: (x: 27mm, y: 25mm), fill: paper)
+  set text(lang: "zh", region: "cn", fill: ink)
+  role-ground(frame: false)
+  align(center)[#prose-title-style[年谱]]
+  v(13pt)
+  align(center)[#line(length: 30mm, stroke: (paint: faint-rule, thickness: 0.5pt))]
   v(16pt)
-  set text(font: chronology-font, size: 11.2pt)
-  set par(leading: 0.72em, justify: false)
+  set text(font: chronology-font, size: 11pt)
+  set par(leading: 0.58em, justify: false)
   for entry in entries [
     #grid(
-      columns: (28mm, 1fr),
+      columns: (31mm, 1fr),
       column-gutter: 8mm,
       align: top,
       text(fill: muted)[#entry.period],
