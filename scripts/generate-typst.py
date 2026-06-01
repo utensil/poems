@@ -6,7 +6,7 @@ import re
 
 import yaml
 
-from common import ROOT, typst_array, typst_dict, typst_string
+from common import COMMENTARY_WARNING, ROOT, UNREVIEWED_COMMENTARY, typst_array, typst_dict, typst_string
 
 
 def paragraphs(markdown: str) -> list[str]:
@@ -31,6 +31,14 @@ def emit_paragraphs(parts: list[str]) -> str:
     return "\n".join(rendered)
 
 
+def typst_chronology_entries(entries: list[dict]) -> str:
+    rendered = []
+    for entry in entries:
+        poems = "".join(f"《{title}》" for title in entry.get("poems", []))
+        rendered.append(f"(period: {typst_string(entry['period'])}, poems: {typst_string(poems)})")
+    return "(" + ", ".join(rendered) + ("," if len(rendered) == 1 else "") + ")"
+
+
 def main() -> None:
     manifest = json.loads((ROOT / "build" / "generated" / "manifest.json").read_text(encoding="utf-8"))
     chronology = yaml.safe_load((ROOT / "src" / "chronology.yaml").read_text(encoding="utf-8"))
@@ -40,6 +48,7 @@ def main() -> None:
     llm_note = (ROOT / "src" / "llm-commentary-note.md").read_text(encoding="utf-8")
 
     lines: list[str] = [
+        '#import "../../templates/book-style.typ": *',
         '#import "../../templates/illustrated-poem-page.typ": illustrated-poem-page',
         '#import "../../templates/auto-pinyin/lib.typ": to-pinyin',
         "",
@@ -78,34 +87,40 @@ def main() -> None:
         "}",
         "",
         '#set document(title: "冶文斋诗选", author: "宋皿")',
-        '#set page(width: 210mm, height: 297mm, margin: (x: 24mm, y: 24mm), fill: rgb("#f8f1e6"))',
-        '#set text(lang: "zh", region: "cn", font: "STFangsong", size: 11pt, fill: rgb("#2f231f"))',
-        '#set heading(numbering: "一、")',
         "",
-        '#align(center + horizon)[#text(font: "Zhuque Fangsong (technical preview)", size: 30pt)[冶文斋诗选]\\ #v(18pt)#text(size: 13pt)[Typst 插画本]]',
+        '#cover-page("冶文斋诗选", "宋皿")',
         "#pagebreak()",
-        "= 序",
-        emit_paragraphs(paragraphs(preface)[1:]),
+        '#prose-page("序", (), placeholder: true)',
         "#pagebreak()",
-        "= 凡例",
-        emit_paragraphs(paragraphs(fanli)[1:]),
+        f'#prose-page("凡例", {typst_array(paragraphs(fanli)[1:])})',
         "#pagebreak()",
-        "= 目录",
-        "#outline()",
+        "#toc-page((",
+        '  "序",',
+        '  "凡例",',
+        *[f'  "{section["title"]}",' for section in manifest["sections"]],
+        '  "年谱",',
+        '  "代后记：在日常里写旧体诗的一点体会",',
+        '  "LLM 辅助赏析写作说明",',
+        "))",
         "#pagebreak()",
     ]
 
     for section in manifest["sections"]:
+        title_lines = [section["title"]]
+        if section["title"] == "云南丽江香格里拉之旅":
+            title_lines = ["云南丽江", "香格里拉之旅"]
         lines.extend(
             [
-                f"= {section['title']}",
-                f"#text(size: 12pt)[本章收录 {len(section['poems'])} 首。]",
+                f"#chapter-divider({typst_array(title_lines)}, {len(section['poems'])})",
                 "#pagebreak()",
             ]
         )
         for poem in section["poems"]:
             body_lines = [line for line in poem["body"].splitlines() if line.strip()]
             commentary_parts = paragraphs(poem.get("commentary-body", ""))
+            if poem.get("commentary-status") in UNREVIEWED_COMMENTARY and commentary_parts:
+                if not commentary_parts[0].startswith(COMMENTARY_WARNING):
+                    commentary_parts = [COMMENTARY_WARNING] + commentary_parts
             lines.extend(
                 [
                     "#{",
@@ -121,22 +136,14 @@ def main() -> None:
                 ]
             )
 
-    lines.extend(["= 年谱"])
-    for entry in chronology.get("entries", []):
-        poems = "".join(f"《{title}》" for title in entry.get("poems", []))
-        lines.append(f"== {entry['period']}")
-        lines.append(f"#txt({typst_string(poems)})")
     skipped = "、".join(chronology.get("undated-skipped", []))
     lines.extend(
         [
-            "== 未列入年谱",
-            f"#txt({typst_string('以下诗作缺少可确认写作时间，暂不列入年谱：' + skipped)})",
+            f"#chronology-page({typst_chronology_entries(chronology.get('entries', []))}, {typst_string(skipped)})",
             "#pagebreak()",
-            "= 代后记：在日常里写旧体诗的一点体会",
-            emit_paragraphs(paragraphs(postscript)[1:]),
+            f'#appendix-article("代后记：在日常里写旧体诗的一点体会", {typst_array(paragraphs(postscript)[1:])})',
             "#pagebreak()",
-            "= LLM 辅助赏析写作说明",
-            emit_paragraphs(paragraphs(llm_note)[1:]),
+            f'#appendix-article("LLM 辅助赏析写作说明", {typst_array(paragraphs(llm_note)[1:])})',
         ]
     )
 

@@ -1,12 +1,10 @@
 from __future__ import annotations
 
-import base64
 import json
 import re
 import shutil
 import struct
 import zlib
-from collections import defaultdict
 from pathlib import Path
 
 import yaml
@@ -30,6 +28,11 @@ SECTIONS = [
 
 ELIGIBLE_COMMENTARY = {"human-revised", "reference-quality"}
 INELIGIBLE_COMMENTARY = {"ai-review-only", "iterated", "unclear"}
+INCLUDED_COMMENTARY = {"human-revised", "reference-quality", "ai-review-only", "iterated"}
+UNREVIEWED_COMMENTARY = {"ai-review-only", "iterated"}
+COMMENTARY_WARNING = "【人工修订未完成，仅供参考】"
+PLACEHOLDER_PROMPT_SIGNATURE = "TEMPORARY PLACEHOLDER IMAGE - DRAFT/LAYOUT ONLY"
+MAX_POEM_LINE_CELLS = 14
 
 PILOT_ASSET_SLUGS = {
     "夜会": "yehui",
@@ -83,8 +86,24 @@ def clean_poem_body(body: str, context: str | None = None) -> str:
             if not context or quote == context.strip():
                 continue
         if stripped:
-            cleaned.append(stripped)
+            cleaned.extend(rebreak_poem_line(clean_latex_inline(stripped)))
     return "\n".join(cleaned)
+
+
+def rebreak_poem_line(line: str) -> list[str]:
+    if len(line) <= MAX_POEM_LINE_CELLS:
+        return [line]
+    if "，" in line:
+        parts = []
+        segments = line.split("，")
+        for i, segment in enumerate(segments):
+            if not segment:
+                continue
+            punctuation = "，" if i < len(segments) - 1 else ""
+            parts.append(segment + punctuation)
+        if all(len(part) <= MAX_POEM_LINE_CELLS for part in parts):
+            return parts
+    return [line]
 
 
 def poem_order_from_main_tex() -> dict[str, list[str]]:
@@ -105,7 +124,16 @@ def poem_order_from_main_tex() -> dict[str, list[str]]:
 
 def latex_inline_to_text(value: str) -> str:
     value = re.sub(r"\\xpinyin\{([^{}]+)\}\{[^{}]+\}", r"\1", value)
+    value = clean_latex_inline(value)
     value = value.replace("{", "").replace("}", "")
+    return value
+
+
+def clean_latex_inline(value: str) -> str:
+    value = re.sub(r"\{\\textsf\s+([^{}]+)\}", r"\1", value)
+    value = re.sub(r"\\xpinyin\{([^{}]+)\}\{[^{}]+\}", r"\1", value)
+    value = value.replace("``", "“").replace("''", "”")
+    value = value.replace("\\%", "%").replace("\\&", "&")
     return value
 
 
@@ -119,15 +147,46 @@ def commentary_title(path: Path) -> str | None:
 
 
 def find_commentaries() -> dict[str, Path]:
-    chosen: dict[str, Path] = {}
+    chosen: dict[str, tuple[int, Path]] = {}
+    priority = {"human-revised": 0, "reference-quality": 1, "ai-review-only": 2, "iterated": 3}
     for path in sorted(COG_COMMENTARIES.glob("*/*.md")):
         title = commentary_title(path)
         if not title:
             continue
         frontmatter, _ = read_markdown(path)
-        if frontmatter.get("commentary-status") in ELIGIBLE_COMMENTARY:
-            chosen[title] = path
-    return chosen
+        status = frontmatter.get("commentary-status")
+        if status in INCLUDED_COMMENTARY:
+            candidate = (priority[status], path)
+            if title not in chosen or candidate[0] < chosen[title][0]:
+                chosen[title] = candidate
+    return {title: path for title, (_, path) in chosen.items()}
+
+
+def extract_postscript_markdown() -> str:
+    text = (ROOT / "main.tex").read_text(encoding="utf-8")
+    start_marker = r"\section{代后记：在日常里写旧体诗的一点体会}"
+    stop_marker = r"\section{附录：诗词赏析}"
+    start = text.index(start_marker) + len(start_marker)
+    stop = text.index(stop_marker, start)
+    body = text[start:stop].strip()
+    body = body.replace("\r\n", "\n")
+    body = re.sub(r"\\begin\{quote\}\n?(.*?)\n?\\end\{quote\}", quote_to_markdown, body, flags=re.S)
+    body = clean_latex_inline(body)
+    body = re.sub(r"\\[a-zA-Z]+\*?(?:\[[^\]]*\])?(?:\{([^{}]*)\})?", r"\1", body)
+    body = body.replace("\n\n\n", "\n\n")
+    return "# 代后记：在日常里写旧体诗的一点体会\n\n" + body.strip() + "\n"
+
+
+def quote_to_markdown(match: re.Match) -> str:
+    inner = clean_latex_inline(match.group(1).strip())
+    lines = []
+    for line in inner.splitlines():
+        stripped = line.strip()
+        if stripped:
+            lines.append(f"> {stripped}")
+        else:
+            lines.append(">")
+    return "\n".join(lines)
 
 
 def pinyin_num_to_tone(value: str) -> str:
@@ -220,6 +279,9 @@ def copy_or_create_asset(title: str, section: str, target_dir: Path) -> None:
     prompt = target_dir / "illustration.prompt.md"
     notes = target_dir / "illustration.notes.md"
     target_dir.mkdir(parents=True, exist_ok=True)
+    status = "placeholder"
+    prompt_source = "poem-only"
+    review_status = "needs-regeneration"
     pilot_slug = PILOT_ASSET_SLUGS.get(title)
     if pilot_slug:
         source_dir = ILLUSTRATED / pilot_slug / "assets"
@@ -232,6 +294,10 @@ def copy_or_create_asset(title: str, section: str, target_dir: Path) -> None:
         rejected = source_dir / f"{pilot_slug}-illustration.rejected-iterations.md"
         if rejected.exists():
             shutil.copy2(rejected, notes)
+        if source_image.exists():
+            status = "generated"
+            prompt_source = "poem-commentary"
+            review_status = "accepted"
     if not image.exists():
         write_png(image, title, section)
     if not prompt.exists():
@@ -240,10 +306,33 @@ def copy_or_create_asset(title: str, section: str, target_dir: Path) -> None:
                 [
                     f"# 《{title}》插画提示词",
                     "",
-                    "Textless literary illustration for a Typst poem book page.",
-                    f"Use the poem title, section, and context as the source: {section}.",
+                    PLACEHOLDER_PROMPT_SIGNATURE,
+                    "",
+                    f"Poem title: 《{title}》",
+                    f"Chapter: {section}",
+                    "Concrete anchors: use the poem body, background, and any commentary in source control before generating a replacement.",
                     "Keep the image subdued, atmospheric, and supportive of the poem text.",
                     "Avoid calligraphy, captions, seals, decorative text, and generic ancient-China clichés.",
+                ]
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+    if not notes.exists() or "image-status:" not in notes.read_text(encoding="utf-8", errors="ignore"):
+        existing_notes = notes.read_text(encoding="utf-8", errors="ignore") if notes.exists() else ""
+        notes.write_text(
+            "\n".join(
+                [
+                    "---",
+                    f"image-status: {status}",
+                    f"prompt-source: {prompt_source}",
+                    f"review-status: {review_status}",
+                    "---",
+                    "",
+                    f"《{title}》asset metadata.",
+                    "Placeholder assets are allowed only in draft/layout validation.",
+                    "",
+                    existing_notes.strip(),
                 ]
             )
             + "\n",

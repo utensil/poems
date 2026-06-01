@@ -1,5 +1,8 @@
 validate:
-    python3 scripts/validate.py
+    python3 scripts/validate.py --mode draft
+
+validate-final:
+    python3 scripts/validate.py --mode final
 
 sync:
     python3 scripts/sync-from-cog-land.py
@@ -11,6 +14,9 @@ generate:
 build: validate generate
     mkdir -p build/pdf
     typst compile --root . book.typ build/pdf/poem-book.pdf
+
+audit:
+    python3 scripts/audit.py
 
 open: build
     open -a "Google Chrome" build/pdf/poem-book.pdf

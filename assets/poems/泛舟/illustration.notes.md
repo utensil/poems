@@ -1,3 +1,12 @@
+---
+image-status: generated
+prompt-source: poem-commentary
+review-status: accepted
+---
+
+《泛舟》asset metadata.
+Placeholder assets are allowed only in draft/layout validation.
+
 # 泛舟 rejected illustration iterations
 
 Reason for rejection: the generated images still do not correctly show that the girl is bowing backward.

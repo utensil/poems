@@ -1,5 +1,6 @@
 .aider*
 __pycache__/
+build/audit/
 main.aux
 main.log
 main.typ

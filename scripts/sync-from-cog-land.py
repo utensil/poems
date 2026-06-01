@@ -9,12 +9,15 @@ import yaml
 from common import (
     AUTO_PINYIN,
     COG_POEMS,
-    ELIGIBLE_COMMENTARY,
+    COMMENTARY_WARNING,
     ROOT,
     SKILL_TEMPLATE,
     clean_poem_body,
     copy_or_create_asset,
+    extract_postscript_markdown,
     find_commentaries,
+    INCLUDED_COMMENTARY,
+    UNREVIEWED_COMMENTARY,
     pinyin_overrides,
     poem_order_from_main_tex,
     read_markdown,
@@ -56,20 +59,46 @@ def main() -> None:
             for key in ["original-written", "images", "pinyin"]:
                 if key in frontmatter:
                     poem_frontmatter[key] = frontmatter[key]
-            write_markdown(local_poem, poem_frontmatter, clean_poem_body(body, context))
+            poem_body = clean_poem_body(body, context)
+            if title == "启步":
+                poem_frontmatter["layout"] = {
+                    "line-breaks": [
+                        "脂重乏肌显体圆，",
+                        "志虚轻誓总断延。",
+                        "鞋环衣裤皆齐备，",
+                        "东风乍起旗又偃。",
+                        "午间会后健房满，",
+                        "晨床迟起无澡时。",
+                        "轻装放空入夜丛，",
+                        "野径路灯伴胖影。",
+                        "汗酣血活心宇阔，",
+                        "设标昂首越路人。",
+                        "面红气短歇不停，",
+                        "耳乐恢宏重拾步。",
+                        "踝适膝承喘渐平，",
+                        "脚下里程腋成裘。",
+                        "配速虽缓阶踏实，",
+                        "此战持久莫急求。",
+                    ]
+                }
+                poem_body = "\n".join(poem_frontmatter["layout"]["line-breaks"])
+            write_markdown(local_poem, poem_frontmatter, poem_body)
 
             commentary_path = None
             commentary_status = None
             if title in commentaries:
                 c_frontmatter, c_body = read_markdown(commentaries[title])
                 commentary_status = c_frontmatter.get("commentary-status")
-                local_commentary = commentary_root / section_name / f"{slug}.md"
-                normalized = dict(c_frontmatter)
-                normalized["title"] = c_frontmatter.get("title", f"《{title}》赏析")
-                normalized["poem"] = f"src/poems/{section_name}/{slug}.md"
-                normalized["section"] = section_name
-                write_markdown(local_commentary, normalized, c_body)
-                commentary_path = local_commentary.relative_to(ROOT).as_posix()
+                if commentary_status in INCLUDED_COMMENTARY:
+                    local_commentary = commentary_root / section_name / f"{slug}.md"
+                    normalized = dict(c_frontmatter)
+                    normalized["title"] = c_frontmatter.get("title", f"《{title}》赏析")
+                    normalized["poem"] = f"src/poems/{section_name}/{slug}.md"
+                    normalized["section"] = section_name
+                    if commentary_status in UNREVIEWED_COMMENTARY and not c_body.lstrip().startswith(COMMENTARY_WARNING):
+                        c_body = f"{COMMENTARY_WARNING}\n\n{c_body.strip()}\n"
+                    write_markdown(local_commentary, normalized, c_body)
+                    commentary_path = local_commentary.relative_to(ROOT).as_posix()
 
             asset_dir = asset_root / slug
             copy_or_create_asset(title, section_name, asset_dir)
@@ -133,17 +162,7 @@ def main() -> None:
         encoding="utf-8",
     )
     (src / "preface.md").write_text("# 序\n\n（待补）\n", encoding="utf-8")
-    (src / "postscript.md").write_text(
-        """# 代后记：在日常里写旧体诗的一点体会
-
-旧体诗于我不是远离日常的古典陈设，而是一种压缩经验、整理心绪的方法。工作中的进退，家庭里的牵挂，旅途上的湖山，常常先成为一句可以反复咀嚼的话，再慢慢凝成四句或数联。
-
-写得多了，越发觉得格律不是拘束，而像一副窄窄的骨架。它迫使情绪收束，也迫使含混的想法显出轮廓。字数有限，便不能事事铺陈，只能在取舍中留下最要紧的声气。
-
-本书保留创作背景，也保留必要的拼音校注，是希望读者能同时看到诗句、当时处境与后来回看时的理解。若这些短诗还能在某个日常片刻里与人相遇，便已足够。
-""",
-        encoding="utf-8",
-    )
+    (src / "postscript.md").write_text(extract_postscript_markdown(), encoding="utf-8")
     (src / "llm-commentary-note.md").write_text(
         """# LLM 辅助赏析写作说明
 
@@ -164,7 +183,7 @@ LLM 的作用主要是提供初稿结构、意象展开和可供反驳的解释�
 
     print(
         f"synced {sum(len(section['poems']) for section in book['sections'])} poems, "
-        f"{sum(1 for section in book['sections'] for poem in section['poems'] if poem['commentary'])} eligible commentaries"
+        f"{sum(1 for section in book['sections'] for poem in section['poems'] if poem['commentary'])} included commentaries"
     )
 
 

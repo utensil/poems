@@ -6,8 +6,8 @@ sections:
     slug: 心旗
     order: 1
     path: src/poems/职业生涯/心旗.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/职业生涯/心旗.md
+    commentary-status: ai-review-only
     asset: assets/poems/心旗/illustration.png
     prompt: assets/poems/心旗/illustration.prompt.md
     pinyin-overrides:
@@ -16,8 +16,8 @@ sections:
     slug: 屡战
     order: 2
     path: src/poems/职业生涯/屡战.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/职业生涯/屡战.md
+    commentary-status: ai-review-only
     asset: assets/poems/屡战/illustration.png
     prompt: assets/poems/屡战/illustration.prompt.md
     pinyin-overrides:
@@ -26,8 +26,8 @@ sections:
     slug: 断舍
     order: 3
     path: src/poems/职业生涯/断舍.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/职业生涯/断舍.md
+    commentary-status: ai-review-only
     asset: assets/poems/断舍/illustration.png
     prompt: assets/poems/断舍/illustration.prompt.md
     pinyin-overrides:
@@ -37,8 +37,8 @@ sections:
     slug: 统帅
     order: 4
     path: src/poems/职业生涯/统帅.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/职业生涯/统帅.md
+    commentary-status: ai-review-only
     asset: assets/poems/统帅/illustration.png
     prompt: assets/poems/统帅/illustration.prompt.md
     pinyin-overrides: {}
@@ -55,8 +55,8 @@ sections:
     slug: 整装
     order: 6
     path: src/poems/职业生涯/整装.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/职业生涯/整装.md
+    commentary-status: ai-review-only
     asset: assets/poems/整装/illustration.png
     prompt: assets/poems/整装/illustration.prompt.md
     pinyin-overrides:
@@ -65,8 +65,8 @@ sections:
     slug: 战时
     order: 7
     path: src/poems/职业生涯/战时.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/职业生涯/战时.md
+    commentary-status: ai-review-only
     asset: assets/poems/战时/illustration.png
     prompt: assets/poems/战时/illustration.prompt.md
     pinyin-overrides:
@@ -75,8 +75,8 @@ sections:
     slug: 泳夜
     order: 8
     path: src/poems/职业生涯/泳夜.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/职业生涯/泳夜.md
+    commentary-status: ai-review-only
     asset: assets/poems/泳夜/illustration.png
     prompt: assets/poems/泳夜/illustration.prompt.md
     pinyin-overrides: {}
@@ -84,8 +84,8 @@ sections:
     slug: 拭剑
     order: 9
     path: src/poems/职业生涯/拭剑.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/职业生涯/拭剑.md
+    commentary-status: ai-review-only
     asset: assets/poems/拭剑/illustration.png
     prompt: assets/poems/拭剑/illustration.prompt.md
     pinyin-overrides: {}
@@ -93,8 +93,8 @@ sections:
     slug: 型势
     order: 10
     path: src/poems/职业生涯/型势.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/职业生涯/型势.md
+    commentary-status: ai-review-only
     asset: assets/poems/型势/illustration.png
     prompt: assets/poems/型势/illustration.prompt.md
     pinyin-overrides:
@@ -103,8 +103,8 @@ sections:
     slug: 伙伴
     order: 11
     path: src/poems/职业生涯/伙伴.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/职业生涯/伙伴.md
+    commentary-status: ai-review-only
     asset: assets/poems/伙伴/illustration.png
     prompt: assets/poems/伙伴/illustration.prompt.md
     pinyin-overrides: {}
@@ -112,8 +112,8 @@ sections:
     slug: 投融
     order: 12
     path: src/poems/职业生涯/投融.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/职业生涯/投融.md
+    commentary-status: ai-review-only
     asset: assets/poems/投融/illustration.png
     prompt: assets/poems/投融/illustration.prompt.md
     pinyin-overrides: {}
@@ -121,8 +121,8 @@ sections:
     slug: 直前
     order: 13
     path: src/poems/职业生涯/直前.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/职业生涯/直前.md
+    commentary-status: ai-review-only
     asset: assets/poems/直前/illustration.png
     prompt: assets/poems/直前/illustration.prompt.md
     pinyin-overrides: {}
@@ -130,8 +130,8 @@ sections:
     slug: 信使
     order: 14
     path: src/poems/职业生涯/信使.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/职业生涯/信使.md
+    commentary-status: ai-review-only
     asset: assets/poems/信使/illustration.png
     prompt: assets/poems/信使/illustration.prompt.md
     pinyin-overrides:
@@ -140,8 +140,8 @@ sections:
     slug: 失学
     order: 15
     path: src/poems/职业生涯/失学.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/职业生涯/失学.md
+    commentary-status: ai-review-only
     asset: assets/poems/失学/illustration.png
     prompt: assets/poems/失学/illustration.prompt.md
     pinyin-overrides:
@@ -150,8 +150,8 @@ sections:
     slug: 将息
     order: 16
     path: src/poems/职业生涯/将息.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/职业生涯/将息.md
+    commentary-status: ai-review-only
     asset: assets/poems/将息/illustration.png
     prompt: assets/poems/将息/illustration.prompt.md
     pinyin-overrides: {}
@@ -159,8 +159,8 @@ sections:
     slug: 闯潭
     order: 17
     path: src/poems/职业生涯/闯潭.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/职业生涯/闯潭.md
+    commentary-status: ai-review-only
     asset: assets/poems/闯潭/illustration.png
     prompt: assets/poems/闯潭/illustration.prompt.md
     pinyin-overrides: {}
@@ -168,8 +168,8 @@ sections:
     slug: 前行
     order: 18
     path: src/poems/职业生涯/前行.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/职业生涯/前行.md
+    commentary-status: ai-review-only
     asset: assets/poems/前行/illustration.png
     prompt: assets/poems/前行/illustration.prompt.md
     pinyin-overrides: {}
@@ -177,8 +177,8 @@ sections:
     slug: 莫测
     order: 19
     path: src/poems/职业生涯/莫测.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/职业生涯/莫测.md
+    commentary-status: ai-review-only
     asset: assets/poems/莫测/illustration.png
     prompt: assets/poems/莫测/illustration.prompt.md
     pinyin-overrides:
@@ -187,8 +187,8 @@ sections:
     slug: 赴蹈
     order: 20
     path: src/poems/职业生涯/赴蹈.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/职业生涯/赴蹈.md
+    commentary-status: ai-review-only
     asset: assets/poems/赴蹈/illustration.png
     prompt: assets/poems/赴蹈/illustration.prompt.md
     pinyin-overrides: {}
@@ -196,8 +196,8 @@ sections:
     slug: 难抉
     order: 21
     path: src/poems/职业生涯/难抉.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/职业生涯/难抉.md
+    commentary-status: ai-review-only
     asset: assets/poems/难抉/illustration.png
     prompt: assets/poems/难抉/illustration.prompt.md
     pinyin-overrides:
@@ -227,8 +227,8 @@ sections:
     slug: 时机
     order: 1
     path: src/poems/压力阴郁/时机.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/压力阴郁/时机.md
+    commentary-status: ai-review-only
     asset: assets/poems/时机/illustration.png
     prompt: assets/poems/时机/illustration.prompt.md
     pinyin-overrides: {}
@@ -236,8 +236,8 @@ sections:
     slug: 补天
     order: 2
     path: src/poems/压力阴郁/补天.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/压力阴郁/补天.md
+    commentary-status: ai-review-only
     asset: assets/poems/补天/illustration.png
     prompt: assets/poems/补天/illustration.prompt.md
     pinyin-overrides:
@@ -246,8 +246,8 @@ sections:
     slug: 劳疾
     order: 3
     path: src/poems/压力阴郁/劳疾.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/压力阴郁/劳疾.md
+    commentary-status: ai-review-only
     asset: assets/poems/劳疾/illustration.png
     prompt: assets/poems/劳疾/illustration.prompt.md
     pinyin-overrides: {}
@@ -255,8 +255,8 @@ sections:
     slug: 多艰
     order: 4
     path: src/poems/压力阴郁/多艰.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/压力阴郁/多艰.md
+    commentary-status: ai-review-only
     asset: assets/poems/多艰/illustration.png
     prompt: assets/poems/多艰/illustration.prompt.md
     pinyin-overrides: {}
@@ -264,8 +264,8 @@ sections:
     slug: 还家
     order: 5
     path: src/poems/压力阴郁/还家.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/压力阴郁/还家.md
+    commentary-status: ai-review-only
     asset: assets/poems/还家/illustration.png
     prompt: assets/poems/还家/illustration.prompt.md
     pinyin-overrides: {}
@@ -273,8 +273,8 @@ sections:
     slug: 肩钧
     order: 6
     path: src/poems/压力阴郁/肩钧.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/压力阴郁/肩钧.md
+    commentary-status: ai-review-only
     asset: assets/poems/肩钧/illustration.png
     prompt: assets/poems/肩钧/illustration.prompt.md
     pinyin-overrides: {}
@@ -282,8 +282,8 @@ sections:
     slug: 未竟
     order: 7
     path: src/poems/压力阴郁/未竟.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/压力阴郁/未竟.md
+    commentary-status: ai-review-only
     asset: assets/poems/未竟/illustration.png
     prompt: assets/poems/未竟/illustration.prompt.md
     pinyin-overrides: {}
@@ -291,8 +291,8 @@ sections:
     slug: 低效
     order: 8
     path: src/poems/压力阴郁/低效.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/压力阴郁/低效.md
+    commentary-status: ai-review-only
     asset: assets/poems/低效/illustration.png
     prompt: assets/poems/低效/illustration.prompt.md
     pinyin-overrides: {}
@@ -300,8 +300,8 @@ sections:
     slug: 衣悟
     order: 9
     path: src/poems/压力阴郁/衣悟.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/压力阴郁/衣悟.md
+    commentary-status: ai-review-only
     asset: assets/poems/衣悟/illustration.png
     prompt: assets/poems/衣悟/illustration.prompt.md
     pinyin-overrides:
@@ -320,8 +320,8 @@ sections:
     slug: 望空
     order: 11
     path: src/poems/压力阴郁/望空.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/压力阴郁/望空.md
+    commentary-status: ai-review-only
     asset: assets/poems/望空/illustration.png
     prompt: assets/poems/望空/illustration.prompt.md
     pinyin-overrides:
@@ -330,8 +330,8 @@ sections:
     slug: 掌中
     order: 12
     path: src/poems/压力阴郁/掌中.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/压力阴郁/掌中.md
+    commentary-status: ai-review-only
     asset: assets/poems/掌中/illustration.png
     prompt: assets/poems/掌中/illustration.prompt.md
     pinyin-overrides: {}
@@ -339,8 +339,8 @@ sections:
     slug: 齿轮
     order: 13
     path: src/poems/压力阴郁/齿轮.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/压力阴郁/齿轮.md
+    commentary-status: ai-review-only
     asset: assets/poems/齿轮/illustration.png
     prompt: assets/poems/齿轮/illustration.prompt.md
     pinyin-overrides: {}
@@ -348,8 +348,8 @@ sections:
     slug: 井观
     order: 14
     path: src/poems/压力阴郁/井观.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/压力阴郁/井观.md
+    commentary-status: ai-review-only
     asset: assets/poems/井观/illustration.png
     prompt: assets/poems/井观/illustration.prompt.md
     pinyin-overrides:
@@ -367,8 +367,8 @@ sections:
     slug: 席散
     order: 16
     path: src/poems/压力阴郁/席散.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/压力阴郁/席散.md
+    commentary-status: ai-review-only
     asset: assets/poems/席散/illustration.png
     prompt: assets/poems/席散/illustration.prompt.md
     pinyin-overrides: {}
@@ -449,8 +449,8 @@ sections:
     slug: 花泥
     order: 2
     path: src/poems/哲思禅意/花泥.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/哲思禅意/花泥.md
+    commentary-status: iterated
     asset: assets/poems/花泥/illustration.png
     prompt: assets/poems/花泥/illustration.prompt.md
     pinyin-overrides:
@@ -459,8 +459,8 @@ sections:
     slug: 自然
     order: 3
     path: src/poems/哲思禅意/自然.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/哲思禅意/自然.md
+    commentary-status: iterated
     asset: assets/poems/自然/illustration.png
     prompt: assets/poems/自然/illustration.prompt.md
     pinyin-overrides:
@@ -470,8 +470,8 @@ sections:
     slug: 觉来
     order: 4
     path: src/poems/哲思禅意/觉来.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/哲思禅意/觉来.md
+    commentary-status: iterated
     asset: assets/poems/觉来/illustration.png
     prompt: assets/poems/觉来/illustration.prompt.md
     pinyin-overrides:
@@ -482,8 +482,8 @@ sections:
     slug: 相寻
     order: 1
     path: src/poems/心情与事件/相寻.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/心情与事件/相寻.md
+    commentary-status: ai-review-only
     asset: assets/poems/相寻/illustration.png
     prompt: assets/poems/相寻/illustration.prompt.md
     pinyin-overrides:
@@ -492,8 +492,8 @@ sections:
     slug: 年心
     order: 2
     path: src/poems/心情与事件/年心.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/心情与事件/年心.md
+    commentary-status: ai-review-only
     asset: assets/poems/年心/illustration.png
     prompt: assets/poems/年心/illustration.prompt.md
     pinyin-overrides:
@@ -502,8 +502,8 @@ sections:
     slug: 园校
     order: 3
     path: src/poems/心情与事件/园校.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/心情与事件/园校.md
+    commentary-status: ai-review-only
     asset: assets/poems/园校/illustration.png
     prompt: assets/poems/园校/illustration.prompt.md
     pinyin-overrides: {}
@@ -511,8 +511,8 @@ sections:
     slug: 心屿
     order: 4
     path: src/poems/心情与事件/心屿.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/心情与事件/心屿.md
+    commentary-status: ai-review-only
     asset: assets/poems/心屿/illustration.png
     prompt: assets/poems/心屿/illustration.prompt.md
     pinyin-overrides:
@@ -521,8 +521,8 @@ sections:
     slug: 心花
     order: 5
     path: src/poems/心情与事件/心花.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/心情与事件/心花.md
+    commentary-status: ai-review-only
     asset: assets/poems/心花/illustration.png
     prompt: assets/poems/心花/illustration.prompt.md
     pinyin-overrides: {}
@@ -530,8 +530,8 @@ sections:
     slug: 启步
     order: 6
     path: src/poems/心情与事件/启步.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/心情与事件/启步.md
+    commentary-status: ai-review-only
     asset: assets/poems/启步/illustration.png
     prompt: assets/poems/启步/illustration.prompt.md
     pinyin-overrides:
@@ -541,8 +541,8 @@ sections:
     slug: 尝假
     order: 7
     path: src/poems/心情与事件/尝假.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/心情与事件/尝假.md
+    commentary-status: ai-review-only
     asset: assets/poems/尝假/illustration.png
     prompt: assets/poems/尝假/illustration.prompt.md
     pinyin-overrides: {}
@@ -550,8 +550,8 @@ sections:
     slug: 咏茶
     order: 8
     path: src/poems/心情与事件/咏茶.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/心情与事件/咏茶.md
+    commentary-status: ai-review-only
     asset: assets/poems/咏茶/illustration.png
     prompt: assets/poems/咏茶/illustration.prompt.md
     pinyin-overrides: {}
@@ -559,8 +559,8 @@ sections:
     slug: 咏酒
     order: 9
     path: src/poems/心情与事件/咏酒.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/心情与事件/咏酒.md
+    commentary-status: ai-review-only
     asset: assets/poems/咏酒/illustration.png
     prompt: assets/poems/咏酒/illustration.prompt.md
     pinyin-overrides: {}
@@ -568,8 +568,8 @@ sections:
     slug: 鱼缸
     order: 10
     path: src/poems/心情与事件/鱼缸.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/心情与事件/鱼缸.md
+    commentary-status: ai-review-only
     asset: assets/poems/鱼缸/illustration.png
     prompt: assets/poems/鱼缸/illustration.prompt.md
     pinyin-overrides:
@@ -578,8 +578,8 @@ sections:
     slug: 羽决
     order: 11
     path: src/poems/心情与事件/羽决.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/心情与事件/羽决.md
+    commentary-status: ai-review-only
     asset: assets/poems/羽决/illustration.png
     prompt: assets/poems/羽决/illustration.prompt.md
     pinyin-overrides:
@@ -589,8 +589,8 @@ sections:
     slug: 得遇
     order: 12
     path: src/poems/心情与事件/得遇.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/心情与事件/得遇.md
+    commentary-status: ai-review-only
     asset: assets/poems/得遇/illustration.png
     prompt: assets/poems/得遇/illustration.prompt.md
     pinyin-overrides: {}
@@ -598,8 +598,8 @@ sections:
     slug: 出戏
     order: 13
     path: src/poems/心情与事件/出戏.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/心情与事件/出戏.md
+    commentary-status: ai-review-only
     asset: assets/poems/出戏/illustration.png
     prompt: assets/poems/出戏/illustration.prompt.md
     pinyin-overrides: {}
@@ -607,8 +607,8 @@ sections:
     slug: 滋长
     order: 14
     path: src/poems/心情与事件/滋长.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/心情与事件/滋长.md
+    commentary-status: ai-review-only
     asset: assets/poems/滋长/illustration.png
     prompt: assets/poems/滋长/illustration.prompt.md
     pinyin-overrides: {}
@@ -616,8 +616,8 @@ sections:
     slug: 遴选
     order: 15
     path: src/poems/心情与事件/遴选.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/心情与事件/遴选.md
+    commentary-status: ai-review-only
     asset: assets/poems/遴选/illustration.png
     prompt: assets/poems/遴选/illustration.prompt.md
     pinyin-overrides: {}
@@ -625,8 +625,8 @@ sections:
     slug: 纵擒
     order: 16
     path: src/poems/心情与事件/纵擒.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/心情与事件/纵擒.md
+    commentary-status: ai-review-only
     asset: assets/poems/纵擒/illustration.png
     prompt: assets/poems/纵擒/illustration.prompt.md
     pinyin-overrides: {}
@@ -665,8 +665,8 @@ sections:
     slug: 穿云
     order: 2
     path: src/poems/云南丽江香格里拉之旅/穿云.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/云南丽江香格里拉之旅/穿云.md
+    commentary-status: iterated
     asset: assets/poems/穿云/illustration.png
     prompt: assets/poems/穿云/illustration.prompt.md
     pinyin-overrides:
