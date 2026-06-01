@@ -14,6 +14,11 @@
 #let chronology-font = "STFangsong"
 #let toc-font = "STFangsong"
 
+#let paper = rgb("#f8f1e6")
+#let ink = rgb("#2f231f")
+#let muted = rgb("#6f5a50")
+#let faint-rule = rgb("#8c6e5d").transparentize(70%)
+
 #let book-title-style(body) = text(font: poem-title-font, size: 36pt, weight: "bold", tracking: 2pt)[#body]
 #let book-author-style(body) = text(font: author-font, size: 17pt)[#body]
 #let toc-title-style(body) = text(font: prose-heading-font, size: 26pt, weight: "bold")[#body]
@@ -27,11 +32,6 @@
 #let commentary-style(body) = text(font: commentary-font)[#body]
 #let context-style(body) = text(font: context-font)[#body]
 #let chronology-style(body) = text(font: chronology-font)[#body]
-
-#let paper = rgb("#f8f1e6")
-#let ink = rgb("#2f231f")
-#let muted = rgb("#6f5a50")
-#let faint-rule = rgb("#8c6e5d").transparentize(70%)
 
 #let base-page() = {
   set page(width: 210mm, height: 297mm, margin: (x: 24mm, y: 24mm), fill: paper)
