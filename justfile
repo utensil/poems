@@ -1,8 +1,24 @@
-dev: build
-    open main.pdf
+validate:
+    python3 scripts/validate.py
 
-build:
+sync:
+    python3 scripts/sync-from-cog-land.py
+
+generate:
+    python3 scripts/build-manifest.py
+    python3 scripts/generate-typst.py
+
+build: validate generate
+    mkdir -p build/pdf
+    typst compile --root . book.typ build/pdf/poem-book.pdf
+
+open: build
+    open -a "Google Chrome" build/pdf/poem-book.pdf
+
+latex-build:
     tectonic --keep-logs main.tex
+
+dev: open
 
 prep:
     #!/usr/bin/env zsh

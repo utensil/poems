@@ -1,0 +1,6 @@
+[package]
+name = "poems"
+version = "0.1.0"
+entrypoint = "book.typ"
+authors = ["宋皿"]
+description = "Typst illustrated edition of 冶文斋诗选."

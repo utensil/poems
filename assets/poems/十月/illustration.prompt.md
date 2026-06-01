@@ -1,0 +1,7 @@
+Use case: illustration-story
+Asset type: subdued A4 poem-page background illustration, vertical 2:3 to 9:16 friendly, no text.
+Primary request: Generate a new literary illustration for the Chinese poem 《十月》 and its commentary. Do not reproduce or trace the source family photo; use only palette inspiration: warm indoor cream, gentle rose, soft medical blue, muted grain colors.
+Scene/backdrop: A tender symbolic ten-month pregnancy journey in one calm domestic composition: faint pregnancy test paper, ultrasound-like abstract shape without readable details, soft nursery wall with indistinct child posters, folded clothes, grains in a small bowl, a mother’s rounded silhouette suggested by fabric and light rather than an identifiable face. The mood moves from anxious checks to expectant warmth.
+Subject and symbolism: Blend modern medical care and classical tenderness. Show waiting, care, bodily burden, and hope without literal hospital machinery. Keep privacy: no identifiable faces, no exposed body, no medical text.
+Visual style: refined contemporary Chinese literary illustration, ink-and-wash mixed with soft gouache, warm paper texture, muted domestic palette, quiet and humane, low contrast enough for overlaid text.
+Composition: vertical page background and side panel; generous open areas. No text, no Chinese characters, no labels, no watermark. Avoid ultrasound text, medical diagrams, sentimental cliché, decorative seals, fantasy glow.
