@@ -13,12 +13,14 @@ from common import (
     INCLUDED_COMMENTARY,
     MAX_POEM_LINE_CELLS,
     PLACEHOLDER_PROMPT_SIGNATURE,
+    PROMPT_FIELDS,
     ROOT,
     SECTIONS,
     COMMENTARY_WARNING,
     UNREVIEWED_COMMENTARY,
     clean_poem_body,
     extract_postscript_markdown,
+    extract_commentary_note_markdown,
     iter_book_poems,
     load_book,
     poem_order_from_main_tex,
@@ -94,12 +96,13 @@ def main() -> int:
             if not c_path.exists():
                 fail(errors, f"missing commentary source {commentary}")
             else:
-                c_frontmatter, _ = read_markdown(c_path)
+                c_frontmatter, c_body = read_markdown(c_path)
                 status = c_frontmatter.get("commentary-status")
                 if status not in INCLUDED_COMMENTARY:
                     fail(errors, f"{commentary} has unsupported commentary-status {status!r}")
+                if re.search(r"\\[A-Za-z]+", c_body):
+                    fail(errors, f"{commentary} contains raw LaTeX command")
                 if status in UNREVIEWED_COMMENTARY:
-                    _, c_body = read_markdown(c_path)
                     if not c_body.lstrip().startswith(COMMENTARY_WARNING):
                         fail(errors, f"{commentary} missing unreviewed commentary warning")
 
@@ -125,6 +128,15 @@ def main() -> int:
                 fail(errors, f"{notes.relative_to(ROOT)} has invalid image-status {status!r}")
             if args.mode == "final" and status == "placeholder":
                 fail(errors, f"{notes.relative_to(ROOT)} is placeholder in final mode")
+            if status in {"generated", "reviewed"} and prompt.exists():
+                prompt_text = prompt.read_text(encoding="utf-8")
+                missing = [field for field in PROMPT_FIELDS if f"{field}:" not in prompt_text]
+                if missing:
+                    fail(errors, f"{poem['prompt']} missing prompt fields: {', '.join(missing)}")
+                if len(prompt_text) < 850:
+                    fail(errors, f"{poem['prompt']} is too short for a content-rich generated prompt")
+                if not any(anchor in prompt_text for anchor in ["commentary_reading:", "Poem text anchors", "source_poem_summary:"]):
+                    fail(errors, f"{poem['prompt']} lacks poem/commentary anchors")
         seen_assets.add(poem["asset"])
 
     commentary_files = list((ROOT / "src" / "commentaries").glob("*/*.md"))
@@ -167,6 +179,15 @@ def main() -> int:
                 fail(errors, f"src/postscript.md missing extracted source snippet: {snippet}")
         if abs(len(postscript) - len(extracted)) > 1500:
             fail(errors, "src/postscript.md length diverges from main.tex extraction")
+
+    note_path = ROOT / "src" / "llm-commentary-note.md"
+    if note_path.exists():
+        note = note_path.read_text(encoding="utf-8")
+        extracted_note = extract_commentary_note_markdown()
+        if "少年时代，我非常喜欢《唐诗鉴赏辞典》" not in note:
+            fail(errors, "src/llm-commentary-note.md missing extracted commentary-writing note")
+        if abs(len(note) - len(extracted_note)) > 300:
+            fail(errors, "src/llm-commentary-note.md length diverges from main.tex commentary note extraction")
 
     manifest = ROOT / "build" / "generated" / "manifest.json"
     if manifest.exists():

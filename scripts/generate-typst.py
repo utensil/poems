@@ -9,11 +9,64 @@ import yaml
 from common import COMMENTARY_WARNING, ROOT, UNREVIEWED_COMMENTARY, typst_array, typst_dict, typst_string
 
 
-def paragraphs(markdown: str) -> list[str]:
+def paragraphs(markdown: str) -> list[dict[str, str]]:
     text = re.sub(r"^---\n.*?\n---\n", "", markdown.strip(), flags=re.S)
     parts = []
-    for part in re.split(r"\n\s*\n", text):
-        lines = [line.strip() for line in part.splitlines() if line.strip()]
+    current_quote: list[str] = []
+    current_para: list[str] = []
+
+    def flush_para() -> None:
+        nonlocal current_para
+        if current_para:
+            lines = current_para
+            if lines[0].startswith("#"):
+                lines[0] = lines[0].lstrip("#").strip()
+            parts.append({"kind": "para", "text": "\n".join(lines)})
+            current_para = []
+
+    def flush_quote() -> None:
+        nonlocal current_quote
+        if current_quote:
+            parts.append({"kind": "quote", "text": "\n".join(current_quote)})
+            current_quote = []
+
+    for raw in text.splitlines():
+        line = raw.strip()
+        if not line:
+            flush_para()
+            flush_quote()
+            continue
+        if line.startswith(">"):
+            flush_para()
+            current_quote.append(line.lstrip("> ").strip())
+            continue
+        flush_quote()
+        current_para.append(line)
+    flush_para()
+    flush_quote()
+    return parts
+
+
+def paragraph_texts(markdown: str) -> list[str]:
+    return [part["text"] for part in paragraphs(markdown) if part["kind"] == "para"]
+
+
+def typst_block_array(parts: list[dict[str, str]]) -> str:
+    if not parts:
+        return "()"
+    rendered = ", ".join(
+        f"(kind: {typst_string(part['kind'])}, text: {typst_string(part['text'])})"
+        for part in parts
+    )
+    if len(parts) == 1:
+        rendered += ","
+    return f"({rendered})"
+
+
+def commentary_paragraphs(markdown: str) -> list[str]:
+    parts = []
+    for part in re.split(r"\n\s*\n", re.sub(r"^---\n.*?\n---\n", "", markdown.strip(), flags=re.S)):
+        lines = [line.strip().lstrip("> ").strip() for line in part.splitlines() if line.strip()]
         if not lines:
             continue
         if lines[0].startswith("#"):
@@ -92,7 +145,7 @@ def main() -> None:
         "#pagebreak()",
         '#prose-page("序", (), placeholder: true)',
         "#pagebreak()",
-        f'#prose-page("凡例", {typst_array(paragraphs(fanli)[1:])})',
+        f'#prose-page("凡例", {typst_block_array(paragraphs(fanli)[1:])})',
         "#pagebreak()",
         "#toc-page((",
         '  "序",',
@@ -100,7 +153,7 @@ def main() -> None:
         *[f'  "{section["title"]}",' for section in manifest["sections"]],
         '  "年谱",',
         '  "代后记：在日常里写旧体诗的一点体会",',
-        '  "LLM 辅助赏析写作说明",',
+        '  "赏析编写说明",',
         "))",
         "#pagebreak()",
     ]
@@ -117,7 +170,7 @@ def main() -> None:
         )
         for poem in section["poems"]:
             body_lines = [line for line in poem["body"].splitlines() if line.strip()]
-            commentary_parts = paragraphs(poem.get("commentary-body", ""))
+            commentary_parts = commentary_paragraphs(poem.get("commentary-body", ""))
             if poem.get("commentary-status") in UNREVIEWED_COMMENTARY and commentary_parts:
                 if not commentary_parts[0].startswith(COMMENTARY_WARNING):
                     commentary_parts = [COMMENTARY_WARNING] + commentary_parts
@@ -136,14 +189,13 @@ def main() -> None:
                 ]
             )
 
-    skipped = "、".join(chronology.get("undated-skipped", []))
     lines.extend(
         [
-            f"#chronology-page({typst_chronology_entries(chronology.get('entries', []))}, {typst_string(skipped)})",
+            f"#chronology-page({typst_chronology_entries(chronology.get('entries', []))})",
             "#pagebreak()",
-            f'#appendix-article("代后记：在日常里写旧体诗的一点体会", {typst_array(paragraphs(postscript)[1:])})',
+            f'#appendix-article("代后记：在日常里写旧体诗的一点体会", {typst_block_array(paragraphs(postscript)[1:])})',
             "#pagebreak()",
-            f'#appendix-article("LLM 辅助赏析写作说明", {typst_array(paragraphs(llm_note)[1:])})',
+            f'#appendix-article("赏析编写说明", {typst_block_array(paragraphs(llm_note)[1:])})',
         ]
     )
 

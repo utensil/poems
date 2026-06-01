@@ -42,13 +42,36 @@ def main() -> int:
     text_path.parent.mkdir(parents=True, exist_ok=True)
     run(["pdftotext", str(pdf), str(text_path)])
     text = text_path.read_text(encoding="utf-8", errors="ignore")
-    for required in ["冶文斋诗选", "宋皿", "凡例", "年谱", "代后记：在日常里写旧体诗的一点体会", "LLM 辅助赏析写作说明"]:
+    for required in ["冶文斋诗选", "宋皿", "凡例", "年谱", "代后记：在日常里写旧体诗的一点体会", "赏析编写说明"]:
         if required not in text:
             print(f"ERROR: PDF text missing {required}", file=sys.stderr)
             return 1
-    for forbidden in ["textsf", "Typst 插画本", "十、一、", "十、二、", r"\\textsf"]:
+    for forbidden in ["textsf", "Typst 插画本", "十、一、", "十、二、", r"\\textsf", "LLM", "未列入年谱", "夜会、心印", "> "]:
         if forbidden in text:
             print(f"ERROR: PDF text contains forbidden text {forbidden}", file=sys.stderr)
+            return 1
+
+    style_source = (ROOT / "templates" / "book-style.typ").read_text(encoding="utf-8")
+    if "#let cover-title-font = poem-title-font" not in style_source:
+        print("ERROR: cover title font is not tied to poem-title font role", file=sys.stderr)
+        return 1
+
+    generated_source = (ROOT / "build" / "generated" / "book.generated.typ").read_text(encoding="utf-8")
+    if "LLM" in generated_source:
+        print("ERROR: generated Typst still contains LLM title text", file=sys.stderr)
+        return 1
+
+    for title in ["十月", "疹热", "自然", "启步"]:
+        marker = text.find(title)
+        if marker < 0:
+            print(f"ERROR: PDF text missing known page {title}", file=sys.stderr)
+            return 1
+        window = text[marker : marker + 4500]
+        if "【背景】" not in window:
+            print(f"ERROR: known page {title} missing background marker near poem text", file=sys.stderr)
+            return 1
+        if "【赏析】" not in window:
+            print(f"ERROR: known page {title} missing commentary marker near poem text", file=sys.stderr)
             return 1
 
     info = run(["pdfinfo", str(pdf)])

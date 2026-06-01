@@ -1,11 +1,11 @@
 // Central book design system for the Typst illustrated edition.
 
-#let cover-title-font = "Zhuque Fangsong (technical preview)"
-#let cover-subtitle-font = "STFangsong"
-#let author-font = "STFangsong"
-#let chapter-title-font = "STKaiti"
 #let poem-title-font = "STKaiti"
 #let poem-body-font = "STKaiti"
+#let cover-title-font = poem-title-font
+#let cover-subtitle-font = "STFangsong"
+#let author-font = "STFangsong"
+#let chapter-title-font = poem-title-font
 #let pinyin-font = "Kaiti SC"
 #let context-font = "STFangsong"
 #let commentary-font = "STFangsong"
@@ -13,6 +13,20 @@
 #let prose-body-font = "Zhuque Fangsong (technical preview)"
 #let chronology-font = "STFangsong"
 #let toc-font = "STFangsong"
+
+#let book-title-style(body) = text(font: poem-title-font, size: 36pt, weight: "bold", tracking: 2pt)[#body]
+#let book-author-style(body) = text(font: author-font, size: 17pt)[#body]
+#let toc-title-style(body) = text(font: prose-heading-font, size: 26pt, weight: "bold")[#body]
+#let toc-entry-style(body) = text(font: toc-font, size: 12pt)[#body]
+#let chapter-divider-style(body) = text(font: chapter-title-font, size: 34pt, weight: "bold", tracking: 2pt)[#body]
+#let prose-title-style(body, size: 26pt) = text(font: prose-heading-font, size: size, weight: "bold", tracking: 0.6pt)[#body]
+#let prose-body-style(body) = text(font: prose-body-font, size: 11.6pt)[#body]
+#let prose-quote-style(body) = text(font: prose-body-font, size: 10.8pt, fill: muted)[#body]
+#let poem-title-style(body) = text(font: poem-title-font)[#body]
+#let poem-body-style(body) = text(font: poem-body-font)[#body]
+#let commentary-style(body) = text(font: commentary-font)[#body]
+#let context-style(body) = text(font: context-font)[#body]
+#let chronology-style(body) = text(font: chronology-font)[#body]
 
 #let paper = rgb("#f8f1e6")
 #let ink = rgb("#2f231f")
@@ -31,9 +45,9 @@
 #let cover-page(title, author, subtitle: none) = {
   base-page()
   align(center + horizon)[
-    #text(font: cover-title-font, size: 36pt, weight: "bold", tracking: 2pt)[#title]
+    #book-title-style(title)
     #v(22pt)
-    #text(font: author-font, size: 17pt)[#author]
+    #book-author-style(author)
     #if subtitle != none [
       #v(11pt)
       #text(font: cover-subtitle-font, size: 12pt, fill: muted)[#subtitle]
@@ -43,27 +57,39 @@
 
 #let prose-page(title, paragraphs, placeholder: false) = {
   base-page()
-  align(center)[#text(font: prose-heading-font, size: 26pt, weight: "bold", tracking: 1pt)[#title]]
+  align(center)[#prose-title-style(title, size: if title.clusters().len() > 16 { 22pt } else { 26pt })]
   v(18pt)
   set text(font: prose-body-font, size: 11.6pt)
-  set par(first-line-indent: 2em, leading: 0.86em, justify: true)
+  set par(first-line-indent: 2em, leading: 0.78em, justify: true)
   if placeholder {
     align(center)[#text(font: prose-body-font, size: 12pt, fill: muted)[（待补）]]
   } else {
     for p in paragraphs [
-      #block(above: 0pt, below: 10pt)[#p]
+      #if p.kind == "quote" {
+        block(
+          inset: (left: 8mm, right: 6mm, y: 3mm),
+          above: 2pt,
+          below: 8pt,
+          stroke: (left: (paint: faint-rule, thickness: 1pt)),
+        )[
+          #set par(first-line-indent: 0pt, leading: 0.72em, justify: true)
+          #prose-quote-style(p.text)
+        ]
+      } else {
+        block(above: 0pt, below: 7pt)[#prose-body-style(p.text)]
+      }
     ]
   }
 }
 
 #let toc-page(entries) = {
   base-page()
-  align(center)[#text(font: prose-heading-font, size: 26pt, weight: "bold")[目录]]
+  align(center)[#toc-title-style[目录]]
   v(16pt)
   set text(font: toc-font, size: 12pt)
   for entry in entries [
     #block(above: 0pt, below: 7pt)[
-      #text[#entry]
+      #toc-entry-style(entry)
     ]
   ]
 }
@@ -76,15 +102,13 @@
   ]
   align(center + horizon)[
     #for line in title-lines [
-      #text(font: chapter-title-font, size: 34pt, weight: "bold", tracking: 2pt)[#line]
+      #chapter-divider-style(line)
       #v(6pt)
     ]
-    #v(16pt)
-    #text(font: chronology-font, size: 12pt, fill: muted)[本章收录 #str(count) 首]
   ]
 }
 
-#let chronology-page(entries, skipped) = {
+#let chronology-page(entries) = {
   base-page()
   align(center)[#text(font: prose-heading-font, size: 26pt, weight: "bold")[年谱]]
   v(16pt)
@@ -100,10 +124,6 @@
     )
     #v(7pt)
   ]
-  v(10pt)
-  line(length: 100%, stroke: (paint: faint-rule, thickness: 0.5pt))
-  v(6pt)
-  text(size: 10pt, fill: muted)[未列入年谱：#skipped]
 }
 
 #let appendix-article(title, paragraphs) = {

@@ -33,6 +33,18 @@ UNREVIEWED_COMMENTARY = {"ai-review-only", "iterated"}
 COMMENTARY_WARNING = "【人工修订未完成，仅供参考】"
 PLACEHOLDER_PROMPT_SIGNATURE = "TEMPORARY PLACEHOLDER IMAGE - DRAFT/LAYOUT ONLY"
 MAX_POEM_LINE_CELLS = 14
+PROMPT_FIELDS = [
+    "title",
+    "source_poem_summary",
+    "commentary_reading",
+    "key_imagery",
+    "human_subjects",
+    "camera_and_composition",
+    "emotional_tone",
+    "color_palette",
+    "style",
+    "negative_constraints",
+]
 
 PILOT_ASSET_SLUGS = {
     "夜会": "yehui",
@@ -177,6 +189,17 @@ def extract_postscript_markdown() -> str:
     return "# 代后记：在日常里写旧体诗的一点体会\n\n" + body.strip() + "\n"
 
 
+def extract_commentary_note_markdown() -> str:
+    text = (ROOT / "main.tex").read_text(encoding="utf-8")
+    start_marker = r"\section{附录：诗词赏析}"
+    start = text.index(start_marker) + len(start_marker)
+    subsection = text.index(r"\subsection", start)
+    body = text[start:subsection].strip()
+    body = clean_latex_inline(body)
+    body = re.sub(r"\\[a-zA-Z]+\*?(?:\[[^\]]*\])?(?:\{([^{}]*)\})?", r"\1", body)
+    return "# 赏析编写说明\n\n" + body.strip() + "\n"
+
+
 def quote_to_markdown(match: re.Match) -> str:
     inner = clean_latex_inline(match.group(1).strip())
     lines = []
@@ -301,23 +324,7 @@ def copy_or_create_asset(title: str, section: str, target_dir: Path) -> None:
     if not image.exists():
         write_png(image, title, section)
     if not prompt.exists():
-        prompt.write_text(
-            "\n".join(
-                [
-                    f"# 《{title}》插画提示词",
-                    "",
-                    PLACEHOLDER_PROMPT_SIGNATURE,
-                    "",
-                    f"Poem title: 《{title}》",
-                    f"Chapter: {section}",
-                    "Concrete anchors: use the poem body, background, and any commentary in source control before generating a replacement.",
-                    "Keep the image subdued, atmospheric, and supportive of the poem text.",
-                    "Avoid calligraphy, captions, seals, decorative text, and generic ancient-China clichés.",
-                ]
-            )
-            + "\n",
-            encoding="utf-8",
-        )
+        prompt.write_text(placeholder_prompt(title, section), encoding="utf-8")
     if not notes.exists() or "image-status:" not in notes.read_text(encoding="utf-8", errors="ignore"):
         existing_notes = notes.read_text(encoding="utf-8", errors="ignore") if notes.exists() else ""
         notes.write_text(
@@ -338,6 +345,59 @@ def copy_or_create_asset(title: str, section: str, target_dir: Path) -> None:
             + "\n",
             encoding="utf-8",
         )
+
+
+def placeholder_prompt(title: str, section: str) -> str:
+    return (
+        "\n".join(
+            [
+                f"title: 《{title}》",
+                f"source_poem_summary: {PLACEHOLDER_PROMPT_SIGNATURE}; generate only after reading the poem body and context.",
+                "commentary_reading: Placeholder prompt; replace with commentary-derived reading before accepting a generated image.",
+                f"key_imagery: Chapter anchor is {section}; concrete poem imagery must be filled before generation.",
+                "human_subjects: To be determined from poem/commentary.",
+                "camera_and_composition: Quiet portrait composition with negative space for poem layout.",
+                "emotional_tone: Subdued and literary.",
+                "color_palette: Muted paper-compatible palette.",
+                "style: Textless Chinese-literary illustration, not louder than the poem text.",
+                "negative_constraints: no text, no calligraphy, no captions, no seals, no watermark, no generic ancient-China clichés.",
+            ]
+        )
+        + "\n"
+    )
+
+
+def structured_generated_prompt(
+    title: str,
+    section: str,
+    context: str,
+    poem_body: str,
+    commentary_body: str,
+    source_image: str | None = None,
+) -> str:
+    poem_lines = " / ".join(line.strip() for line in poem_body.splitlines() if line.strip())
+    commentary_excerpt = re.sub(r"\s+", " ", commentary_body.strip())[:420] if commentary_body else "No commentary source available; use poem and context only."
+    human_subjects = "Infer from poem/commentary; if people appear, keep them restrained, non-portrait, and subordinate to the literary scene."
+    if any(word in context + poem_body + commentary_body for word in ["妻", "女", "恋", "别", "童", "家庭", "父母", "孩子"]):
+        human_subjects = "Use human figures only where the poem/commentary calls for them; show role, posture, and relationship through quiet body language, not literal labels."
+    return (
+        "\n".join(
+            [
+                f"title: 《{title}》",
+                f"source_poem_summary: {context or 'No explicit context.'} Poem text anchors: {poem_lines[:520]}",
+                f"commentary_reading: {commentary_excerpt}",
+                f"key_imagery: Select concrete images from 《{title}》, especially visible nouns, actions, landscape, weather, light, road/water/body details, and the commentary's interpretive turn.",
+                f"human_subjects: {human_subjects}",
+                "camera_and_composition: Portrait-oriented book illustration; quiet negative space; camera positioned like the poet's observing eye when the scene is personal, otherwise at a calm documentary-literary distance.",
+                "emotional_tone: Subdued, literary, specific to the poem's pressure, tenderness, travel, reflection, or joy; never melodramatic.",
+                "color_palette: Muted paper-compatible palette, low contrast, soft atmospheric depth, no saturated poster colors.",
+                "style: Textless Chinese-literary painterly illustration with modern subtlety; usable behind or beside poem text and not visually louder than the poem.",
+                "negative_constraints: no written characters, no captions, no calligraphy, no seals, no watermark, no generic ancient-China costume cliché, no decorative filler unrelated to the poem.",
+                f"source_generated_image: {source_image or 'existing project asset'}",
+            ]
+        )
+        + "\n"
+    )
 
 
 def typst_string(value: str) -> str:

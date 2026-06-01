@@ -14,6 +14,7 @@ from common import (
     SKILL_TEMPLATE,
     clean_poem_body,
     copy_or_create_asset,
+    extract_commentary_note_markdown,
     extract_postscript_markdown,
     find_commentaries,
     INCLUDED_COMMENTARY,
@@ -23,6 +24,8 @@ from common import (
     read_markdown,
     safe_title,
     season_for_date,
+    split_frontmatter,
+    structured_generated_prompt,
     write_markdown,
 )
 
@@ -102,6 +105,31 @@ def main() -> None:
 
             asset_dir = asset_root / slug
             copy_or_create_asset(title, section_name, asset_dir)
+            notes_path = asset_dir / "illustration.notes.md"
+            notes_frontmatter = {}
+            if notes_path.exists():
+                notes_frontmatter, _ = split_frontmatter(notes_path.read_text(encoding="utf-8"))
+            if notes_frontmatter.get("image-status") in {"generated", "reviewed"}:
+                source_image = None
+                prompt_existing = asset_dir / "illustration.prompt.md"
+                if prompt_existing.exists():
+                    for line in prompt_existing.read_text(encoding="utf-8", errors="ignore").splitlines():
+                        if "generated image source:" in line.lower() or "source_generated_image:" in line:
+                            source_image = line.split(":", 1)[-1].strip(" `")
+                commentary_body_for_prompt = ""
+                if commentary_path:
+                    _, commentary_body_for_prompt = read_markdown(ROOT / commentary_path)
+                (asset_dir / "illustration.prompt.md").write_text(
+                    structured_generated_prompt(
+                        title,
+                        section_name,
+                        context,
+                        poem_body,
+                        commentary_body_for_prompt,
+                        source_image=source_image,
+                    ),
+                    encoding="utf-8",
+                )
 
             dated = None if title in {"夜会", "心印"} else season_for_date(frontmatter.get("original-written"))
             if dated is None:
@@ -164,14 +192,7 @@ def main() -> None:
     (src / "preface.md").write_text("# 序\n\n（待补）\n", encoding="utf-8")
     (src / "postscript.md").write_text(extract_postscript_markdown(), encoding="utf-8")
     (src / "llm-commentary-note.md").write_text(
-        """# LLM 辅助赏析写作说明
-
-本书部分赏析由大语言模型辅助起草，再经作者审阅、修订或重写后收入。
-
-收入标准以 frontmatter 的 `commentary-status` 为准：`human-revised` 与 `reference-quality` 可进入正文；`ai-review-only`、`iterated`、`unclear` 或缺少状态的文本不进入本书。
-
-LLM 的作用主要是提供初稿结构、意象展开和可供反驳的解释线索。最终文本仍以作者确认后的版本为准。赏析不声称穷尽诗意，也不替代作者原始写作处境。
-""",
+        extract_commentary_note_markdown(),
         encoding="utf-8",
     )
 
