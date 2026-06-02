@@ -305,9 +305,9 @@ for typst-book-post-pass2-feedback-adjustments-2026-06-02.md
 
 Status:
 
-- Open.
-- This feedback supersedes the visual acceptance assumptions in section 7 where they conflict.
-- Do not treat the existing `a3d2913` tuning as visually complete for role pages, non-poem continuation pages, context/commentary rule spacing, title-rule spacing, or Chinese paragraph indentation.
+- Implemented.
+- This feedback superseded the visual acceptance assumptions in section 7 where they conflicted.
+- The existing `a3d2913` tuning was not treated as visually complete for role pages, non-poem continuation pages, context/commentary rule spacing, title-rule spacing, or Chinese paragraph indentation.
 
 Required behavior for the next layout pass:
 
@@ -333,6 +333,12 @@ Verification requirements:
   - at least one poem page with `【背景】` and `【赏析】`
   - at least one commentary continuation page
 - Audit gates should detect future regressions for missing non-poem continuation frames where feasible.
+
+Implemented in:
+
+```text
+e52ea9f fix: resolve post-pass2 layout feedback [AGENT: peri]
+```
 
 ## Current Accepted State
 
