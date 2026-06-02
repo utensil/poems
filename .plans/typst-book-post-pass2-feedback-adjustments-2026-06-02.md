@@ -278,15 +278,71 @@ Implemented in:
 848b90a docs: add typst book goal record [AGENT: peri]
 ```
 
+### 9. Open Feedback After Pass3 Image Work
+
+User feedback:
+
+```text
+for typst-book-post-pass2-feedback-adjustments-2026-06-02.md
+
+> frame margin / top gap / bottom text guard tuning
+> cover/chapter divider frame margins
+1. preface, fanli, index still have inconsistent frame margin with the rest (incl. cover, poem pages)
+2. bottom text guard seems working
+
+> body-context gap and context/commentary rule spacing
+
+3. body-context gap seems ok
+4. context/commentary rule spacing needs double again
+
+> title-rule and TOC spacing
+5. title-rule space need to be half the current
+
+6. only the first page of e.g. appendix has framed design, the next pages lost it, most obvious is 代后记, all such non-poem pages would need to take care of this
+
+7. for each chinese paragraps in commentary, or other non-poem pages, should indent 2 chinese chars, choose the typst tech to implement this wisely
+```
+
+Status:
+
+- Open.
+- This feedback supersedes the visual acceptance assumptions in section 7 where they conflict.
+- Do not treat the existing `a3d2913` tuning as visually complete for role pages, non-poem continuation pages, context/commentary rule spacing, title-rule spacing, or Chinese paragraph indentation.
+
+Required behavior for the next layout pass:
+
+- Preface, 凡例, and TOC/index frame margins must visually match the rest of the system, including cover, chapter divider pages, and poem pages.
+- The bottom text guard behavior can remain, subject to regression checks.
+- The current body-context gap can remain.
+- The context/commentary horizontal rule spacing must be doubled again from the current value.
+- Title-to-rule spacing must be reduced to half the current value.
+- Every page of non-poem flows must keep the framed page design, not only the first page. This applies especially to multi-page appendix/prose sections such as 代后记, and should also cover preface, 凡例, 年谱, 赏析编写说明, and other role/prose flows if they paginate.
+- Chinese paragraphs in commentary and non-poem prose must use a two-Chinese-character first-line indent. Prefer a Typst-native paragraph/style mechanism over manual spaces or per-paragraph text edits.
+
+Verification requirements:
+
+- `just validate` must pass.
+- `just audit` must pass.
+- `just build` must pass.
+- Chrome-open the rebuilt PDF.
+- Visual spot checks must include:
+  - preface
+  - 凡例
+  - TOC/index
+  - a multi-page 代后记 continuation page
+  - at least one poem page with `【背景】` and `【赏析】`
+  - at least one commentary continuation page
+- Audit gates should detect future regressions for missing non-poem continuation frames where feasible.
+
 ## Current Accepted State
 
 As of commit:
 
 ```text
-a3d2913 fix: tune title rules and poem context spacing [AGENT: peri]
+0883ceb feat: regenerate pass3 scoped poem images [AGENT: peri]
 ```
 
-The accepted post-pass2 state is:
+The accepted post-pass2/pass3 state before section 9 feedback was:
 
 - role-page backgrounds centered again;
 - `自然` and `启步` regenerated as selected spot-check samples;
@@ -296,7 +352,11 @@ The accepted post-pass2 state is:
 - cover and chapter divider frames use poem-like margins;
 - body-context gap, title-rule gaps, TOC row spacing, and context/commentary rule spacing tuned centrally;
 - plan and goal files archived under `.plans/`;
+- pass3 prompt brief/prompt/note gates added;
+- 12 pass3-scoped images regenerated while preserving the original seven sample images;
 - latest PDF copied to iCloud Downloads and sync queue verified clear.
+
+Section 9 records newer unresolved visual feedback and should be treated as the active follow-up target.
 
 ## Verification Expectations
 
