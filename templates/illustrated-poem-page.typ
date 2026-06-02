@@ -45,7 +45,7 @@
   title-body-gap-factor: 0.5,
   after-poem-gap: none,
   poem-line-gap: 1pt,
-  paragraph-gap: 9pt,
+  commentary-paragraph-gap: 18pt,
   context-commentary-gap: 14pt,
   min-first-page-note-height: 88pt,
   commentary-break-after: "auto",
@@ -187,7 +187,7 @@
     ]
   ]
 
-  let para(body) = block(above: 0pt, below: paragraph-gap)[#body]
+  let para(body) = block(above: 0pt, below: commentary-paragraph-gap)[#body]
   let context-block = box(width: content-w)[
     #text(font: fsong, size: context-size, tracking: 0.3pt, fill: rgb("#60463b"))[
       #strong[【背景】]#background-note
@@ -213,7 +213,7 @@
     #set text(font: fsong, size: size, tracking: 0.3pt, fill: rgb("#2f231f"))
     #set par(leading: 0.62em, justify: false)
     #if continued {
-      block(above: 0pt, below: paragraph-gap)[#strong[【赏析】续]]
+      block(above: 0pt, below: commentary-paragraph-gap)[#strong[【赏析】续]]
     }
     #for (i, p) in commentary.enumerate() [
       #if i >= start and (stop == none or i < stop) {

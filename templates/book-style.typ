@@ -21,6 +21,8 @@
 #let wash = rgb("#fff8e9")
 #let role-panel = wash.transparentize(30%)
 #let role-paper = rgb("#f3e7d3")
+#let prose-paragraph-gap = 20pt
+#let prose-quote-gap = 18pt
 
 #let book-title-style(body) = text(font: poem-title-font, size: 36pt, weight: "bold", tracking: 2pt)[#body]
 #let book-author-style(body) = text(font: author-font, size: 17pt)[#body]
@@ -100,14 +102,14 @@
             block(
               inset: (left: 7mm, right: 6mm, y: 3mm),
               above: 3pt,
-              below: 10pt,
+            below: prose-quote-gap,
               stroke: (left: (paint: faint-rule, thickness: 1pt)),
             )[
               #set par(first-line-indent: 0pt, leading: 0.62em, justify: true)
               #prose-quote-style(p.text)
             ]
           } else {
-            block(above: 0pt, below: 10pt)[#prose-body-style(p.text)]
+            block(above: 0pt, below: prose-paragraph-gap)[#prose-body-style(p.text)]
           }
         }
       }
