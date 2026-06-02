@@ -27,8 +27,9 @@
 #let role-frame-margin = 16.8mm
 #let poem-role-panel-margin = 5.6mm
 #let poem-role-frame-margin = 8mm
-#let title-rule-gap = 1.25pt
-#let cover-title-rule-gap = 1.7pt
+#let title-rule-gap = 12pt
+#let cover-title-rule-gap = 12pt
+#let toc-entry-rule-gap = 6pt
 #let toc-entry-row-gap = 16pt
 
 #let book-title-style(body) = text(font: poem-title-font, size: 36pt, weight: "bold", tracking: 2pt)[#body]
@@ -155,9 +156,7 @@
         column-gutter: 18mm,
         row-gutter: toc-entry-row-gap,
         ..entries.map(entry => block(width: 54mm)[
-          #toc-entry-style(entry)
-          #v(4pt)
-          #line(length: 100%, stroke: (paint: faint-rule, thickness: 0.35pt))
+          #measured-title-rule(toc-entry-style(entry), line-length: 100%, gap: toc-entry-rule-gap, thickness: 0.35pt)
         ]),
       )
     ]

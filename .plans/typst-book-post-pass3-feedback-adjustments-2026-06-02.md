@@ -262,6 +262,56 @@ Result:
 - The rule is now placed directly from the measured title content.
 - PDF text bounding boxes show the first body text on 凡例 moved from y=133.9pt to y=103.2pt after removing the implicit block spacing.
 
+### 4. Title Rule Overlap And TOC Entry Rule Gap
+
+User feedback:
+
+```text
+now hr is overlapping with title text  so we need to increase it to at least 1em or pt equivalent
+
+but index page chapter title to hr still have big gap
+
+is it still using the old layout? fix it too
+```
+
+Status:
+
+- Implemented.
+
+Required behavior:
+
+- After removing implicit block spacing, the main title-to-rule gap must not overlap title glyphs.
+- The title-to-rule gap should be at least a normal 1em-like point value.
+- TOC/index entry titles must not use the old separate `entry` / `v(...)` / `line(...)` stack.
+- TOC/index entry underlines should use the same measured-title-rule approach, with a smaller entry-specific gap.
+
+Implementation:
+
+- `title-rule-gap` changed to `12pt`.
+- `cover-title-rule-gap` changed to `12pt`.
+- Added `toc-entry-rule-gap = 6pt`.
+- TOC/index entries now call `measured-title-rule(toc-entry-style(entry), line-length: 100%, gap: toc-entry-rule-gap, thickness: 0.35pt)`.
+- Audit checks now require the measured TOC entry rule path.
+
+Verification:
+
+```text
+just validate
+just audit
+just build
+```
+
+Visual verification:
+
+```text
+build/spotcheck/title-rule-1em/contact-sheet.png
+```
+
+Result:
+
+- Main role-page title rules no longer overlap title text.
+- TOC/index entry rules use the measured helper and no longer show the old large block-flow gap.
+
 Future feedback should be appended here with:
 
 - user quote;
