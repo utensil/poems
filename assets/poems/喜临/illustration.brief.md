@@ -8,25 +8,25 @@ source_image_observations: Source photo path(s): 2014-07-21-18-00-xi-lin.JPG. It
 palette_from_source_images: Source photo path(s): 2014-07-21-18-00-xi-lin.JPG. It is a private baby photo with green clothing and tender family-newborn feeling; use only soft green palette and newborn/family anticipation cues, do not copy the baby face.
 lighting_from_source_images: Source photo path(s): 2014-07-21-18-00-xi-lin.JPG. It is a private baby photo with green clothing and tender family-newborn feeling; use only soft green palette and newborn/family anticipation cues, do not copy the baby face.
 place_or_object_cues_from_source_images: Source photo path(s): 2014-07-21-18-00-xi-lin.JPG. It is a private baby photo with green clothing and tender family-newborn feeling; use only soft green palette and newborn/family anticipation cues, do not copy the baby face.
-visual_thesis: bean sprout maps to pregnancy news; flowers map to joy expanding; hand on belly makes pregnancy legible
-main_scene: warm domestic window table with expectant parents and a small bean sprout, hinting at a new life before birth
-foreground: tiny bean sprout and small baby cloth/booties on table
-middle_ground: expectant mother hand on belly with partner nearby, non-identifying
-background: spring flowers and warm window light, soft green palette
-human_figures: non-identifying expectant mother with hand on belly; partner nearby, both partial or from behind
-camera_position: intimate domestic medium-close, portrait 2:3, privacy-safe
+visual_thesis: colleagues with children create envy/anticipation; pregnancy test/result and bean sprout reveal early pregnancy news; spring light/flowers release joy without showing a pregnant belly
+main_scene: two-layer memory-to-news scene: blurred colleagues with children in the background/side, foreground couple at home receiving early pregnancy news beside a tiny bean sprout
+foreground: pregnancy test or result slip beside a tiny bean sprout, with the couple's hands nearby but no visible pregnant belly
+middle_ground: non-identifying couple leaning toward the early pregnancy news object, faces private, posture shifting from envy/anxiety to joy
+background: soft memory of colleagues with children plus spring flowers/light, not an identifiable baby portrait
+human_figures: non-identifying parents-to-be shown as ordinary couple at the news moment; blurred colleagues with children only as background memory silhouettes
+camera_position: intimate domestic medium-close with memory layer behind/side, portrait 2:3, privacy-safe
 composition: Portrait 2:3 book illustration; visible story must read at page scale with quiet negative space for poem layout.
-symbolic_mapping: bean sprout maps to pregnancy news; flowers map to joy expanding; hand on belly makes pregnancy legible
+symbolic_mapping: colleagues' children map to 同事儿女接连诞 and envy; pregnancy test/result maps to 有喜; bean sprout maps to 豆发芽; spring flowers/light map to 山花烂漫面春风
 page_layout_role: Textless page illustration for the Typst poem book; image supports poem/context/commentary and must stay low-contrast enough for text.
-avoid: generic vase; generic domestic still life; identifiable baby face; text; Chinese characters; calligraphy; seal; watermark; private identifiable faces
-must_show: pregnancy cue; expectant mother or parents-to-be; bean sprout metaphor; family anticipation; spring flowers or warm joy
-must_not_show: generic vase; generic domestic still life; identifiable baby face
-setting_contract: warm domestic window table with expectant parents and a small bean sprout, hinting at a new life before birth
-figure_contract: non-identifying expectant mother with hand on belly; partner nearby, both partial or from behind
-action_contract: parents-to-be quietly notice a tiny bean sprout; joy opens from small cue to spring flowers outside
-object_contract: small bean sprout cup, soft baby booties or folded cloth, window flowers; no identifiable baby portrait
+avoid: visible pregnant belly; generic vase; generic domestic still life; identifiable baby face; text; Chinese characters; calligraphy; seal; watermark; private identifiable faces
+must_show: early pregnancy news; pregnancy test or result; colleagues with children; envy before joy; bean sprout metaphor; family anticipation; spring flowers or warm joy
+must_not_show: visible pregnant belly; generic vase; generic domestic still life; identifiable baby face
+setting_contract: intimate home table receiving early pregnancy news, with a soft background/side memory of colleagues with children
+figure_contract: non-identifying couple as parents-to-be at the news moment; no visible pregnancy belly; blurred colleagues with children show the prior envy/anticipation context
+action_contract: couple discovers the pregnancy test/result beside the bean sprout; their posture shifts from anxious envy to sudden joy
+object_contract: pregnancy test or result slip, tiny bean sprout, spring flowers/light, blurred child-related colleague memory; no visible pregnant belly and no baby face
 emotion_contract: from anxious waiting to sudden, blooming joy at pregnancy news
 commentary_contract: 有喜, 忐忑羡天伦, 豆发芽, 山花烂漫 must be visually inferable
 source_photo_contract: Source photo path(s): 2014-07-21-18-00-xi-lin.JPG. It is a private baby photo with green clothing and tender family-newborn feeling; use only soft green palette and newborn/family anticipation cues, do not copy the baby face.
-composition_contract: intimate domestic medium-close, portrait 2:3, privacy-safe; tiny bean sprout and small baby cloth/booties on table / expectant mother hand on belly with partner nearby, non-identifying / spring flowers and warm window light, soft green palette
-coverage_check: pregnancy cue -> final prompt foreground; expectant mother or parents-to-be -> final prompt middle_ground; bean sprout metaphor -> final prompt background; family anticipation -> final prompt human_figures; spring flowers or warm joy -> final prompt action
+composition_contract: intimate domestic medium-close with memory layer behind/side, portrait 2:3, privacy-safe; pregnancy test/result and bean sprout in foreground / couple leaning into news in middle ground / blurred colleagues with children and spring flowers/light in background
+coverage_check: early pregnancy news -> final prompt foreground; pregnancy test or result -> final prompt foreground; colleagues with children -> final prompt background; envy before joy -> final prompt background; bean sprout metaphor -> final prompt foreground; family anticipation -> final prompt human_figures; spring flowers or warm joy -> final prompt action

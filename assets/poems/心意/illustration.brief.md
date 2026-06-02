@@ -9,24 +9,24 @@ palette_from_source_images: No source-photo palette; use subdued literary colors
 lighting_from_source_images: No source-photo lighting; choose light from the visual story contract.
 place_or_object_cues_from_source_images: No source-photo place cues; use poem/commentary anchors only.
 visual_thesis: arm ring maps to immediate intimacy; flower stall maps to settled sweetness; opening path maps to wandering together
-main_scene: Spring flower market with stalls, blossoms, and festive crowd softened behind the couple
-foreground: flowers and market edge framing the couple
-middle_ground: couple in behind embrace, central but restrained
-background: crowd and a path/road hinting at wandering beyond the settled flower stall
-human_figures: young couple non-identifying: male behind, arms encircling female from behind; female in front, relaxed within the arm ring
-camera_position: medium shot from slightly behind/side, portrait 2:3, no faces copied
+main_scene: close medium shot in a flower-market aisle; market context is readable through side/background stalls, lights, and crowd, not by heavy flowers crowding the foreground
+foreground: mostly open aisle/market edge with minimal flowers; no foreground flower clutter around the couple
+middle_ground: couple in behind embrace, central but restrained; the girl's side/three-quarter face tilts slightly down so her shy smile is visible at the lips
+background: flower stalls, warm lights, crowd, and a path/road hinting at wandering beyond the settled market scene
+human_figures: young couple non-identifying: male behind, arms encircling female from behind; female in front, relaxed within the arm ring, head slightly lowered in shy gesture, lips/smile visible without facing camera directly
+camera_position: close medium shot from slightly side/front, portrait 2:3, no copied faces, girl's shy visible smile legible
 composition: Portrait 2:3 book illustration; visible story must read at page scale with quiet negative space for poem layout.
 symbolic_mapping: arm ring maps to immediate intimacy; flower stall maps to settled sweetness; opening path maps to wandering together
 page_layout_role: Textless page illustration for the Typst poem book; image supports poem/context/commentary and must stay low-contrast enough for text.
 avoid: gift token still life; single figure; empty table; text; Chinese characters; calligraphy; seal; watermark; private identifiable faces
-must_show: flower market; couple; behind embrace; female figure held in front; contrast between home-settling and wandering-together
-must_not_show: gift token still life; single figure; empty table
+must_show: flower market; couple; behind embrace; female figure held in front; shy visible smile; contrast between home-settling and wandering-together
+must_not_show: gift token still life; single figure; empty table; foreground flower clutter
 setting_contract: Spring flower market with stalls, blossoms, and festive crowd softened behind the couple
-figure_contract: young couple non-identifying: male behind, arms encircling female from behind; female in front, relaxed within the arm ring
-action_contract: behind embrace in the flower market; their gaze directions subtly differ, homeward warmth versus roadward distance
-object_contract: flower stalls, warm market lights, path opening outward beyond stalls
+figure_contract: young couple non-identifying: male behind, arms encircling female from behind; female in front, relaxed within the arm ring, side/three-quarter face visible, head slightly lowered, lips showing a shy smile
+action_contract: behind embrace in the flower market; girl lowers her gaze shyly with visible smile while their gaze directions subtly differ, homeward warmth versus roadward distance
+object_contract: flower stalls, warm market lights, path opening outward beyond stalls; flowers stay in side/background rather than cluttered foreground
 emotion_contract: intimate present sweetness with different future imaginations
 commentary_contract: 身后臂膀环 is required; 安居甜蜜意 belongs to her, 携手浪迹心 belongs to him
 source_photo_contract: No source photos in poem frontmatter.
-composition_contract: medium shot from slightly behind/side, portrait 2:3, no faces copied; flowers and market edge framing the couple / couple in behind embrace, central but restrained / crowd and a path/road hinting at wandering beyond the settled flower stall
-coverage_check: flower market -> final prompt foreground; couple -> final prompt middle_ground; behind embrace -> final prompt background; female figure held in front -> final prompt human_figures; contrast between home-settling and wandering-together -> final prompt action
+composition_contract: close medium shot from slightly side/front, portrait 2:3, no faces copied; open aisle/minimal foreground flowers / couple in behind embrace with girl's shy visible smile / background stalls, lights, crowd, and path
+coverage_check: flower market -> final prompt background; couple -> final prompt middle_ground; behind embrace -> final prompt action; female figure held in front -> final prompt human_figures; shy visible smile -> final prompt human_figures; contrast between home-settling and wandering-together -> final prompt action

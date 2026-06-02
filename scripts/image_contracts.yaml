@@ -28,16 +28,17 @@ contracts:
   流迁:
     decision: regenerate
     required:
-      - external hands or force moving an object
-      - floating or sinking/turning object
+      - external force without visible hands
+      - taken fruit or displaced crafted object
       - bubble or reflection
       - shifting narrative layers
       - no dominant foreground luggage
     forbidden:
+      - visible hands
       - suitcase
       - luggage
       - train station
-    review_check: "Fail if a foreground suitcase/luggage dominates or if the image is only travel-migration mood."
+    review_check: "Fail if literal hands appear, if a foreground suitcase/luggage dominates, or if the image is only travel-migration mood."
   沉沦:
     decision: regenerate
     required:
@@ -71,25 +72,30 @@ contracts:
       - couple
       - behind embrace
       - female figure held in front
+      - shy visible smile
       - contrast between home-settling and wandering-together
     forbidden:
       - gift token still life
       - single figure
       - empty table
-    review_check: "Fail if there is no couple or if the male figure is not embracing from behind."
+      - foreground flower clutter
+    review_check: "Fail if there is no couple, the male figure is not embracing from behind, the girl's shy smile is not visible, or flowers crowd the foreground around them."
   喜临:
     decision: regenerate
     required:
-      - pregnancy cue
-      - expectant mother or parents-to-be
+      - early pregnancy news
+      - pregnancy test or result
+      - colleagues with children
+      - envy before joy
       - bean sprout metaphor
       - family anticipation
       - spring flowers or warm joy
     forbidden:
+      - visible pregnant belly
       - generic vase
       - generic domestic still life
       - identifiable baby face
-    review_check: "Fail if pregnancy cannot be inferred without the title/commentary."
+    review_check: "Fail if pregnancy news cannot be inferred without the title/commentary, if a visible pregnant belly appears, or if colleagues' children/envy are missing."
   孤僧:
     decision: regenerate
     required:
@@ -106,15 +112,18 @@ contracts:
   自然:
     decision: regenerate
     required:
-      - dusty worldly achievement being left behind
-      - thirst/craving set down
+      - clean worldly achievement tokens
+      - stopped reaching
       - new dreams arising
       - heart opening to reality
       - non-seeking stillness
     forbidden:
+      - empty cup
+      - dusty world
+      - hands-in-pockets pose
       - generic nature only
       - bamboo-only title illustration
-    review_check: "Fail if the prompt/image is only plants or landscape because the title says nature."
+    review_check: "Fail if the prompt/image is only plants or landscape, shows literal dusty-world imagery, uses a cup as thirst shorthand, or repeats the lone hands-in-pockets pose."
   启步:
     decision: regenerate
     required:

@@ -8,25 +8,25 @@ source_image_observations: No source photos in poem frontmatter.
 palette_from_source_images: No source-photo palette; use subdued literary colors from the poem's emotional register.
 lighting_from_source_images: No source-photo lighting; choose light from the visual story contract.
 place_or_object_cues_from_source_images: No source-photo place cues; use poem/commentary anchors only.
-visual_thesis: handled fragment maps to成果被摘取揉捏; bubbles/reflections map to 心相泡影 and shifting stories
-main_scene: shallow water table or river-edge work surface where translucent paper/leaf/cloth fragments are moved by outside hands and current
-foreground: ripples and bubbles around a small translucent fragment, visually subordinate and not luggage
-middle_ground: anonymous hands turn or press the fragment in water, showing outside handling
+visual_thesis: a taken fruit/displaced crafted object maps to成果被摘取揉捏 without literal hands; bubbles/reflections map to 心相泡影 and shifting stories
+main_scene: shallow water where a small fruit or crafted object has just been taken/displaced without showing the taker; the external force is visible only through snapped stem, ripples, current pressure, and changing reflections
+foreground: ripples, bubbles, and a snapped stem around a small displaced fruit/crafted object, visually subordinate and not luggage
+middle_ground: the object drifts and turns by current pressure, with no visible hands, suggesting摘取 and揉捏 through aftermath rather than literal handling
 background: overlapping reflections and drifting layers, suggesting叙事迭
-human_figures: only anonymous partial hands at the edge, acting as external force; no portrait
+human_figures: no visible hands and no portrait; the external force is inferred from water movement, snapped stem, and displaced object
 camera_position: close but not still-life-static, slightly overhead, portrait 2:3 with empty upper wash
 composition: Portrait 2:3 book illustration; visible story must read at page scale with quiet negative space for poem layout.
-symbolic_mapping: handled fragment maps to成果被摘取揉捏; bubbles/reflections map to 心相泡影 and shifting stories
+symbolic_mapping: taken/displaced object maps to成果被摘取揉捏; bubbles/reflections map to 心相泡影 and shifting stories
 page_layout_role: Textless page illustration for the Typst poem book; image supports poem/context/commentary and must stay low-contrast enough for text.
-avoid: suitcase; luggage; train station; text; Chinese characters; calligraphy; seal; watermark; private identifiable faces
-must_show: external hands or force moving an object; floating or sinking/turning object; bubble or reflection; shifting narrative layers; no dominant foreground luggage
-must_not_show: suitcase; luggage; train station
-setting_contract: shallow water table or river-edge work surface where translucent paper/leaf/cloth fragments are moved by outside hands and current
-figure_contract: only anonymous partial hands at the edge, acting as external force; no portrait
-action_contract: hands and current turn, lift, and press a floating translucent object; bubbles/reflections make it unstable
-object_contract: floating paper/leaf/cloth fragments, water ripples, bubbles, reflected layers; no suitcase
+avoid: visible hands; suitcase; luggage; train station; text; Chinese characters; calligraphy; seal; watermark; private identifiable faces
+must_show: external force without visible hands; taken fruit or displaced crafted object; bubble or reflection; shifting narrative layers; no dominant foreground luggage
+must_not_show: visible hands; suitcase; luggage; train station
+setting_contract: shallow water table or river-edge work surface where a small fruit/crafted object has just been displaced by unseen force
+figure_contract: no human hands or people appear; force is implied visually by the displaced object, snapped stem, ripples, and reflection distortion
+action_contract: current turns and pulls a taken fruit/displaced crafted object through water; bubbles and reflections make the narrative unstable
+object_contract: small fruit or crafted object, snapped stem, water ripples, bubbles, reflected layers; no suitcase
 emotion_contract: being handled by outside forces, accepting shifting narratives without panic
 commentary_contract: external forces摘取/揉捏 and the realization that 心相如泡影, narratives shift through交变
 source_photo_contract: No source photos in poem frontmatter.
-composition_contract: close but not still-life-static, slightly overhead, portrait 2:3 with empty upper wash; ripples and bubbles around a small translucent fragment, visually subordinate and not luggage / anonymous hands turn or press the fragment in water, showing outside handling / overlapping reflections and drifting layers, suggesting叙事迭
-coverage_check: external hands or force moving an object -> final prompt foreground; floating or sinking/turning object -> final prompt middle_ground; bubble or reflection -> final prompt background; shifting narrative layers -> final prompt human_figures; no dominant foreground luggage -> final prompt action
+composition_contract: close but not still-life-static, slightly overhead, portrait 2:3 with empty upper wash; ripples and bubbles around a small taken/displaced object / no hands, only current pressure and snapped stem / overlapping reflections and drifting layers, suggesting叙事迭
+coverage_check: external force without visible hands -> final prompt foreground; taken fruit or displaced crafted object -> final prompt middle_ground; bubble or reflection -> final prompt background; shifting narrative layers -> final prompt action; no dominant foreground luggage -> final prompt action

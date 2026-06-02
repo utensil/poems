@@ -8,25 +8,25 @@ source_image_observations: No source photos in poem frontmatter.
 palette_from_source_images: No source-photo palette; use subdued literary colors from the poem's emotional register.
 lighting_from_source_images: No source-photo lighting; choose light from the visual story contract.
 place_or_object_cues_from_source_images: No source-photo place cues; use poem/commentary anchors only.
-visual_thesis: dust maps to 尘功; cup maps to 渴; bubbles map to 新梦; opening maps to 心豁
-main_scene: minimal threshold between dusty road of achievements and a clear inner courtyard/sky opening
-foreground: dust and an empty cup set down
-middle_ground: small figure pauses, no longer reaching
-background: dream bubbles dissolve into open clear light at heart/window
-human_figures: optional small seeker setting down an empty cup/scroll; no heroic sage
-camera_position: minimal symbolic scene, portrait 2:3, soft empty space
+visual_thesis: clean worldly achievement tokens map to 尘功 as ordinary reality/success, not literal dust; stopped reaching maps to 莫渴/去执; dream reflections map to 新梦; open window/light maps to 心豁
+main_scene: clean desk-and-window scene: documents/books/achievement tokens sit on a desk while a seated figure stops reaching toward them and turns toward open window light
+foreground: clean documents, books, or achievement tokens on a desk, orderly and real, not dusty and no cup
+middle_ground: seated figure with open relaxed hands no longer reaching, turned partly toward an open window/light; no hands-in-pockets pose
+background: dream-like reflections/bubbles dissolve near the open window into clear light, suggesting 实相在心豁
+human_figures: one seated or leaning figure, hands relaxed/open away from the objects, not standing with hands in pockets and not like 孤僧
+camera_position: quiet desk-level side view, portrait 2:3, soft empty space, open window as release
 composition: Portrait 2:3 book illustration; visible story must read at page scale with quiet negative space for poem layout.
-symbolic_mapping: dust maps to 尘功; cup maps to 渴; bubbles map to 新梦; opening maps to 心豁
+symbolic_mapping: clean achievement objects map to 尘功 as reality/success; relaxed hands map to 莫渴/停止求索; dream reflections map to 新梦; open window/light maps to 心豁
 page_layout_role: Textless page illustration for the Typst poem book; image supports poem/context/commentary and must stay low-contrast enough for text.
-avoid: generic nature only; bamboo-only title illustration; text; Chinese characters; calligraphy; seal; watermark; private identifiable faces
-must_show: dusty worldly achievement being left behind; thirst/craving set down; new dreams arising; heart opening to reality; non-seeking stillness
-must_not_show: generic nature only; bamboo-only title illustration
-setting_contract: minimal threshold between dusty road of achievements and a clear inner courtyard/sky opening
-figure_contract: optional small seeker setting down an empty cup/scroll; no heroic sage
-action_contract: the seeker stops chasing dust, sets down a cup of thirst, while dream-like bubbles fade and chest/heart space opens to clear light
-object_contract: dusty road, empty cup, fading dream bubbles, open window/heart-like clear space
+avoid: empty cup; dusty world; hands-in-pockets pose; generic nature only; bamboo-only title illustration; text; Chinese characters; calligraphy; seal; watermark; private identifiable faces
+must_show: clean worldly achievement tokens; stopped reaching; new dreams arising; heart opening to reality; non-seeking stillness
+must_not_show: empty cup; dusty world; hands-in-pockets pose; generic nature only; bamboo-only title illustration
+setting_contract: clean desk and open-window threshold where worldly achievement is real/orderly but no longer grasped
+figure_contract: one seated or leaning figure with open relaxed hands, turned partly away from the achievement objects toward window light; no hands-in-pockets pose
+action_contract: the figure stops reaching toward clean achievement tokens; dream reflections fade while open window/light suggests the heart opening to reality
+object_contract: clean documents/books/achievement tokens, open window/light, fading dream reflections; no cup and no literal dust
 emotion_contract: quiet release after layers of negation; truth appears when seeking stops
 commentary_contract: 否定逐尘功, 否定渴本真, 否定求索, finally 实相在心豁
 source_photo_contract: No source photos in poem frontmatter.
-composition_contract: minimal symbolic scene, portrait 2:3, soft empty space; dust and an empty cup set down / small figure pauses, no longer reaching / dream bubbles dissolve into open clear light at heart/window
-coverage_check: dusty worldly achievement being left behind -> final prompt foreground; thirst/craving set down -> final prompt middle_ground; new dreams arising -> final prompt background; heart opening to reality -> final prompt human_figures; non-seeking stillness -> final prompt action
+composition_contract: quiet desk-level side view, portrait 2:3, soft empty space; clean achievement tokens on desk / seated figure stops reaching with open relaxed hands / dream reflections dissolve into open window light
+coverage_check: clean worldly achievement tokens -> final prompt foreground; stopped reaching -> final prompt middle_ground; new dreams arising -> final prompt background; heart opening to reality -> final prompt background; non-seeking stillness -> final prompt action
