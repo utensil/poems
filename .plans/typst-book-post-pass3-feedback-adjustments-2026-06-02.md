@@ -312,6 +312,56 @@ Result:
 - Main role-page title rules no longer overlap title text.
 - TOC/index entry rules use the measured helper and no longer show the old large block-flow gap.
 
+### 5. Double Measured Rule Gaps And Widen Cover Rule
+
+User feedback:
+
+```text
+ok the layout mechanism is fixed
+
+now we have to doublw the gap
+
+also widen hr for book title to cover the title length and more
+```
+
+Status:
+
+- Implemented.
+
+Required behavior:
+
+- Keep the measured title/rule layout mechanism.
+- Double the current measured gaps.
+- Widen the cover/book-title horizontal rule so it spans the book-title length and extra visual breathing room.
+
+Implementation:
+
+- `title-rule-gap` changed from `12pt` to `24pt`.
+- `cover-title-rule-gap` changed from `12pt` to `24pt`.
+- `toc-entry-rule-gap` changed from `6pt` to `12pt`.
+- Cover title rule length changed from `38mm` to `82mm`.
+- Audit checks updated for the doubled gaps and wider cover rule.
+
+Verification:
+
+```text
+just validate
+just audit
+just build
+```
+
+Visual verification:
+
+```text
+build/spotcheck/double-rule-gap/contact-sheet.png
+```
+
+Result:
+
+- Role-page title-to-rule gaps use the doubled measured value.
+- TOC/index entry-to-rule gaps use the doubled measured entry value.
+- Cover title rule spans wider than the book title.
+
 Future feedback should be appended here with:
 
 - user quote;

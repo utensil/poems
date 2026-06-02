@@ -27,9 +27,9 @@
 #let role-frame-margin = 16.8mm
 #let poem-role-panel-margin = 5.6mm
 #let poem-role-frame-margin = 8mm
-#let title-rule-gap = 12pt
-#let cover-title-rule-gap = 12pt
-#let toc-entry-rule-gap = 6pt
+#let title-rule-gap = 24pt
+#let cover-title-rule-gap = 24pt
+#let toc-entry-rule-gap = 12pt
 #let toc-entry-row-gap = 16pt
 
 #let book-title-style(body) = text(font: poem-title-font, size: 36pt, weight: "bold", tracking: 2pt)[#body]
@@ -84,7 +84,7 @@
   set text(lang: "zh", region: "cn", fill: ink)
   role-ground(panel-margin: poem-role-panel-margin, frame-margin: poem-role-frame-margin)
   align(center + horizon)[
-    #measured-title-rule(book-title-style(title), line-length: 38mm, gap: cover-title-rule-gap, thickness: 0.6pt)
+    #measured-title-rule(book-title-style(title), line-length: 82mm, gap: cover-title-rule-gap, thickness: 0.6pt)
     #v(18pt)
     #book-author-style(author)
     #if subtitle != none [
