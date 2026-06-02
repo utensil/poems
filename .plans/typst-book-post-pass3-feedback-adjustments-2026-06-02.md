@@ -195,6 +195,73 @@ Spot-check coverage:
 - 启步 AI-review marker inline with `【赏析】`
 - 途遇 continuation/commentary page
 
+### 3. Title Rule Gap Root Cause
+
+User feedback:
+
+```text
+title to hr gap still large
+
+must be something else
+
+investigate
+```
+
+Status:
+
+- Implemented.
+
+Investigation:
+
+- Reducing `title-rule-gap` alone did not visually reduce the title-to-rule gap enough.
+- Rendered pixel scans of pages 2, 3, and 4 showed the rule still landing roughly 28-30pt below the title glyph even when `title-rule-gap = 1.25pt`.
+- Root cause: the old heading stack used separate block-level constructs:
+
+```typst
+#align(center)[title]
+#v(title-rule-gap)
+#align(center)[line]
+```
+
+- Typst's block/line layout around those separate `align` blocks added implicit vertical extent beyond the explicit `title-rule-gap`.
+
+Required behavior:
+
+- The horizontal rule must be positioned from the measured title box, not from adjacent block flow.
+- Future changes must not restore the old separate title / `v(...)` / line stack for role-page headings.
+
+Implementation:
+
+- Added `measured-title-rule(...)` in `templates/book-style.typ`.
+- The helper measures the title content and places the rule at:
+
+```typst
+title-size.height + gap
+```
+
+- Applied the helper to cover, prose pages, TOC, and 年谱 headings.
+- Added audit checks for the measured helper.
+
+Verification:
+
+```text
+just validate
+just audit
+just build
+```
+
+Pixel/render investigation:
+
+```text
+build/spotcheck/title-gap-investigation-after/contact-sheet.png
+```
+
+Result:
+
+- The title/rule hidden block gap is removed.
+- The rule is now placed directly from the measured title content.
+- PDF text bounding boxes show the first body text on 凡例 moved from y=133.9pt to y=103.2pt after removing the implicit block spacing.
+
 Future feedback should be appended here with:
 
 - user quote;

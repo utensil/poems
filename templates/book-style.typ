@@ -68,14 +68,22 @@
   align(center)[#text(font: font, size: size, weight: "bold", tracking: 1pt)[#text-value]]
 }
 
+#let measured-title-rule(title-content, line-length: 34mm, gap: title-rule-gap, thickness: 0.5pt) = context {
+  let title-size = measure(title-content)
+  box(width: 100%, height: title-size.height + gap + thickness)[
+    #place(top + center, dy: 0pt)[#title-content]
+    #place(top + center, dy: title-size.height + gap)[
+      #line(length: line-length, stroke: (paint: faint-rule, thickness: thickness))
+    ]
+  ]
+}
+
 #let cover-page(title, author, subtitle: none) = {
   set page(width: 210mm, height: 297mm, margin: 0pt, fill: role-paper)
   set text(lang: "zh", region: "cn", fill: ink)
   role-ground(panel-margin: poem-role-panel-margin, frame-margin: poem-role-frame-margin)
   align(center + horizon)[
-    #book-title-style(title)
-    #v(cover-title-rule-gap)
-    #line(length: 38mm, stroke: (paint: faint-rule, thickness: 0.6pt))
+    #measured-title-rule(book-title-style(title), line-length: 38mm, gap: cover-title-rule-gap, thickness: 0.6pt)
     #v(18pt)
     #book-author-style(author)
     #if subtitle != none [
@@ -95,9 +103,7 @@
   )
   set text(lang: "zh", region: "cn", fill: ink)
   pad(x: 28mm, y: 25mm)[
-    #align(center)[#prose-title-style(title, size: if title.clusters().len() > 16 { 22pt } else { 26pt })]
-    #v(title-rule-gap)
-    #align(center)[#line(length: 34mm, stroke: (paint: faint-rule, thickness: 0.5pt))]
+    #measured-title-rule(prose-title-style(title, size: if title.clusters().len() > 16 { 22pt } else { 26pt }), line-length: 34mm)
     #v(15pt)
     #set text(font: prose-body-font, size: 11.6pt)
     #set par(first-line-indent: 2em, leading: 0.66em, justify: true)
@@ -139,9 +145,7 @@
   )
   set text(lang: "zh", region: "cn", fill: ink)
   pad(x: 30mm, y: 26mm)[
-    #align(center)[#toc-title-style[目录]]
-    #v(title-rule-gap)
-    #align(center)[#line(length: 32mm, stroke: (paint: faint-rule, thickness: 0.5pt))]
+    #measured-title-rule(toc-title-style[目录], line-length: 32mm)
     #v(18pt)
     #set text(font: toc-font, size: 13.2pt)
     #set par(leading: 0.55em, justify: false)
@@ -184,9 +188,7 @@
   )
   set text(lang: "zh", region: "cn", fill: ink)
   pad(x: 27mm, y: 25mm)[
-    #align(center)[#prose-title-style[年谱]]
-    #v(title-rule-gap)
-    #align(center)[#line(length: 30mm, stroke: (paint: faint-rule, thickness: 0.5pt))]
+    #measured-title-rule(prose-title-style[年谱], line-length: 30mm)
     #v(16pt)
     #set text(font: chronology-font, size: 11pt)
     #set par(leading: 0.58em, justify: false)
