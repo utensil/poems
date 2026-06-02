@@ -9,11 +9,16 @@ import sys
 import yaml
 
 from common import (
+    BRIEF_FIELDS,
     ELIGIBLE_COMMENTARY,
     INCLUDED_COMMENTARY,
     MAX_POEM_LINE_CELLS,
+    NOTES_FIELDS,
+    PASS3_PRESERVE_ORIGINAL,
+    PASS3_REGENERATE,
     PLACEHOLDER_PROMPT_SIGNATURE,
     PROMPT_FIELDS,
+    PROMPT_FORBIDDEN_PHRASES,
     ROOT,
     SECTIONS,
     COMMENTARY_WARNING,
@@ -109,6 +114,7 @@ def main() -> int:
         asset = ROOT / poem["asset"]
         prompt = ROOT / poem["prompt"]
         notes = asset.parent / "illustration.notes.md"
+        brief = asset.parent / "illustration.brief.md"
         if not asset.exists():
             fail(errors, f"missing illustration asset {poem['asset']}")
         if not prompt.exists():
@@ -129,14 +135,46 @@ def main() -> int:
             if args.mode == "final" and status == "placeholder":
                 fail(errors, f"{notes.relative_to(ROOT)} is placeholder in final mode")
             if status in {"generated", "reviewed"} and prompt.exists():
+                if not brief.exists():
+                    fail(errors, f"{brief.relative_to(ROOT)} missing for generated/reviewed asset")
+                else:
+                    brief_text = brief.read_text(encoding="utf-8")
+                    missing_brief = [field for field in BRIEF_FIELDS if f"{field}:" not in brief_text]
+                    if missing_brief:
+                        fail(errors, f"{brief.relative_to(ROOT)} missing brief fields: {', '.join(missing_brief)}")
+                    if len(brief_text) < 1400:
+                        fail(errors, f"{brief.relative_to(ROOT)} is too short for a concrete visual brief")
+                    if frontmatter.get("images"):
+                        for field in [
+                            "source_image_observations:",
+                            "palette_from_source_images:",
+                            "lighting_from_source_images:",
+                            "place_or_object_cues_from_source_images:",
+                        ]:
+                            if field not in brief_text:
+                                fail(errors, f"{brief.relative_to(ROOT)} missing source-photo field {field}")
+                        if "Source photo path(s):" not in brief_text:
+                            fail(errors, f"{brief.relative_to(ROOT)} lacks concrete source-photo observations")
                 prompt_text = prompt.read_text(encoding="utf-8")
                 missing = [field for field in PROMPT_FIELDS if f"{field}:" not in prompt_text]
                 if missing:
                     fail(errors, f"{poem['prompt']} missing prompt fields: {', '.join(missing)}")
-                if len(prompt_text) < 850:
+                if len(prompt_text) < 1200:
                     fail(errors, f"{poem['prompt']} is too short for a content-rich generated prompt")
-                if not any(anchor in prompt_text for anchor in ["commentary_reading:", "Poem text anchors", "source_poem_summary:"]):
-                    fail(errors, f"{poem['prompt']} lacks poem/commentary anchors")
+                for phrase in PROMPT_FORBIDDEN_PHRASES:
+                    if phrase in prompt_text:
+                        fail(errors, f"{poem['prompt']} contains unresolved prompt language: {phrase}")
+                for anchor in ["foreground:", "middle_ground:", "background:", "camera_and_composition:", "final_image_prompt:"]:
+                    if anchor not in prompt_text:
+                        fail(errors, f"{poem['prompt']} lacks execution anchor {anchor}")
+                missing_notes = [field for field in NOTES_FIELDS if f"{field}:" not in notes_frontmatter and field not in notes_frontmatter]
+                if missing_notes:
+                    fail(errors, f"{notes.relative_to(ROOT)} missing note fields: {', '.join(missing_notes)}")
+                scope = notes_frontmatter.get("regeneration-scope")
+                if poem["title"] in PASS3_PRESERVE_ORIGINAL and scope != "preserve-original-seven":
+                    fail(errors, f"{notes.relative_to(ROOT)} must preserve original seven scope")
+                if poem["title"] in PASS3_REGENERATE and scope != "pass3-regenerate":
+                    fail(errors, f"{notes.relative_to(ROOT)} must be pass3-regenerate scope")
         seen_assets.add(poem["asset"])
 
     commentary_files = list((ROOT / "src" / "commentaries").glob("*/*.md"))

@@ -1,11 +1,16 @@
 title: 《启步》
-source_poem_summary: 夜跑减重所作。Poem text anchors: 脂重乏肌显体圆，/ 志虚轻誓总断延。/ 轻装放空入夜丛，/ 野径路灯伴胖影。/ 配速虽缓阶踏实，/ 此战持久莫急求。
-commentary_reading: 赏析把此诗读作一次普通生活中的重新开始：不是壮举，而是在反复拖延后重新接上的那一脚。核心不是胜利姿态，而是装备已齐仍屡次中断之后，夜路、路灯、胖影、喘息和“莫急求”的持久自嘱。
-key_imagery: A dim evening path or park track, soft roadside lamps, a receding route, a slightly heavy-bodied runner or walk-runner seen from behind, ordinary effort, muted night air, quiet negative space. Avoid gym interiors; the poem’s visual anchor is “野径路灯伴胖影”.
-human_subjects: One restrained modern figure, seen from behind or three-quarter rear. The figure should be slightly heavy-bodied but dignified, beginning to jog or walk-run, posture showing effort and resolve rather than triumph. No close-up face.
-camera_and_composition: Portrait 2:3 composition. Place the subject and path mostly in the right half, keep generous pale negative space for poem layout, use calm documentary-literary camera distance.
-emotional_tone: Subdued, self-disciplined, tentative but steady, grounded in ordinary-life resolve.
-color_palette: Muted paper-compatible warm cream, dusk gray-blue, muted rose-brown, soft lamp amber, low contrast.
-style: Textless Chinese-literary painterly illustration with modern subtlety and soft ink-wash atmosphere, usable behind or beside poem text, not visually louder than the poem.
-negative_constraints: No text, no calligraphy, no captions, no seals, no watermark, no sports-brand logos, no dramatic superhero pose, no photorealism, no saturated poster colors, no generic ancient-China costume cliché.
+use_case: illustration-story
+asset_type: portrait 2:3 illustration for a Typst Chinese poem book page
+primary_request: Execution-ready textless illustration for 《启步》; do not add typography.
+scene_backdrop: A dim riverside or park path at night, with one slightly heavy modern runner moving away under warm lamps.
+subjects_and_actions: One non-identifying adult runner; no close face, no brand logo, no heroic pose.
+foreground: Soft path edge, faint fallen leaves, and a low pool of lamplight near the runner's feet.
+middle_ground: The runner seen from behind, small but clear, mid-stride with effort and restraint.
+background: A receding row of lamps, trees, and pale city silhouettes dissolved into paper haze.
+camera_and_composition: Standing behind and slightly left of the runner at calm walking distance. Portrait 2:3 with generous negative space for poem layout.
+light_and_color: Muted paper-compatible palette, low contrast, soft atmospheric depth; apply source-photo palette only as vibe/place reference when available.
+style: Textless contemporary Chinese literary illustration, ink-wash plus soft gouache, fine paper grain, restrained detail.
+page_layout_constraints: Leave quiet negative space and low contrast so poem, pinyin, context, and commentary remain dominant and legible.
+negative_constraints: No text, no Chinese characters, no calligraphy, no seals, no watermark, no labels, no AI-art orbs, no bokeh blobs, no generic ancient-China costume cliché, no photorealistic private likeness.
+final_image_prompt: Create a textless quiet Chinese-literary illustration for 《启步》. Scene: A dim riverside or park path at night, with one slightly heavy modern runner moving away under warm lamps. Foreground: Soft path edge, faint fallen leaves, and a low pool of lamplight near the runner's feet. Middle ground: The runner seen from behind, small but clear, mid-stride with effort and restraint. Background: A receding row of lamps, trees, and pale city silhouettes dissolved into paper haze. Human/subject treatment: One non-identifying adult runner; no close face, no brand logo, no heroic pose. Camera/composition: Standing behind and slightly left of the runner at calm walking distance. Portrait 2:3 with generous negative space for poem layout. Symbolic intent: The lamp-lit path maps to '启步'; the small body shadow maps to the poem's self-aware '胖影'. Keep it restrained, page-compatible, and visually quieter than the poem text.
 source_generated_image: /Users/utensil/.codex-peri/generated_images/019e82e9-a976-7d02-b116-300972fd6a7c/ig_05b4dec741b3d7c0016a1e3844be6881919775d2e1a0df78e1.png

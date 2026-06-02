@@ -35,15 +35,74 @@ PLACEHOLDER_PROMPT_SIGNATURE = "TEMPORARY PLACEHOLDER IMAGE - DRAFT/LAYOUT ONLY"
 MAX_POEM_LINE_CELLS = 14
 PROMPT_FIELDS = [
     "title",
-    "source_poem_summary",
-    "commentary_reading",
-    "key_imagery",
-    "human_subjects",
+    "use_case",
+    "asset_type",
+    "primary_request",
+    "scene_backdrop",
+    "subjects_and_actions",
+    "foreground",
+    "middle_ground",
+    "background",
     "camera_and_composition",
-    "emotional_tone",
-    "color_palette",
+    "light_and_color",
     "style",
+    "page_layout_constraints",
     "negative_constraints",
+    "final_image_prompt",
+    "source_generated_image",
+]
+
+BRIEF_FIELDS = [
+    "title",
+    "source_files",
+    "poem_context",
+    "poem_reading",
+    "commentary_interpretation",
+    "source_image_paths",
+    "source_image_observations",
+    "palette_from_source_images",
+    "lighting_from_source_images",
+    "place_or_object_cues_from_source_images",
+    "visual_thesis",
+    "main_scene",
+    "foreground",
+    "middle_ground",
+    "background",
+    "human_figures",
+    "camera_position",
+    "composition",
+    "symbolic_mapping",
+    "page_layout_role",
+    "avoid",
+]
+
+NOTES_FIELDS = [
+    "image-status",
+    "prompt-source",
+    "brief-status",
+    "review-status",
+    "source-poem",
+    "source-commentary",
+    "source-images",
+    "generation-tool",
+    "generated-image-source",
+    "regeneration-scope",
+    "human-feedback",
+]
+
+PASS3_PRESERVE_ORIGINAL = {"夜会", "疹热", "十月", "岩浆", "泛舟", "湖畔", "月谷"}
+PASS3_REGENERATE = {"启步", "自然", "哧溜", "喜临", "孤僧", "心印", "心意", "沉沦", "穿越", "流迁", "返初", "途遇"}
+PROMPT_FORBIDDEN_PHRASES = [
+    "Infer from poem/commentary",
+    "infer from poem/commentary",
+    "Select concrete images",
+    "select concrete images",
+    "based on the poem",
+    "use the commentary to decide",
+    "to be determined",
+    "To be determined",
+    "No commentary source available",
+    "generic literary illustration",
 ]
 
 PILOT_ASSET_SLUGS = {

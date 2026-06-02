@@ -1,10 +1,15 @@
 ---
 image-status: generated
-prompt-source: poem-commentary
-review-status: accepted
+prompt-source: pass3-brief
+brief-status: pass3-written
+review-status: needs-pass3-image-generation
+source-poem: src/poems/云南丽江香格里拉之旅/途遇.md
+source-commentary: src/commentaries/云南丽江香格里拉之旅/途遇.md
+source-images: /Users/utensil/projects/utensil.github.io/source/writings/images/2020-09-19-23-15-tu-yu.JPG
+generation-tool: not-run
+generated-image-source: pending-pass3-generation
+regeneration-scope: pass3-regenerate
+human-feedback: pass3 image concept remediation; original seven preserved unless explicitly rejected
 ---
 
-Generated during the 2026-06-01 remediation pass as part of the additional real-image sample set.
-Original generated image retained at:
-
-`/Users/utensil/.codex-peri/generated_images/019e82e9-a976-7d02-b116-300972fd6a7c/ig_0a86662a74050d82016a1d796d00c081918ab7389463cd47b7.png`
+《途遇》pass3 image lifecycle metadata.

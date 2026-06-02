@@ -1,10 +1,15 @@
 ---
 image-status: generated
-prompt-source: poem-commentary
-review-status: accepted
+prompt-source: pass3-brief
+brief-status: pass3-written
+review-status: needs-pass3-image-generation
+source-poem: src/poems/哲思禅意/孤僧.md
+source-commentary: src/commentaries/哲思禅意/孤僧.md
+source-images: none
+generation-tool: not-run
+generated-image-source: pending-pass3-generation
+regeneration-scope: pass3-regenerate
+human-feedback: pass3 image concept remediation; original seven preserved unless explicitly rejected
 ---
 
-Generated during the 2026-06-01 remediation pass as part of the additional real-image sample set.
-Original generated image retained at:
-
-`/Users/utensil/.codex-peri/generated_images/019e82e9-a976-7d02-b116-300972fd6a7c/ig_0a86662a74050d82016a1d78711bcc8191a0574c9f459c270b.png`
+《孤僧》pass3 image lifecycle metadata.
