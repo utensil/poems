@@ -334,7 +334,7 @@ Do not mark pass3 complete unless:
 
 ## Directive For The Next Goal
 
-Work in `/Users/utensil/projects/poems` on branch `typst`, and update the illustrated-poem-page skill in `/Users/utensil/projects/skills-land/ours/illustrated-poem-page` as needed. Implement pass3 according to `/Users/utensil/.illustrated-poem-page/typst-book-image-prompt-pass3-plan-2026-06-02.md`.
+Work in `/Users/utensil/projects/poems` on branch `typst`, and update the illustrated-poem-page skill in `/Users/utensil/projects/skills-land/ours/illustrated-poem-page` as needed. Implement pass3 according to `.plans/typst-book-image-prompt-pass3-plan-2026-06-02.md`.
 
 Use practical mode. Preserve the original seven sample images: `夜会`, `疹热`, `十月`, `岩浆`, `泛舟`, `湖畔`, `月谷`. Treat the pass1/pass2 generated images `启步`, `自然`, `哧溜`, `喜临`, `孤僧`, `心印`, `心意`, `沉沦`, `穿越`, `流迁`, `返初`, `途遇` as in scope for pass3 regeneration. Add explicit visual briefs before prompts, use source photos for palette/vibe/place cues, audit prompts so they cannot delegate interpretation to the image model, and verify with `just validate`, `just audit`, and `just build`.
 
