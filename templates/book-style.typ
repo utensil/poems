@@ -21,8 +21,8 @@
 #let wash = rgb("#fff8e9")
 #let role-panel = wash.transparentize(30%)
 #let role-paper = rgb("#f3e7d3")
-#let prose-paragraph-gap = 40pt
-#let prose-quote-gap = 36pt
+#let prose-paragraph-gap = 20pt
+#let prose-quote-gap = 18pt
 
 #let book-title-style(body) = text(font: poem-title-font, size: 36pt, weight: "bold", tracking: 2pt)[#body]
 #let book-author-style(body) = text(font: author-font, size: 17pt)[#body]
