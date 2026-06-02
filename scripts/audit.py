@@ -81,6 +81,9 @@ def main() -> int:
         "#let cover-title-rule-gap = 24pt",
         "#let toc-entry-rule-gap = 12pt",
         "line-length: 82mm",
+        "#let prose-indent = 2em",
+        "#let prose-quote-offset = prose-indent",
+        "width: 100% - prose-quote-offset",
         "#let measured-title-rule",
         "title-size.height + gap",
         "measured-title-rule(prose-title-style",
@@ -90,7 +93,7 @@ def main() -> int:
         "#toc-entry-rule(entry)",
         "#let toc-entry-row-gap = 16pt",
         "first-line-indent: 2em",
-        "#h(2em)#prose-body-style(p.text)",
+        "#h(prose-indent)#prose-body-style(p.text)",
     ]:
         if required_source not in style_source:
             print(f"ERROR: missing requested role-page spacing contract: {required_source}", file=sys.stderr)

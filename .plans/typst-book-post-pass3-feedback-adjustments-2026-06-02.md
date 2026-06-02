@@ -415,6 +415,68 @@ Result:
 - Its underline is placed below the second line, not from a one-line measurement.
 - The following row no longer collides with the two-line entry.
 
+### 7. Prose Quote Offset After Paragraph Indent
+
+User feedback:
+
+```text
+after we indent every paragraph in 代后记 with 2 chinese chars, the markdown quote render would look too left (left aligned), best if we could move the quote 2 chinese char right altogether incl. the left border to make it as quote, any ideas how to implement this in typst?
+```
+
+Follow-up:
+
+```text
+good, implement it
+```
+
+Status:
+
+- Implemented.
+
+Required behavior:
+
+- Normal prose paragraphs keep a two-Chinese-character paragraph start.
+- Quote blocks in non-poem prose should shift right by the same two-character amount as a block-level quote.
+- The quote left border must shift together with the quote text.
+- Quote internal first-line indent remains `0pt`.
+- The shifted quote block must reduce its width so it does not overflow the right edge.
+
+Implementation:
+
+- Added `prose-indent = 2em`.
+- Added `prose-quote-offset = prose-indent`.
+- Replaced hardcoded prose paragraph `#h(2em)` with `#h(prose-indent)`.
+- Wrapped quote rendering with `#h(prose-quote-offset)` and an inner block:
+
+```typst
+width: 100% - prose-quote-offset
+```
+
+- The quote border and quote text now move right together.
+- Audit checks the prose indent and quote offset contracts.
+
+Verification:
+
+```text
+just validate
+just audit
+just build
+```
+
+Visual verification:
+
+```text
+build/spotcheck/prose-quote-offset/contact-sheet.png
+build/spotcheck/prose-quote-offset/page-98-lower.png
+build/spotcheck/prose-quote-offset/page-100-top.png
+```
+
+Result:
+
+- Quote block left border moves right with the quote text.
+- Normal prose paragraph starts retain the two-Chinese-character indent.
+- Quote internal first-line indent remains unindented.
+
 Future feedback should be appended here with:
 
 - user quote;

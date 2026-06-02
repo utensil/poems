@@ -21,8 +21,10 @@
 #let wash = rgb("#fff8e9")
 #let role-panel = wash.transparentize(30%)
 #let role-paper = rgb("#f3e7d3")
+#let prose-indent = 2em
 #let prose-paragraph-gap = 20pt
 #let prose-quote-gap = 18pt
+#let prose-quote-offset = prose-indent
 #let role-panel-margin = 11.2mm
 #let role-frame-margin = 16.8mm
 #let poem-role-panel-margin = 5.6mm
@@ -131,17 +133,19 @@
       } else {
         for p in paragraphs {
           if p.kind == "quote" {
-            block(
-              inset: (left: 7mm, right: 6mm, y: 3mm),
-              above: 3pt,
-            below: prose-quote-gap,
-              stroke: (left: (paint: faint-rule, thickness: 1pt)),
-            )[
-              #set par(first-line-indent: 0pt, leading: 0.62em, justify: true)
-              #prose-quote-style(p.text)
+            block(above: 3pt, below: prose-quote-gap)[
+              #h(prose-quote-offset)
+              #block(
+                width: 100% - prose-quote-offset,
+                inset: (left: 7mm, right: 6mm, y: 3mm),
+                stroke: (left: (paint: faint-rule, thickness: 1pt)),
+              )[
+                #set par(first-line-indent: 0pt, leading: 0.62em, justify: true)
+                #prose-quote-style(p.text)
+              ]
             ]
           } else {
-            block(above: 0pt, below: prose-paragraph-gap)[#h(2em)#prose-body-style(p.text)]
+            block(above: 0pt, below: prose-paragraph-gap)[#h(prose-indent)#prose-body-style(p.text)]
           }
         }
       }
