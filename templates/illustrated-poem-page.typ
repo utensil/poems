@@ -210,6 +210,9 @@
     ]
   }
 
+  let review-marker = "【人工修订未完成，仅供参考】"
+  let marker-inline = commentary.len() > 0 and commentary.first() == review-marker
+  let body-start = if marker-inline { 1 } else { 0 }
   let commentary-block(start, stop: none, continued: false, size: commentary-size) = box(width: content-w)[
     #set text(font: fsong, size: size, tracking: 0.3pt, fill: rgb("#2f231f"))
     #set par(first-line-indent: 2em, leading: 0.62em, justify: true)
@@ -218,14 +221,15 @@
         #set par(first-line-indent: 0pt)
         #strong[【赏析】续]
       ]
+    } else if start == 0 {
+      block(above: 0pt, below: commentary-paragraph-gap)[
+        #set par(first-line-indent: 0pt, justify: false)
+        #strong[【赏析】]#if marker-inline [ #review-marker]
+      ]
     }
     #for (i, p) in commentary.enumerate() [
-      #if i >= start and (stop == none or i < stop) {
-        if i == 0 {
-          para[#h(2em)#strong[【赏析】]#p]
-        } else {
-          para[#h(2em)#p]
-        }
+      #if i >= calc.max(start, body-start) and (stop == none or i < stop) {
+        para[#h(2em)#p]
       }
     ]
   ]
@@ -301,13 +305,13 @@
     } else if commentary-break-after == none {
       commentary.len()
     } else if commentary-break-after == "auto" {
-      let count = 0
+      let count = body-start
       for i in range(commentary.len()) {
         if measure(commentary-block(0, stop: i + 1)).height <= available-h {
           count = i + 1
         }
       }
-      calc.max(count, 1)
+      calc.max(count, body-start)
     } else {
       commentary-break-after
     }
@@ -346,6 +350,9 @@
       }
       if stop <= start {
         stop = start + 1
+      }
+      if stop <= body-start and start == 0 {
+        stop = body-start + 1
       }
       pagebreak()
       page-background()

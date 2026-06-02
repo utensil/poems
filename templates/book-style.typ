@@ -27,8 +27,8 @@
 #let role-frame-margin = 16.8mm
 #let poem-role-panel-margin = 5.6mm
 #let poem-role-frame-margin = 8mm
-#let title-rule-gap = 2.5pt
-#let cover-title-rule-gap = 3.35pt
+#let title-rule-gap = 1.25pt
+#let cover-title-rule-gap = 1.7pt
 #let toc-entry-row-gap = 16pt
 
 #let book-title-style(body) = text(font: poem-title-font, size: 36pt, weight: "bold", tracking: 2pt)[#body]

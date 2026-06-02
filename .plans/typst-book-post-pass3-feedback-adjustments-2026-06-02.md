@@ -126,7 +126,74 @@ CloudDocs upload queue was reported clear.
 
 ## Open Items
 
-No unresolved post-pass3 feedback is recorded in this file yet.
+### 2. Title Rule Gap And Commentary Marker Alignment
+
+User feedback:
+
+```text
+the text to hr distance is still too large, is there anything else in between?
+
+the 2 chinese char indent looks ok, what tech did you use?
+
+but the 【赏析】 line is not a normal paragram but a special marker, so it needs to have no indent, aligned with 【背景】, and to the left. The commentary could consistently begin in next line, with a real 2-char indented paragraph. the 【人工修订未完成，仅供参考】marker stays in the same line of 【赏析】
+```
+
+Source:
+
+```text
+https://discord.com/channels/1089537860106993716/1510954118691291206/1511291198755835974
+```
+
+Status:
+
+- Implemented.
+
+Required behavior:
+
+- Title-to-horizontal-rule spacing needs another reduction from the current post-section-9 value.
+- Keep two-Chinese-character indentation for normal commentary/prose paragraphs.
+- `【赏析】` is a structural marker, not a normal commentary paragraph.
+- `【赏析】` must be unindented and left-aligned with `【背景】`.
+- The commentary body must begin on the next line as a real two-Chinese-character-indented paragraph.
+- For unrevised commentary, `【人工修订未完成，仅供参考】` stays on the same line as `【赏析】`.
+- The indent implementation used for the previous pass was Typst content-level `#h(2em)` at paragraph starts, because `set par(first-line-indent: 2em)` did not visibly apply inside the placed/boxed commentary flow.
+
+Implementation notes:
+
+- `templates/book-style.typ`
+  - `title-rule-gap` changed from `2.5pt` to `1.25pt`.
+  - `cover-title-rule-gap` changed from `3.35pt` to `1.7pt`.
+- `templates/illustrated-poem-page.typ`
+  - Added `review-marker` / `marker-inline` / `body-start` handling.
+  - Renders `【赏析】` as a structural marker line with no paragraph indent.
+  - Keeps `【人工修订未完成，仅供参考】` inline with `【赏析】` when present as the first commentary paragraph.
+  - Starts actual commentary body on the next line with `#h(2em)` paragraph-start indent.
+  - Adjusted commentary split measurement so marker-only handling does not drop the first body paragraph.
+- `scripts/audit.py`
+  - Audits the tighter title-rule gaps and marker/body split contract.
+
+Verification:
+
+```text
+just validate
+just audit
+just build
+```
+
+Additional visual verification:
+
+```text
+build/spotcheck/commentary-marker/contact-sheet.png
+```
+
+Spot-check coverage:
+
+- 序 title/rule spacing
+- 凡例 title/rule spacing
+- 目录 title/rule spacing
+- 喜临 human-revised `【赏析】` marker/body split
+- 启步 AI-review marker inline with `【赏析】`
+- 途遇 continuation/commentary page
 
 Future feedback should be appended here with:
 
@@ -137,4 +204,3 @@ Future feedback should be appended here with:
 - validation/build/audit results;
 - visual spot-check pages or contact sheet;
 - iCloud PDF delivery status when the PDF changes.
-
