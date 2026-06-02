@@ -2,13 +2,13 @@
 image-status: generated
 prompt-source: pass4-primary-source-brief
 brief-status: pass4-written
-review-status: pass4-contract-pending-image
+review-status: pass4-contact-sheet-approved
 source-poem: src/poems/云南丽江香格里拉之旅/途遇.md
 source-commentary: src/commentaries/云南丽江香格里拉之旅/途遇.md
 source-images:
 - ~/projects/utensil.github.io/source/writings/images/2020-09-19-23-15-tu-yu.JPG
-generation-tool: pending
-generated-image-source: pending-pass4-generation
+generation-tool: built-in image_gen
+generated-image-source: /Users/utensil/.codex-peri/generated_images/019e82e9-a976-7d02-b116-300972fd6a7c/ig_0daedd9e66ce5d7f016a1ecc6e675c81968d5a3777f4b966ed.png
 regeneration-scope: pass4-regenerate
 pass4-decision: regenerate
 human-feedback: pass4 visual story contract correction; fresh brief/prompt regenerated

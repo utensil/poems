@@ -2,13 +2,13 @@
 image-status: reviewed
 prompt-source: pass4-primary-source-brief
 brief-status: pass4-written
-review-status: pass4-contract-pending-image
+review-status: pass4-contact-sheet-approved
 source-poem: src/poems/职业生涯/返初.md
 source-commentary: src/commentaries/职业生涯/返初.md
 source-images:
 - ~/projects/utensil.github.io/source/writings/images/2023-10-05-21-06-fan-chu.jpg
-generation-tool: pending
-generated-image-source: preserved-current-image
+generation-tool: preserved existing project asset
+generated-image-source: /Users/utensil/projects/poems/assets/poems/返初/illustration.png
 regeneration-scope: pass4-preserved-after-check
 pass4-decision: preserved-after-check
 human-feedback: pass4 visual story contract correction; fresh brief/prompt regenerated
