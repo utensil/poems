@@ -27,8 +27,8 @@
 #let role-frame-margin = 16.8mm
 #let poem-role-panel-margin = 5.6mm
 #let poem-role-frame-margin = 8mm
-#let title-rule-gap = 5pt
-#let cover-title-rule-gap = 6.7pt
+#let title-rule-gap = 2.5pt
+#let cover-title-rule-gap = 3.35pt
 #let toc-entry-row-gap = 16pt
 
 #let book-title-style(body) = text(font: poem-title-font, size: 36pt, weight: "bold", tracking: 2pt)[#body]
@@ -86,9 +86,14 @@
 }
 
 #let prose-page(title, paragraphs, placeholder: false) = {
-  set page(width: 210mm, height: 297mm, margin: 0pt, fill: paper)
+  set page(
+    width: 210mm,
+    height: 297mm,
+    margin: 0pt,
+    fill: paper,
+    background: role-ground(panel-margin: poem-role-panel-margin, frame-margin: poem-role-frame-margin),
+  )
   set text(lang: "zh", region: "cn", fill: ink)
-  role-ground(frame: false)
   pad(x: 28mm, y: 25mm)[
     #align(center)[#prose-title-style(title, size: if title.clusters().len() > 16 { 22pt } else { 26pt })]
     #v(title-rule-gap)
@@ -116,7 +121,7 @@
               #prose-quote-style(p.text)
             ]
           } else {
-            block(above: 0pt, below: prose-paragraph-gap)[#prose-body-style(p.text)]
+            block(above: 0pt, below: prose-paragraph-gap)[#h(2em)#prose-body-style(p.text)]
           }
         }
       }
@@ -125,9 +130,14 @@
 }
 
 #let toc-page(entries) = {
-  set page(width: 210mm, height: 297mm, margin: 0pt, fill: paper)
+  set page(
+    width: 210mm,
+    height: 297mm,
+    margin: 0pt,
+    fill: paper,
+    background: role-ground(panel-margin: poem-role-panel-margin, frame-margin: poem-role-frame-margin),
+  )
   set text(lang: "zh", region: "cn", fill: ink)
-  role-ground()
   pad(x: 30mm, y: 26mm)[
     #align(center)[#toc-title-style[目录]]
     #v(title-rule-gap)
@@ -165,9 +175,14 @@
 }
 
 #let chronology-page(entries) = {
-  set page(width: 210mm, height: 297mm, margin: 0pt, fill: paper)
+  set page(
+    width: 210mm,
+    height: 297mm,
+    margin: 0pt,
+    fill: paper,
+    background: role-ground(panel-margin: poem-role-panel-margin, frame-margin: poem-role-frame-margin),
+  )
   set text(lang: "zh", region: "cn", fill: ink)
-  role-ground(frame: false)
   pad(x: 27mm, y: 25mm)[
     #align(center)[#prose-title-style[年谱]]
     #v(title-rule-gap)

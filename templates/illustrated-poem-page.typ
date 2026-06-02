@@ -46,7 +46,7 @@
   after-poem-gap: none,
   poem-line-gap: 1pt,
   commentary-paragraph-gap: 18pt,
-  context-commentary-rule-gap: 7pt,
+  context-commentary-rule-gap: 14pt,
   min-first-page-note-height: 88pt,
   bottom-frame-text-gap: 18pt,
   commentary-break-after: "auto",
@@ -212,16 +212,19 @@
 
   let commentary-block(start, stop: none, continued: false, size: commentary-size) = box(width: content-w)[
     #set text(font: fsong, size: size, tracking: 0.3pt, fill: rgb("#2f231f"))
-    #set par(leading: 0.62em, justify: false)
+    #set par(first-line-indent: 2em, leading: 0.62em, justify: true)
     #if continued {
-      block(above: 0pt, below: commentary-paragraph-gap)[#strong[【赏析】续]]
+      block(above: 0pt, below: commentary-paragraph-gap)[
+        #set par(first-line-indent: 0pt)
+        #strong[【赏析】续]
+      ]
     }
     #for (i, p) in commentary.enumerate() [
       #if i >= start and (stop == none or i < stop) {
         if i == 0 {
-          para[#strong[【赏析】]#p]
+          para[#h(2em)#strong[【赏析】]#p]
         } else {
-          para[#p]
+          para[#h(2em)#p]
         }
       }
     ]

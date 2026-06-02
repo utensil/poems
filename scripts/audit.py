@@ -73,16 +73,15 @@ def main() -> int:
     if "#let prose-paragraph-gap = 20pt" not in style_source:
         print("ERROR: prose paragraph gap is not centrally set to the pass2 minimum", file=sys.stderr)
         return 1
-    for required_source in ["#let role-panel-margin = 11.2mm", "#let role-frame-margin = 16.8mm"]:
-        if required_source not in style_source:
-            print(f"ERROR: role frame margin is not set to the requested 0.8x value: {required_source}", file=sys.stderr)
-            return 1
     for required_source in [
         "#let poem-role-panel-margin = 5.6mm",
         "#let poem-role-frame-margin = 8mm",
-        "#let title-rule-gap = 5pt",
-        "#let cover-title-rule-gap = 6.7pt",
+        "background: role-ground(panel-margin: poem-role-panel-margin, frame-margin: poem-role-frame-margin)",
+        "#let title-rule-gap = 2.5pt",
+        "#let cover-title-rule-gap = 3.35pt",
         "#let toc-entry-row-gap = 16pt",
+        "first-line-indent: 2em",
+        "#h(2em)#prose-body-style(p.text)",
     ]:
         if required_source not in style_source:
             print(f"ERROR: missing requested role-page spacing contract: {required_source}", file=sys.stderr)
@@ -105,7 +104,7 @@ def main() -> int:
         if f"#let {role}" not in style_source:
             print(f"ERROR: missing centralized style role {role}", file=sys.stderr)
             return 1
-    for required_source in ["role-ground()", "grid(", "prose-quote-style", "chapter-divider-style"]:
+    for required_source in ["role-ground(", "grid(", "prose-quote-style", "chapter-divider-style"]:
         if required_source not in style_source:
             print(f"ERROR: book-style lacks required page-role renderer evidence {required_source}", file=sys.stderr)
             return 1
@@ -120,7 +119,10 @@ def main() -> int:
         "pad-top: 8.8mm",
         "title-body-gap-factor: 0.4",
         "resolved-title-gap * 2",
-        "context-commentary-rule-gap: 7pt",
+        "context-commentary-rule-gap: 14pt",
+        "first-line-indent: 2em",
+        "#h(2em)#strong[【赏析】]#p",
+        "#h(2em)#p",
         "bottom-frame-text-gap: 18pt",
         'panic("poem block reaches bottom frame',
         "long-poem = poem-lines.len() >= 14",
