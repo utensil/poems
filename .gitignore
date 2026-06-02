@@ -1,6 +1,9 @@
 .aider*
+.DS_Store
 __pycache__/
-build/audit/
+build/*
+!build/generated/
+!build/generated/**
 main.aux
 main.log
 main.typ
