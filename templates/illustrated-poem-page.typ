@@ -46,7 +46,7 @@
   after-poem-gap: none,
   poem-line-gap: 1pt,
   commentary-paragraph-gap: 18pt,
-  context-commentary-gap: 14pt,
+  context-commentary-rule-gap: 7pt,
   min-first-page-note-height: 88pt,
   bottom-frame-text-gap: 18pt,
   commentary-break-after: "auto",
@@ -72,7 +72,7 @@
   let resolved-title-gap = if title-gap == none {
     (if title-pinyin.len() > 0 { actual-annotated-line-h * 0.75 } else { actual-annotated-line-h * 1.35 }) * title-body-gap-factor
   } else { title-gap }
-  let resolved-after-poem-gap = if after-poem-gap == none { resolved-title-gap } else { after-poem-gap }
+  let resolved-after-poem-gap = if after-poem-gap == none { resolved-title-gap * 2 } else { after-poem-gap }
   let title-pinyin-row-h = actual-title-pinyin-size + 1pt
   let title-block-h = if title-pinyin.len() > 0 { actual-title-size + title-pinyin-row-h + 1pt } else { actual-title-size }
   let ink-absorb-wash = rgb("#fff8e9").transparentize(96%)
@@ -277,8 +277,8 @@
     let continuation-h = content-bottom - content-y
     let context-y = poem-size-measured.height + resolved-after-poem-gap
     let context-size-measured = measure(context-block)
-    let commentary-y = context-y + context-size-measured.height + context-commentary-gap
-    let rule-y = context-y + context-size-measured.height + context-commentary-gap / 2
+    let commentary-y = context-y + context-size-measured.height + context-commentary-rule-gap * 2
+    let rule-y = context-y + context-size-measured.height + context-commentary-rule-gap
     let available-h = content-bottom - (content-y + commentary-y)
     if poem-size-measured.height > content-bottom - content-y {
       panic("poem block reaches bottom frame: " + title)
@@ -329,7 +329,7 @@
       let start-y = y0
       let body-top = if with-context {
         let ctx-h = measure(context-block).height
-        ctx-h + context-commentary-gap
+        ctx-h + context-commentary-rule-gap * 2
       } else {
         0pt
       }
@@ -350,7 +350,7 @@
         place(top + left, dx: content-x, dy: content-y + start-y)[
           #context-block
         ]
-        place(top + left, dx: content-x, dy: content-y + start-y + measure(context-block).height + context-commentary-gap / 2)[
+        place(top + left, dx: content-x, dy: content-y + start-y + measure(context-block).height + context-commentary-rule-gap)[
           #line(length: content-w, stroke: (paint: rgb("#7d5b4f").transparentize(76%), thickness: 0.5pt))
         ]
       }

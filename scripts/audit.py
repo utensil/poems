@@ -77,6 +77,16 @@ def main() -> int:
         if required_source not in style_source:
             print(f"ERROR: role frame margin is not set to the requested 0.8x value: {required_source}", file=sys.stderr)
             return 1
+    for required_source in [
+        "#let poem-role-panel-margin = 5.6mm",
+        "#let poem-role-frame-margin = 8mm",
+        "#let title-rule-gap = 5pt",
+        "#let cover-title-rule-gap = 6.7pt",
+        "#let toc-entry-row-gap = 16pt",
+    ]:
+        if required_source not in style_source:
+            print(f"ERROR: missing requested role-page spacing contract: {required_source}", file=sys.stderr)
+            return 1
     for role in [
         "book-title-style",
         "book-author-style",
@@ -109,6 +119,8 @@ def main() -> int:
         "fg-bottom: 6.4mm",
         "pad-top: 8.8mm",
         "title-body-gap-factor: 0.4",
+        "resolved-title-gap * 2",
+        "context-commentary-rule-gap: 7pt",
         "bottom-frame-text-gap: 18pt",
         'panic("poem block reaches bottom frame',
         "long-poem = poem-lines.len() >= 14",

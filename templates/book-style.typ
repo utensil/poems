@@ -25,6 +25,11 @@
 #let prose-quote-gap = 18pt
 #let role-panel-margin = 11.2mm
 #let role-frame-margin = 16.8mm
+#let poem-role-panel-margin = 5.6mm
+#let poem-role-frame-margin = 8mm
+#let title-rule-gap = 5pt
+#let cover-title-rule-gap = 6.7pt
+#let toc-entry-row-gap = 16pt
 
 #let book-title-style(body) = text(font: poem-title-font, size: 36pt, weight: "bold", tracking: 2pt)[#body]
 #let book-author-style(body) = text(font: author-font, size: 17pt)[#body]
@@ -45,16 +50,16 @@
   set text(lang: "zh", region: "cn", fill: ink)
 }
 
-#let role-ground(frame: true) = {
+#let role-ground(frame: true, panel-margin: role-panel-margin, frame-margin: role-frame-margin) = {
   place(top + left, dx: 0pt, dy: 0pt)[
     #rect(width: 210mm, height: 297mm, fill: role-paper)
   ]
-  place(top + left, dx: role-panel-margin, dy: role-panel-margin)[
-    #rect(width: 210mm - role-panel-margin * 2, height: 297mm - role-panel-margin * 2, radius: 5pt, fill: role-panel)
+  place(top + left, dx: panel-margin, dy: panel-margin)[
+    #rect(width: 210mm - panel-margin * 2, height: 297mm - panel-margin * 2, radius: 5pt, fill: role-panel)
   ]
   if frame {
-    place(top + left, dx: role-frame-margin, dy: role-frame-margin)[
-      #rect(width: 210mm - role-frame-margin * 2, height: 297mm - role-frame-margin * 2, radius: 2pt, stroke: (paint: faint-rule, thickness: 0.5pt))
+    place(top + left, dx: frame-margin, dy: frame-margin)[
+      #rect(width: 210mm - frame-margin * 2, height: 297mm - frame-margin * 2, radius: 2pt, stroke: (paint: faint-rule, thickness: 0.5pt))
     ]
   }
 }
@@ -66,10 +71,10 @@
 #let cover-page(title, author, subtitle: none) = {
   set page(width: 210mm, height: 297mm, margin: 0pt, fill: role-paper)
   set text(lang: "zh", region: "cn", fill: ink)
-  role-ground()
+  role-ground(panel-margin: poem-role-panel-margin, frame-margin: poem-role-frame-margin)
   align(center + horizon)[
     #book-title-style(title)
-    #v(20pt)
+    #v(cover-title-rule-gap)
     #line(length: 38mm, stroke: (paint: faint-rule, thickness: 0.6pt))
     #v(18pt)
     #book-author-style(author)
@@ -86,7 +91,7 @@
   role-ground(frame: false)
   pad(x: 28mm, y: 25mm)[
     #align(center)[#prose-title-style(title, size: if title.clusters().len() > 16 { 22pt } else { 26pt })]
-    #v(16pt)
+    #v(title-rule-gap)
     #align(center)[#line(length: 34mm, stroke: (paint: faint-rule, thickness: 0.5pt))]
     #v(15pt)
     #set text(font: prose-body-font, size: 11.6pt)
@@ -125,7 +130,7 @@
   role-ground()
   pad(x: 30mm, y: 26mm)[
     #align(center)[#toc-title-style[目录]]
-    #v(13pt)
+    #v(title-rule-gap)
     #align(center)[#line(length: 32mm, stroke: (paint: faint-rule, thickness: 0.5pt))]
     #v(18pt)
     #set text(font: toc-font, size: 13.2pt)
@@ -134,7 +139,7 @@
       #grid(
         columns: (1fr, 1fr),
         column-gutter: 18mm,
-        row-gutter: 8pt,
+        row-gutter: toc-entry-row-gap,
         ..entries.map(entry => block(width: 54mm)[
           #toc-entry-style(entry)
           #v(4pt)
@@ -148,7 +153,7 @@
 #let chapter-divider(title-lines, count) = {
   set page(width: 210mm, height: 297mm, margin: 0pt, fill: role-paper)
   set text(lang: "zh", region: "cn", fill: ink)
-  role-ground()
+  role-ground(panel-margin: poem-role-panel-margin, frame-margin: poem-role-frame-margin)
   align(center + horizon)[
     #block(width: 126mm)[
       #for (i, line) in title-lines.enumerate() [
@@ -165,7 +170,7 @@
   role-ground(frame: false)
   pad(x: 27mm, y: 25mm)[
     #align(center)[#prose-title-style[年谱]]
-    #v(13pt)
+    #v(title-rule-gap)
     #align(center)[#line(length: 30mm, stroke: (paint: faint-rule, thickness: 0.5pt))]
     #v(16pt)
     #set text(font: chronology-font, size: 11pt)
