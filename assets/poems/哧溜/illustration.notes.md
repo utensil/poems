@@ -2,12 +2,12 @@
 image-status: generated
 prompt-source: pass4-primary-source-brief
 brief-status: pass4-written
-review-status: pass4-contact-sheet-approved
+review-status: pass4-single-handle-net-approved
 source-poem: src/poems/心情与事件/哧溜.md
 source-commentary: src/commentaries/心情与事件/哧溜.md
 source-images: none
 generation-tool: built-in image_gen
-generated-image-source: /Users/utensil/.codex-peri/generated_images/019e82e9-a976-7d02-b116-300972fd6a7c/ig_0daedd9e66ce5d7f016a1ecbf216f081968e7c8bf5ad91cdec.png
+generated-image-source: /Users/utensil/.codex-peri/generated_images/019e82e9-a976-7d02-b116-300972fd6a7c/ig_0daedd9e66ce5d7f016a1ed84f7cac8196974d57ab83b906fd.png
 regeneration-scope: pass4-regenerate
 pass4-decision: regenerate
 human-feedback: pass4 visual story contract correction; fresh brief/prompt regenerated

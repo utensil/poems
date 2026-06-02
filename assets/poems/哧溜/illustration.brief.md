@@ -19,14 +19,14 @@ composition: Portrait 2:3 book illustration; visible story must read at page sca
 symbolic_mapping: grand net versus tiny fish maps to comic scale collapse; clear-to-mud maps to 现/没
 page_layout_role: Textless page illustration for the Typst poem book; image supports poem/context/commentary and must stay low-contrast enough for text.
 avoid: person on dry land; collage composition; text; Chinese characters; calligraphy; seal; watermark; private identifiable faces
-must_show: person knee-deep in creek water; butterfly net used for fish; clear shallow bottom; fish vanishing into muddy current; comic ordinary liveliness
-must_not_show: person on dry land; collage composition
+must_show: person knee-deep in creek water; butterfly net used for fish; single-handle net; clear shallow bottom; fish vanishing into muddy current; comic ordinary liveliness
+must_not_show: person on dry land; collage composition; two-handle net
 setting_contract: cold shallow mountain creek with clear stones upstream and muddy current pocket downstream
 figure_contract: one anonymous adult knee-deep in water, sleeves/shorts practical, holding a butterfly net awkwardly
-action_contract: the person lunges with the butterfly net as a small fish slips from clear shallows into muddy current
-object_contract: butterfly net, clear creek stones, fish blur, muddy swirl
+action_contract: the person lunges with one butterfly net that has exactly one long handle held by both hands as a small fish slips from clear shallows into muddy current
+object_contract: one butterfly net with exactly one long handle held by both hands, clear creek stones, fish blur, muddy swirl
 emotion_contract: earnest over-equipped playfulness and comic failure
 commentary_contract: 恢恢扑蝶网 becomes absurd fishing tool; 悠悠淌冰溪; fish appears then 哧溜 disappears into 湍泥
 source_photo_contract: No source photos in poem frontmatter.
 composition_contract: low creek-level view, coherent single scene, portrait 2:3; knee-deep water around legs, splashes / awkward net lunge at fish trail / clear creek bed turning into muddy current
-coverage_check: person knee-deep in creek water -> final prompt foreground; butterfly net used for fish -> final prompt middle_ground; clear shallow bottom -> final prompt background; fish vanishing into muddy current -> final prompt human_figures; comic ordinary liveliness -> final prompt action
+coverage_check: person knee-deep in creek water -> final prompt foreground; butterfly net used for fish -> final prompt middle_ground; single-handle net -> final prompt action; clear shallow bottom -> final prompt background; fish vanishing into muddy current -> final prompt human_figures; comic ordinary liveliness -> final prompt action

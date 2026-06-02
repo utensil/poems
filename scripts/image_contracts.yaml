@@ -133,13 +133,15 @@ contracts:
     required:
       - person knee-deep in creek water
       - butterfly net used for fish
+      - single-handle net
       - clear shallow bottom
       - fish vanishing into muddy current
       - comic ordinary liveliness
     forbidden:
       - person on dry land
       - collage composition
-    review_check: "Fail if the figure is on land or the creek depth is not knee-level."
+      - two-handle net
+    review_check: "Fail if the figure is on land, the creek depth is not knee-level, or the net reads as two handles/forked handles instead of one normal long handle."
   穿越:
     decision: regenerate
     required:
