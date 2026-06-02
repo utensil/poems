@@ -362,6 +362,59 @@ Result:
 - TOC/index entry-to-rule gaps use the doubled measured entry value.
 - Cover title rule spans wider than the book title.
 
+### 6. TOC Two-Line Entry Measurement
+
+User feedback:
+
+```text
+you new layout fail to accomodate for 2-line tiles such as the 代后记 in index page
+```
+
+Status:
+
+- Implemented.
+
+Root cause:
+
+- The TOC entry renderer used the generic `measured-title-rule(toc-entry-style(entry), line-length: 100%, ...)`.
+- That measured the raw entry content outside the actual fixed-width TOC entry block.
+- Long entries such as `代后记：在日常里写旧体诗的一点体会` wrap to two lines inside the `54mm` TOC column, but the rule was positioned using a one-line measurement.
+
+Required behavior:
+
+- TOC/index entries must be measured in the same fixed width where they render.
+- Two-line entries must reserve enough height before their underline.
+- The following TOC row must not collide with or visually crowd a two-line entry.
+
+Implementation:
+
+- Added `toc-entry-rule(entry, width: 54mm)`.
+- It wraps `toc-entry-style(entry)` in `block(width: width)` before measuring.
+- The underline is placed at `entry-size.height + toc-entry-rule-gap`.
+- TOC entries now call `#toc-entry-rule(entry)`.
+- Audit checks require the width-aware TOC entry helper.
+
+Verification:
+
+```text
+just validate
+just audit
+just build
+```
+
+Visual verification:
+
+```text
+build/spotcheck/toc-two-line/page-4-lower-crop.png
+build/spotcheck/toc-two-line/page-4-toc-crop.png
+```
+
+Result:
+
+- The `代后记：在日常里写旧体诗的一点体会` TOC entry reserves height for two lines.
+- Its underline is placed below the second line, not from a one-line measurement.
+- The following row no longer collides with the two-line entry.
+
 Future feedback should be appended here with:
 
 - user quote;

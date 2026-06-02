@@ -79,6 +79,19 @@
   ]
 }
 
+#let toc-entry-rule(entry, width: 54mm) = context {
+  let entry-content = block(width: width)[
+    #align(center)[#toc-entry-style(entry)]
+  ]
+  let entry-size = measure(entry-content)
+  box(width: width, height: entry-size.height + toc-entry-rule-gap + 0.35pt)[
+    #place(top + center, dy: 0pt)[#entry-content]
+    #place(top + center, dy: entry-size.height + toc-entry-rule-gap)[
+      #line(length: width, stroke: (paint: faint-rule, thickness: 0.35pt))
+    ]
+  ]
+}
+
 #let cover-page(title, author, subtitle: none) = {
   set page(width: 210mm, height: 297mm, margin: 0pt, fill: role-paper)
   set text(lang: "zh", region: "cn", fill: ink)
@@ -156,7 +169,7 @@
         column-gutter: 18mm,
         row-gutter: toc-entry-row-gap,
         ..entries.map(entry => block(width: 54mm)[
-          #measured-title-rule(toc-entry-style(entry), line-length: 100%, gap: toc-entry-rule-gap, thickness: 0.35pt)
+          #toc-entry-rule(entry)
         ]),
       )
     ]
