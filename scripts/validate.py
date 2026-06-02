@@ -38,11 +38,20 @@ def fail(errors: list[str], message: str) -> None:
     errors.append(message)
 
 
+def load_image_contracts() -> tuple[set[str], dict]:
+    path = ROOT / "scripts" / "image_contracts.yaml"
+    if not path.exists():
+        return set(), {}
+    data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    return set(data.get("pass4_scope", [])), data.get("contracts", {})
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--mode", choices=["draft", "final"], default="draft")
     args = parser.parse_args()
     errors: list[str] = []
+    pass4_scope, pass4_contracts = load_image_contracts()
     branch = ""
     try:
         import subprocess
@@ -115,6 +124,8 @@ def main() -> int:
         prompt = ROOT / poem["prompt"]
         notes = asset.parent / "illustration.notes.md"
         brief = asset.parent / "illustration.brief.md"
+        prompt_text = ""
+        brief_text = ""
         if not asset.exists():
             fail(errors, f"missing illustration asset {poem['asset']}")
         if not prompt.exists():
@@ -173,7 +184,40 @@ def main() -> int:
                 scope = notes_frontmatter.get("regeneration-scope")
                 if poem["title"] in PASS3_PRESERVE_ORIGINAL and scope != "preserve-original-seven":
                     fail(errors, f"{notes.relative_to(ROOT)} must preserve original seven scope")
-                if poem["title"] in PASS3_REGENERATE and scope != "pass3-regenerate":
+                if poem["title"] in pass4_scope:
+                    if scope not in {"pass4-regenerate", "pass4-preserved-after-check"}:
+                        fail(errors, f"{notes.relative_to(ROOT)} must be pass4-regenerate or pass4-preserved-after-check scope")
+                    if "pass4-decision" not in notes_frontmatter:
+                        fail(errors, f"{notes.relative_to(ROOT)} missing pass4-decision")
+                    contract = pass4_contracts.get(poem["title"], {})
+                    if not contract:
+                        fail(errors, f"scripts/image_contracts.yaml missing contract for {poem['title']}")
+                    else:
+                        for field in [
+                            "must_show",
+                            "must_not_show",
+                            "setting_contract",
+                            "figure_contract",
+                            "action_contract",
+                            "object_contract",
+                            "emotion_contract",
+                            "commentary_contract",
+                            "source_photo_contract",
+                            "composition_contract",
+                            "coverage_check",
+                        ]:
+                            if f"{field}:" not in brief_text:
+                                fail(errors, f"{brief.relative_to(ROOT)} missing pass4 contract field {field}")
+                        combined_sidecar = f"{brief_text}\n{prompt_text}"
+                        for required in contract.get("required", []):
+                            if required not in combined_sidecar:
+                                fail(errors, f"{brief.relative_to(ROOT)} / {poem['prompt']} missing pass4 required anchor: {required}")
+                            if f"{required} -> final prompt" not in brief_text and f"{required} covered in final_image_prompt" not in prompt_text:
+                                fail(errors, f"{brief.relative_to(ROOT)} coverage_check does not map required anchor: {required}")
+                        for forbidden in contract.get("forbidden", []):
+                            if forbidden not in combined_sidecar:
+                                fail(errors, f"{brief.relative_to(ROOT)} / {poem['prompt']} does not explicitly exclude pass4 forbidden anchor: {forbidden}")
+                elif poem["title"] in PASS3_REGENERATE and scope != "pass3-regenerate":
                     fail(errors, f"{notes.relative_to(ROOT)} must be pass3-regenerate scope")
         seen_assets.add(poem["asset"])
 

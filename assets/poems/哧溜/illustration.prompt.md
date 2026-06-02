@@ -1,16 +1,18 @@
 title: 《哧溜》
 use_case: illustration-story
 asset_type: portrait 2:3 illustration for a Typst Chinese poem book page
-primary_request: Execution-ready textless illustration for 《哧溜》; do not add typography.
-scene_backdrop: A shallow mountain creek with a small hand net hovering above rippled water as a fish slips away.
-subjects_and_actions: Only partial hands or a small crouched silhouette if needed; no identifiable face.
-foreground: Wet stones, a bamboo-handled net, and splashed water.
-middle_ground: A quick silver fish shape disappearing into stirred brown-green current.
-background: Cool creek banks and soft foliage in pale October light.
-camera_and_composition: Low close view above the creek surface, angled like someone crouching to catch fish. Portrait 2:3 with generous negative space for poem layout.
-light_and_color: Muted paper-compatible palette, low contrast, soft atmospheric depth; apply source-photo palette only as vibe/place reference when available.
+primary_request: Execution-ready textless pass4 illustration for 《哧溜》 using the visual story contract; do not add typography.
+scene_backdrop: cold shallow mountain creek with clear stones upstream and muddy current pocket downstream
+subjects_and_actions: one anonymous adult knee-deep in water, sleeves/shorts practical, holding a butterfly net awkwardly the person lunges with the butterfly net as a small fish slips from clear shallows into muddy current
+foreground: knee-deep water around legs, splashes
+middle_ground: awkward net lunge at fish trail
+background: clear creek bed turning into muddy current
+camera_and_composition: low creek-level view, coherent single scene, portrait 2:3
+light_and_color: Restrained literary palette; preserve source-photo light/palette only when specified in source_photo_contract.
 style: Textless contemporary Chinese literary illustration, ink-wash plus soft gouache, fine paper grain, restrained detail.
 page_layout_constraints: Leave quiet negative space and low contrast so poem, pinyin, context, and commentary remain dominant and legible.
-negative_constraints: No text, no Chinese characters, no calligraphy, no seals, no watermark, no labels, no AI-art orbs, no bokeh blobs, no generic ancient-China costume cliché, no photorealistic private likeness.
-final_image_prompt: Create a textless quiet Chinese-literary illustration for 《哧溜》. Scene: A shallow mountain creek with a small hand net hovering above rippled water as a fish slips away. Foreground: Wet stones, a bamboo-handled net, and splashed water. Middle ground: A quick silver fish shape disappearing into stirred brown-green current. Background: Cool creek banks and soft foliage in pale October light. Human/subject treatment: Only partial hands or a small crouched silhouette if needed; no identifiable face. Camera/composition: Low close view above the creek surface, angled like someone crouching to catch fish. Portrait 2:3 with generous negative space for poem layout. Symbolic intent: The vanishing fish maps to '倏而没湍泥'; the net's emptiness keeps the poem's playful tone. Keep it restrained, page-compatible, and visually quieter than the poem text.
-source_generated_image: pending-pass3-generation
+negative_constraints: person on dry land; collage composition; text; Chinese characters; calligraphy; seals; watermark; labels; AI-art orbs; private identifiable faces
+final_image_prompt: Create a textless portrait 2:3 contemporary Chinese literary illustration for 《哧溜》. Scene/backdrop: cold shallow mountain creek with clear stones upstream and muddy current pocket downstream. Foreground: knee-deep water around legs, splashes. Middle ground: awkward net lunge at fish trail. Background: clear creek bed turning into muddy current. Human figures and actions: one anonymous adult knee-deep in water, sleeves/shorts practical, holding a butterfly net awkwardly; the person lunges with the butterfly net as a small fish slips from clear shallows into muddy current. Required objects: butterfly net, clear creek stones, fish blur, muddy swirl. Emotion and story: earnest over-equipped playfulness and comic failure. Composition/camera: low creek-level view, coherent single scene, portrait 2:3. Symbolic mapping: grand net versus tiny fish maps to comic scale collapse; clear-to-mud maps to 现/没. Style: restrained ink-wash plus soft gouache, muted paper-compatible palette, fine grain, low contrast. Do not show: person on dry land; collage composition; no text, no Chinese characters, no calligraphy, no seals, no watermark.
+source_generated_image: pending-pass4-generation
+must_show: person knee-deep in creek water; butterfly net used for fish; clear shallow bottom; fish vanishing into muddy current; comic ordinary liveliness
+coverage_check: person knee-deep in creek water covered in final_image_prompt; butterfly net used for fish covered in final_image_prompt; clear shallow bottom covered in final_image_prompt; fish vanishing into muddy current covered in final_image_prompt; comic ordinary liveliness covered in final_image_prompt

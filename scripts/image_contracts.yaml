@@ -1,0 +1,168 @@
+pass4_scope:
+  - 返初
+  - 流迁
+  - 沉沦
+  - 心印
+  - 心意
+  - 喜临
+  - 孤僧
+  - 自然
+  - 启步
+  - 哧溜
+  - 穿越
+  - 途遇
+
+contracts:
+  返初:
+    decision: preserve-after-check
+    required:
+      - forest path
+      - wooden bridge
+      - blue-green water
+      - stone color
+      - returning to inner firstness
+    forbidden:
+      - urban
+      - indoor
+    review_check: "Preserve only if the image remains a quiet hiking/nature return scene, not a generic bridge picture."
+  流迁:
+    decision: regenerate
+    required:
+      - external hands or force moving an object
+      - floating or sinking/turning object
+      - bubble or reflection
+      - shifting narrative layers
+      - no dominant foreground luggage
+    forbidden:
+      - suitcase
+      - luggage
+      - train station
+    review_check: "Fail if a foreground suitcase/luggage dominates or if the image is only travel-migration mood."
+  沉沦:
+    decision: regenerate
+    required:
+      - body stained by red dust
+      - red worldly specks
+      - thin blue thread toward sky
+      - tension between red and blue
+      - self-portrait not generic sadness
+    forbidden:
+      - only sad person
+      - horror
+      - prison bars
+    review_check: "Fail if the only visible story is an upset person without red-dust/blue-thread mechanism."
+  心印:
+    decision: regenerate
+    required:
+      - remembered girl
+      - lively beautiful eyes
+      - separation or parting
+      - longing after return
+      - memory imprint in heart
+    forbidden:
+      - desk still life
+      - paper seal
+      - empty paper
+    review_check: "Fail if the image centers paper/shadow/desk symbols instead of the remembered beloved figure."
+  心意:
+    decision: regenerate
+    required:
+      - flower market
+      - couple
+      - behind embrace
+      - female figure held in front
+      - contrast between home-settling and wandering-together
+    forbidden:
+      - gift token still life
+      - single figure
+      - empty table
+    review_check: "Fail if there is no couple or if the male figure is not embracing from behind."
+  喜临:
+    decision: regenerate
+    required:
+      - pregnancy cue
+      - expectant mother or parents-to-be
+      - bean sprout metaphor
+      - family anticipation
+      - spring flowers or warm joy
+    forbidden:
+      - generic vase
+      - generic domestic still life
+      - identifiable baby face
+    review_check: "Fail if pregnancy cannot be inferred without the title/commentary."
+  孤僧:
+    decision: regenerate
+    required:
+      - Spring Festival flower market
+      - lights
+      - crowd like tide
+      - lone speaker with inner monk-like detachment
+      - red-dust festive warmth
+    forbidden:
+      - mountain monk
+      - temple
+      - wilderness
+    review_check: "Fail if the setting is mountain/temple/wilderness or lacks flower-market crowd."
+  自然:
+    decision: regenerate
+    required:
+      - dusty worldly achievement being left behind
+      - thirst/craving set down
+      - new dreams arising
+      - heart opening to reality
+      - non-seeking stillness
+    forbidden:
+      - generic nature only
+      - bamboo-only title illustration
+    review_check: "Fail if the prompt/image is only plants or landscape because the title says nature."
+  启步:
+    decision: regenerate
+    required:
+      - night running
+      - ordinary slightly heavy-bodied runner
+      - road lamps
+      - movement and sweat/breath
+      - modest persistent effort
+    forbidden:
+      - daytime
+      - heroic athlete
+      - gym interior
+    review_check: "Fail if the scene reads as daytime or the runner looks heroic/athletic."
+  哧溜:
+    decision: regenerate
+    required:
+      - person knee-deep in creek water
+      - butterfly net used for fish
+      - clear shallow bottom
+      - fish vanishing into muddy current
+      - comic ordinary liveliness
+    forbidden:
+      - person on dry land
+      - collage composition
+    review_check: "Fail if the figure is on land or the creek depth is not knee-level."
+  穿越:
+    decision: regenerate
+    required:
+      - rugged mountain path
+      - rocky seaside/coastal crossing
+      - companions helping across rocks
+      - hand and foot cooperation
+      - no urban tunnel
+    forbidden:
+      - city tunnel
+      - corridor
+      - bridge interior
+    review_check: "Fail if setting is urban or if there are no helping figures on rough coastal/mountain rocks."
+  途遇:
+    decision: regenerate
+    required:
+      - fallen boulder blocking road
+      - queued vehicles or people
+      - clearing machinery
+      - guards/orderly rescue management
+      - cliff road danger at night or late light
+    forbidden:
+      - open road without blockage
+      - disaster spectacle
+      - crushed cars
+    review_check: "Fail if stones do not block the road, or queue/machinery/guarding are missing."

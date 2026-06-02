@@ -1,16 +1,18 @@
 title: 《启步》
 use_case: illustration-story
 asset_type: portrait 2:3 illustration for a Typst Chinese poem book page
-primary_request: Execution-ready textless illustration for 《启步》; do not add typography.
-scene_backdrop: A dim riverside or park path at night, with one slightly heavy modern runner moving away under warm lamps.
-subjects_and_actions: One non-identifying adult runner; no close face, no brand logo, no heroic pose.
-foreground: Soft path edge, faint fallen leaves, and a low pool of lamplight near the runner's feet.
-middle_ground: The runner seen from behind, small but clear, mid-stride with effort and restraint.
-background: A receding row of lamps, trees, and pale city silhouettes dissolved into paper haze.
-camera_and_composition: Standing behind and slightly left of the runner at calm walking distance. Portrait 2:3 with generous negative space for poem layout.
-light_and_color: Muted paper-compatible palette, low contrast, soft atmospheric depth; apply source-photo palette only as vibe/place reference when available.
+primary_request: Execution-ready textless pass4 illustration for 《启步》 using the visual story contract; do not add typography.
+scene_backdrop: dark evening/night park path or wild path with road lamps and cool air
+subjects_and_actions: one ordinary slightly heavy-bodied runner, dignified and non-heroic, face not identifiable runner moves steadily under lamps, sweating and breathing, with a heavier shadow beside him
+foreground: dark path texture and runner shadow
+middle_ground: ordinary runner in motion under lamp, sweat/breath visible
+background: night park path with lamps receding and a distant walker/target
+camera_and_composition: side/rear three-quarter view, portrait 2:3, dark sky clearly night
+light_and_color: Restrained literary palette; preserve source-photo light/palette only when specified in source_photo_contract.
 style: Textless contemporary Chinese literary illustration, ink-wash plus soft gouache, fine paper grain, restrained detail.
 page_layout_constraints: Leave quiet negative space and low contrast so poem, pinyin, context, and commentary remain dominant and legible.
-negative_constraints: No text, no Chinese characters, no calligraphy, no seals, no watermark, no labels, no AI-art orbs, no bokeh blobs, no generic ancient-China costume cliché, no photorealistic private likeness.
-final_image_prompt: Create a textless quiet Chinese-literary illustration for 《启步》. Scene: A dim riverside or park path at night, with one slightly heavy modern runner moving away under warm lamps. Foreground: Soft path edge, faint fallen leaves, and a low pool of lamplight near the runner's feet. Middle ground: The runner seen from behind, small but clear, mid-stride with effort and restraint. Background: A receding row of lamps, trees, and pale city silhouettes dissolved into paper haze. Human/subject treatment: One non-identifying adult runner; no close face, no brand logo, no heroic pose. Camera/composition: Standing behind and slightly left of the runner at calm walking distance. Portrait 2:3 with generous negative space for poem layout. Symbolic intent: The lamp-lit path maps to '启步'; the small body shadow maps to the poem's self-aware '胖影'. Keep it restrained, page-compatible, and visually quieter than the poem text.
-source_generated_image: /Users/utensil/.codex-peri/generated_images/019e82e9-a976-7d02-b116-300972fd6a7c/ig_05b4dec741b3d7c0016a1e3844be6881919775d2e1a0df78e1.png
+negative_constraints: daytime; heroic athlete; gym interior; text; Chinese characters; calligraphy; seals; watermark; labels; AI-art orbs; private identifiable faces
+final_image_prompt: Create a textless portrait 2:3 contemporary Chinese literary illustration for 《启步》. Scene/backdrop: dark evening/night park path or wild path with road lamps and cool air. Foreground: dark path texture and runner shadow. Middle ground: ordinary runner in motion under lamp, sweat/breath visible. Background: night park path with lamps receding and a distant walker/target. Human figures and actions: one ordinary slightly heavy-bodied runner, dignified and non-heroic, face not identifiable; runner moves steadily under lamps, sweating and breathing, with a heavier shadow beside him. Required objects: road lamps, earphones, running shoes, dark path, maybe distant walker target. Emotion and story: small persistent restart, not triumphant athletic poster. Composition/camera: side/rear three-quarter view, portrait 2:3, dark sky clearly night. Symbolic mapping: lamp and shadow map to 野径路灯伴胖影; steady stride maps to 启步 and 持久. Style: restrained ink-wash plus soft gouache, muted paper-compatible palette, fine grain, low contrast. Do not show: daytime; heroic athlete; gym interior; no text, no Chinese characters, no calligraphy, no seals, no watermark.
+source_generated_image: pending-pass4-generation
+must_show: night running; ordinary slightly heavy-bodied runner; road lamps; movement and sweat/breath; modest persistent effort
+coverage_check: night running covered in final_image_prompt; ordinary slightly heavy-bodied runner covered in final_image_prompt; road lamps covered in final_image_prompt; movement and sweat/breath covered in final_image_prompt; modest persistent effort covered in final_image_prompt

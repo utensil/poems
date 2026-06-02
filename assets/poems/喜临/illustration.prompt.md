@@ -1,16 +1,18 @@
 title: 《喜临》
 use_case: illustration-story
 asset_type: portrait 2:3 illustration for a Typst Chinese poem book page
-primary_request: Execution-ready textless illustration for 《喜临》; do not add typography.
-scene_backdrop: A quiet home table or windowsill with a small sprout, soft flowers, and morning light after news of pregnancy.
-subjects_and_actions: Anonymous adult hands only; no pregnant body close-up, no ultrasound, no baby imagery.
-foreground: Tiny bean sprout in a cup or dish, warm fabric, and a small domestic object.
-middle_ground: A softly lit pair of adult hands near the sprout, suggesting shared news without showing faces.
-background: Window glow and blurred spring flowers, hinting at '山花烂漫'.
-camera_and_composition: Intimate tabletop view, slightly above and close, but with open space for poem text. Portrait 2:3 with generous negative space for poem layout.
-light_and_color: Muted paper-compatible palette, low contrast, soft atmospheric depth; apply source-photo palette only as vibe/place reference when available.
+primary_request: Execution-ready textless pass4 illustration for 《喜临》 using the visual story contract; do not add typography.
+scene_backdrop: warm domestic window table with expectant parents and a small bean sprout, hinting at a new life before birth
+subjects_and_actions: non-identifying expectant mother with hand on belly; partner nearby, both partial or from behind parents-to-be quietly notice a tiny bean sprout; joy opens from small cue to spring flowers outside
+foreground: tiny bean sprout and small baby cloth/booties on table
+middle_ground: expectant mother hand on belly with partner nearby, non-identifying
+background: spring flowers and warm window light, soft green palette
+camera_and_composition: intimate domestic medium-close, portrait 2:3, privacy-safe
+light_and_color: Restrained literary palette; preserve source-photo light/palette only when specified in source_photo_contract.
 style: Textless contemporary Chinese literary illustration, ink-wash plus soft gouache, fine paper grain, restrained detail.
 page_layout_constraints: Leave quiet negative space and low contrast so poem, pinyin, context, and commentary remain dominant and legible.
-negative_constraints: No text, no Chinese characters, no calligraphy, no seals, no watermark, no labels, no AI-art orbs, no bokeh blobs, no generic ancient-China costume cliché, no photorealistic private likeness.
-final_image_prompt: Create a textless quiet Chinese-literary illustration for 《喜临》. Scene: A quiet home table or windowsill with a small sprout, soft flowers, and morning light after news of pregnancy. Foreground: Tiny bean sprout in a cup or dish, warm fabric, and a small domestic object. Middle ground: A softly lit pair of adult hands near the sprout, suggesting shared news without showing faces. Background: Window glow and blurred spring flowers, hinting at '山花烂漫'. Human/subject treatment: Anonymous adult hands only; no pregnant body close-up, no ultrasound, no baby imagery. Camera/composition: Intimate tabletop view, slightly above and close, but with open space for poem text. Portrait 2:3 with generous negative space for poem layout. Symbolic intent: The sprout maps to '豆发芽'; flowers map to joy arriving after hesitation. Keep it restrained, page-compatible, and visually quieter than the poem text.
-source_generated_image: pending-pass3-generation
+negative_constraints: generic vase; generic domestic still life; identifiable baby face; text; Chinese characters; calligraphy; seals; watermark; labels; AI-art orbs; private identifiable faces
+final_image_prompt: Create a textless portrait 2:3 contemporary Chinese literary illustration for 《喜临》. Scene/backdrop: warm domestic window table with expectant parents and a small bean sprout, hinting at a new life before birth. Foreground: tiny bean sprout and small baby cloth/booties on table. Middle ground: expectant mother hand on belly with partner nearby, non-identifying. Background: spring flowers and warm window light, soft green palette. Human figures and actions: non-identifying expectant mother with hand on belly; partner nearby, both partial or from behind; parents-to-be quietly notice a tiny bean sprout; joy opens from small cue to spring flowers outside. Required objects: small bean sprout cup, soft baby booties or folded cloth, window flowers; no identifiable baby portrait. Emotion and story: from anxious waiting to sudden, blooming joy at pregnancy news. Composition/camera: intimate domestic medium-close, portrait 2:3, privacy-safe. Symbolic mapping: bean sprout maps to pregnancy news; flowers map to joy expanding; hand on belly makes pregnancy legible. Style: restrained ink-wash plus soft gouache, muted paper-compatible palette, fine grain, low contrast. Do not show: generic vase; generic domestic still life; identifiable baby face; no text, no Chinese characters, no calligraphy, no seals, no watermark.
+source_generated_image: pending-pass4-generation
+must_show: pregnancy cue; expectant mother or parents-to-be; bean sprout metaphor; family anticipation; spring flowers or warm joy
+coverage_check: pregnancy cue covered in final_image_prompt; expectant mother or parents-to-be covered in final_image_prompt; bean sprout metaphor covered in final_image_prompt; family anticipation covered in final_image_prompt; spring flowers or warm joy covered in final_image_prompt

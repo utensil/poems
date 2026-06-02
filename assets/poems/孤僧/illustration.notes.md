@@ -1,16 +1,22 @@
 ---
 image-status: generated
-prompt-source: pass3-brief
-brief-status: pass3-written
-review-status: generated-pass3
+prompt-source: pass4-primary-source-brief
+brief-status: pass4-written
+review-status: pass4-contract-pending-image
 source-poem: src/poems/哲思禅意/孤僧.md
 source-commentary: src/commentaries/哲思禅意/孤僧.md
 source-images: none
-generation-tool: built-in image_gen
-generated-image-source: /Users/utensil/.codex-peri/generated_images/019e82e9-a976-7d02-b116-300972fd6a7c/ig_02a5c4e426cb6481016a1e754bdea08191976a71286db6d356.png
-regeneration-scope: pass3-regenerate
-human-feedback: pass3 image concept remediation; original seven preserved unless explicitly
-  rejected
+generation-tool: pending
+generated-image-source: pending-pass4-generation
+regeneration-scope: pass4-regenerate
+pass4-decision: regenerate
+human-feedback: pass4 visual story contract correction; fresh brief/prompt regenerated
+  from poem/commentary/frontmatter/source images before old pass3 sidecar comparison
+pass3-regression-audit: 'pass4 restored/kept required anchors: Spring Festival flower
+  market; lights; crowd like tide; lone speaker with inner monk-like detachment; red-dust
+  festive warmth. Old pass3 sidecars lacked these manifest anchors: Spring Festival
+  flower market; lights; crowd like tide; lone speaker with inner monk-like detachment;
+  red-dust festive warmth'
 ---
 
-《孤僧》pass3 image lifecycle metadata.
+《孤僧》pass4 image lifecycle metadata. Visual story contract decision: regenerate.

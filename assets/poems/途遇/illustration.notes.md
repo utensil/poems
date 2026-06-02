@@ -1,16 +1,23 @@
 ---
 image-status: generated
-prompt-source: pass3-brief
-brief-status: pass3-written
-review-status: generated-pass3
+prompt-source: pass4-primary-source-brief
+brief-status: pass4-written
+review-status: pass4-contract-pending-image
 source-poem: src/poems/云南丽江香格里拉之旅/途遇.md
 source-commentary: src/commentaries/云南丽江香格里拉之旅/途遇.md
-source-images: /Users/utensil/projects/utensil.github.io/source/writings/images/2020-09-19-23-15-tu-yu.JPG
-generation-tool: built-in image_gen
-generated-image-source: /Users/utensil/.codex-peri/generated_images/019e82e9-a976-7d02-b116-300972fd6a7c/ig_02a5c4e426cb6481016a1e788e812c8191afc0f069d9b462f8.png
-regeneration-scope: pass3-regenerate
-human-feedback: pass3 image concept remediation; original seven preserved unless explicitly
-  rejected
+source-images:
+- ~/projects/utensil.github.io/source/writings/images/2020-09-19-23-15-tu-yu.JPG
+generation-tool: pending
+generated-image-source: pending-pass4-generation
+regeneration-scope: pass4-regenerate
+pass4-decision: regenerate
+human-feedback: pass4 visual story contract correction; fresh brief/prompt regenerated
+  from poem/commentary/frontmatter/source images before old pass3 sidecar comparison
+pass3-regression-audit: 'pass4 restored/kept required anchors: fallen boulder blocking
+  road; queued vehicles or people; clearing machinery; guards/orderly rescue management;
+  cliff road danger at night or late light. Old pass3 sidecars lacked these manifest
+  anchors: fallen boulder blocking road; queued vehicles or people; clearing machinery;
+  guards/orderly rescue management; cliff road danger at night or late light'
 ---
 
-《途遇》pass3 image lifecycle metadata.
+《途遇》pass4 image lifecycle metadata. Visual story contract decision: regenerate.
