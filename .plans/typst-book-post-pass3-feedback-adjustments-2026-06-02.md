@@ -146,7 +146,7 @@ https://discord.com/channels/1089537860106993716/1510954118691291206/15112911987
 
 Status:
 
-- Implemented.
+- Resolved.
 
 Required behavior:
 
@@ -489,6 +489,13 @@ Follow-up correction:
 ```
 
 - After rebuilding, quote text xMin on the checked page moved from about `99.2pt` to `122.4pt`, confirming the quote block now visibly shifts right.
+- User confirmed the prose quote offset works.
+
+Resolved in:
+
+```text
+60a9b58 fix: apply visible prose quote offset [AGENT: peri]
+```
 
 Future feedback should be appended here with:
 
