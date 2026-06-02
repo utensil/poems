@@ -77,61 +77,67 @@
 }
 
 #let prose-page(title, paragraphs, placeholder: false) = {
-  set page(width: 210mm, height: 297mm, margin: (x: 28mm, y: 25mm), fill: paper)
+  set page(width: 210mm, height: 297mm, margin: 0pt, fill: paper)
   set text(lang: "zh", region: "cn", fill: ink)
   role-ground(frame: false)
-  align(center)[#prose-title-style(title, size: if title.clusters().len() > 16 { 22pt } else { 26pt })]
-  v(16pt)
-  align(center)[#line(length: 34mm, stroke: (paint: faint-rule, thickness: 0.5pt))]
-  v(15pt)
-  set text(font: prose-body-font, size: 11.6pt)
-  set par(first-line-indent: 2em, leading: 0.66em, justify: true)
-  if placeholder {
-    align(center)[
-      #block(width: 110mm)[
-        #text(font: prose-body-font, size: 12pt, fill: muted)[（待补）]
-      ]
-    ]
-  } else {
-    for p in paragraphs [
-      #if p.kind == "quote" {
-        block(
-          inset: (left: 7mm, right: 6mm, y: 3mm),
-          above: 3pt,
-          below: 10pt,
-          stroke: (left: (paint: faint-rule, thickness: 1pt)),
-        )[
-          #set par(first-line-indent: 0pt, leading: 0.62em, justify: true)
-          #prose-quote-style(p.text)
+  pad(x: 28mm, y: 25mm)[
+    #align(center)[#prose-title-style(title, size: if title.clusters().len() > 16 { 22pt } else { 26pt })]
+    #v(16pt)
+    #align(center)[#line(length: 34mm, stroke: (paint: faint-rule, thickness: 0.5pt))]
+    #v(15pt)
+    #set text(font: prose-body-font, size: 11.6pt)
+    #set par(first-line-indent: 2em, leading: 0.66em, justify: true)
+    #{
+      if placeholder {
+        align(center)[
+          #block(width: 110mm)[
+            #text(font: prose-body-font, size: 12pt, fill: muted)[（待补）]
+          ]
         ]
       } else {
-        block(above: 0pt, below: 10pt)[#prose-body-style(p.text)]
+        for p in paragraphs {
+          if p.kind == "quote" {
+            block(
+              inset: (left: 7mm, right: 6mm, y: 3mm),
+              above: 3pt,
+              below: 10pt,
+              stroke: (left: (paint: faint-rule, thickness: 1pt)),
+            )[
+              #set par(first-line-indent: 0pt, leading: 0.62em, justify: true)
+              #prose-quote-style(p.text)
+            ]
+          } else {
+            block(above: 0pt, below: 10pt)[#prose-body-style(p.text)]
+          }
+        }
       }
-    ]
-  }
+    }
+  ]
 }
 
 #let toc-page(entries) = {
-  set page(width: 210mm, height: 297mm, margin: (x: 30mm, y: 26mm), fill: paper)
+  set page(width: 210mm, height: 297mm, margin: 0pt, fill: paper)
   set text(lang: "zh", region: "cn", fill: ink)
   role-ground()
-  align(center)[#toc-title-style[目录]]
-  v(13pt)
-  align(center)[#line(length: 32mm, stroke: (paint: faint-rule, thickness: 0.5pt))]
-  v(18pt)
-  set text(font: toc-font, size: 13.2pt)
-  set par(leading: 0.55em, justify: false)
-  align(center)[
-    #grid(
-      columns: (1fr, 1fr),
-      column-gutter: 18mm,
-      row-gutter: 8pt,
-      ..entries.map(entry => block(width: 54mm)[
-        #toc-entry-style(entry)
-        #v(4pt)
-        #line(length: 100%, stroke: (paint: faint-rule, thickness: 0.35pt))
-      ]),
-    )
+  pad(x: 30mm, y: 26mm)[
+    #align(center)[#toc-title-style[目录]]
+    #v(13pt)
+    #align(center)[#line(length: 32mm, stroke: (paint: faint-rule, thickness: 0.5pt))]
+    #v(18pt)
+    #set text(font: toc-font, size: 13.2pt)
+    #set par(leading: 0.55em, justify: false)
+    #align(center)[
+      #grid(
+        columns: (1fr, 1fr),
+        column-gutter: 18mm,
+        row-gutter: 8pt,
+        ..entries.map(entry => block(width: 54mm)[
+          #toc-entry-style(entry)
+          #v(4pt)
+          #line(length: 100%, stroke: (paint: faint-rule, thickness: 0.35pt))
+        ]),
+      )
+    ]
   ]
 }
 
@@ -150,24 +156,26 @@
 }
 
 #let chronology-page(entries) = {
-  set page(width: 210mm, height: 297mm, margin: (x: 27mm, y: 25mm), fill: paper)
+  set page(width: 210mm, height: 297mm, margin: 0pt, fill: paper)
   set text(lang: "zh", region: "cn", fill: ink)
   role-ground(frame: false)
-  align(center)[#prose-title-style[年谱]]
-  v(13pt)
-  align(center)[#line(length: 30mm, stroke: (paint: faint-rule, thickness: 0.5pt))]
-  v(16pt)
-  set text(font: chronology-font, size: 11pt)
-  set par(leading: 0.58em, justify: false)
-  for entry in entries [
-    #grid(
-      columns: (31mm, 1fr),
-      column-gutter: 8mm,
-      align: top,
-      text(fill: muted)[#entry.period],
-      text[#entry.poems],
-    )
-    #v(7pt)
+  pad(x: 27mm, y: 25mm)[
+    #align(center)[#prose-title-style[年谱]]
+    #v(13pt)
+    #align(center)[#line(length: 30mm, stroke: (paint: faint-rule, thickness: 0.5pt))]
+    #v(16pt)
+    #set text(font: chronology-font, size: 11pt)
+    #set par(leading: 0.58em, justify: false)
+    #for entry in entries [
+      #grid(
+        columns: (31mm, 1fr),
+        column-gutter: 8mm,
+        align: top,
+        text(fill: muted)[#entry.period],
+        text[#entry.poems],
+      )
+      #v(7pt)
+    ]
   ]
 }
 
