@@ -23,6 +23,8 @@
 #let role-paper = rgb("#f3e7d3")
 #let prose-paragraph-gap = 20pt
 #let prose-quote-gap = 18pt
+#let role-panel-margin = 11.2mm
+#let role-frame-margin = 16.8mm
 
 #let book-title-style(body) = text(font: poem-title-font, size: 36pt, weight: "bold", tracking: 2pt)[#body]
 #let book-author-style(body) = text(font: author-font, size: 17pt)[#body]
@@ -47,12 +49,12 @@
   place(top + left, dx: 0pt, dy: 0pt)[
     #rect(width: 210mm, height: 297mm, fill: role-paper)
   ]
-  place(top + left, dx: 14mm, dy: 14mm)[
-    #rect(width: 182mm, height: 269mm, radius: 5pt, fill: role-panel)
+  place(top + left, dx: role-panel-margin, dy: role-panel-margin)[
+    #rect(width: 210mm - role-panel-margin * 2, height: 297mm - role-panel-margin * 2, radius: 5pt, fill: role-panel)
   ]
   if frame {
-    place(top + left, dx: 21mm, dy: 21mm)[
-      #rect(width: 168mm, height: 255mm, radius: 2pt, stroke: (paint: faint-rule, thickness: 0.5pt))
+    place(top + left, dx: role-frame-margin, dy: role-frame-margin)[
+      #rect(width: 210mm - role-frame-margin * 2, height: 297mm - role-frame-margin * 2, radius: 2pt, stroke: (paint: faint-rule, thickness: 0.5pt))
     ]
   }
 }

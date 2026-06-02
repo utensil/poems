@@ -18,11 +18,11 @@
   title-pinyin: (),
   page-w: 210mm,
   page-h: 297mm,
-  fg-x: 10mm,
-  fg-y: 7mm,
-  fg-bottom: 8mm,
+  fg-x: 8mm,
+  fg-y: 5.6mm,
+  fg-bottom: 6.4mm,
   pad-x: 8mm,
-  pad-top: 11mm,
+  pad-top: 8.8mm,
   bg-bleed-x: 14mm,
   bg-bleed-y: 20mm,
   image-aspect: 2 / 3,
@@ -42,12 +42,13 @@
   poem-line-h: 27pt,
   annotated-line-h: 36pt,
   title-gap: none,
-  title-body-gap-factor: 0.5,
+  title-body-gap-factor: 0.4,
   after-poem-gap: none,
   poem-line-gap: 1pt,
   commentary-paragraph-gap: 18pt,
   context-commentary-gap: 14pt,
   min-first-page-note-height: 88pt,
+  bottom-frame-text-gap: 18pt,
   commentary-break-after: "auto",
   ink-absorb-edge: 2pt,
 ) = {
@@ -58,13 +59,13 @@
   let content-w = fg-w - pad-x * 2
   let poem-cells = poem-lines.first().len()
   let long-poem = poem-lines.len() >= 14
-  let actual-title-size = if long-poem { 30pt } else { title-size }
-  let actual-poem-size = if long-poem { 19.5pt } else { poem-size }
-  let actual-pinyin-size = if long-poem { 6.8pt } else { pinyin-size }
-  let actual-title-pinyin-size = if long-poem { 7pt } else { title-pinyin-size }
-  let actual-char-w = if long-poem { 20pt } else { char-w }
-  let actual-poem-line-h = if long-poem { 24pt } else { poem-line-h }
-  let actual-annotated-line-h = if long-poem { 31pt } else { annotated-line-h }
+  let actual-title-size = if long-poem { 28pt } else { title-size }
+  let actual-poem-size = if long-poem { 18pt } else { poem-size }
+  let actual-pinyin-size = if long-poem { 6pt } else { pinyin-size }
+  let actual-title-pinyin-size = if long-poem { 6.5pt } else { title-pinyin-size }
+  let actual-char-w = if long-poem { 18.5pt } else { char-w }
+  let actual-poem-line-h = if long-poem { 22pt } else { poem-line-h }
+  let actual-annotated-line-h = if long-poem { 27pt } else { annotated-line-h }
   let poem-w = actual-char-w * poem-cells
   let punct-visual-w = actual-char-w / 3
   let title-visual-shift = -(actual-char-w - punct-visual-w) / 2
@@ -272,13 +273,16 @@
       [],
     )
 
-    let content-bottom = fg-y + fg-h
+    let content-bottom = fg-y + fg-h - bottom-frame-text-gap
     let continuation-h = content-bottom - content-y
     let context-y = poem-size-measured.height + resolved-after-poem-gap
     let context-size-measured = measure(context-block)
     let commentary-y = context-y + context-size-measured.height + context-commentary-gap
     let rule-y = context-y + context-size-measured.height + context-commentary-gap / 2
     let available-h = content-bottom - (content-y + commentary-y)
+    if poem-size-measured.height > content-bottom - content-y {
+      panic("poem block reaches bottom frame: " + title)
+    }
     let full-commentary-h = measure(commentary-block(0)).height
     let fit-commentary-h = measure(commentary-block(0, size: commentary-fit-size)).height
     let commentary-overflow = full-commentary-h - available-h

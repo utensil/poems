@@ -73,6 +73,10 @@ def main() -> int:
     if "#let prose-paragraph-gap = 20pt" not in style_source:
         print("ERROR: prose paragraph gap is not centrally set to the pass2 minimum", file=sys.stderr)
         return 1
+    for required_source in ["#let role-panel-margin = 11.2mm", "#let role-frame-margin = 16.8mm"]:
+        if required_source not in style_source:
+            print(f"ERROR: role frame margin is not set to the requested 0.8x value: {required_source}", file=sys.stderr)
+            return 1
     for role in [
         "book-title-style",
         "book-author-style",
@@ -98,9 +102,15 @@ def main() -> int:
 
     poem_template = (ROOT / "templates" / "illustrated-poem-page.typ").read_text(encoding="utf-8")
     for required_source in [
-        "title-body-gap-factor: 0.5",
         "poem-line-gap: 1pt",
         "commentary-paragraph-gap: 18pt",
+        "fg-x: 8mm",
+        "fg-y: 5.6mm",
+        "fg-bottom: 6.4mm",
+        "pad-top: 8.8mm",
+        "title-body-gap-factor: 0.4",
+        "bottom-frame-text-gap: 18pt",
+        'panic("poem block reaches bottom frame',
         "long-poem = poem-lines.len() >= 14",
         "continuation-page",
         'panic("poem top row overflow',
