@@ -83,6 +83,7 @@ def main() -> int:
         "line-length: 82mm",
         "#let prose-indent = 2em",
         "#let prose-quote-offset = prose-indent",
+        "#pad(left: prose-quote-offset)",
         "width: 100% - prose-quote-offset",
         "#let measured-title-rule",
         "title-size.height + gap",

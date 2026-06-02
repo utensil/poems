@@ -134,14 +134,15 @@
         for p in paragraphs {
           if p.kind == "quote" {
             block(above: 3pt, below: prose-quote-gap)[
-              #h(prose-quote-offset)
-              #block(
-                width: 100% - prose-quote-offset,
-                inset: (left: 7mm, right: 6mm, y: 3mm),
-                stroke: (left: (paint: faint-rule, thickness: 1pt)),
-              )[
-                #set par(first-line-indent: 0pt, leading: 0.62em, justify: true)
-                #prose-quote-style(p.text)
+              #pad(left: prose-quote-offset)[
+                #block(
+                  width: 100% - prose-quote-offset,
+                  inset: (left: 7mm, right: 6mm, y: 3mm),
+                  stroke: (left: (paint: faint-rule, thickness: 1pt)),
+                )[
+                  #set par(first-line-indent: 0pt, leading: 0.62em, justify: true)
+                  #prose-quote-style(p.text)
+                ]
               ]
             ]
           } else {

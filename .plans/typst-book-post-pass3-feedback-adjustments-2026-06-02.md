@@ -446,7 +446,8 @@ Implementation:
 - Added `prose-indent = 2em`.
 - Added `prose-quote-offset = prose-indent`.
 - Replaced hardcoded prose paragraph `#h(2em)` with `#h(prose-indent)`.
-- Wrapped quote rendering with `#h(prose-quote-offset)` and an inner block:
+- Initial attempt using `#h(prose-quote-offset)` before a block had no visible effect because the horizontal space did not shift the following block-level quote.
+- Wrapped quote rendering with `#pad(left: prose-quote-offset)` and an inner block:
 
 ```typst
 width: 100% - prose-quote-offset
@@ -476,6 +477,18 @@ Result:
 - Quote block left border moves right with the quote text.
 - Normal prose paragraph starts retain the two-Chinese-character indent.
 - Quote internal first-line indent remains unindented.
+
+Follow-up correction:
+
+- User reported no visible effect in the latest PDF.
+- `pdftotext -bbox` confirmed the quote text still began at about `99.2pt`, so `#h(prose-quote-offset)` before a block did not shift the block-level quote.
+- Replaced the ineffective inline horizontal space with:
+
+```typst
+#pad(left: prose-quote-offset)[...]
+```
+
+- After rebuilding, quote text xMin on the checked page moved from about `99.2pt` to `122.4pt`, confirming the quote block now visibly shifts right.
 
 Future feedback should be appended here with:
 
