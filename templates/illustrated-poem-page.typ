@@ -45,7 +45,7 @@
   title-body-gap-factor: 0.5,
   after-poem-gap: none,
   poem-line-gap: 1pt,
-  commentary-paragraph-gap: 18pt,
+  commentary-paragraph-gap: 36pt,
   context-commentary-gap: 14pt,
   min-first-page-note-height: 88pt,
   commentary-break-after: "auto",

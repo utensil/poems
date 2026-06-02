@@ -70,7 +70,7 @@ def main() -> int:
     if "#let cover-title-font = poem-title-font" not in style_source:
         print("ERROR: cover title font is not tied to poem-title font role", file=sys.stderr)
         return 1
-    if "#let prose-paragraph-gap = 20pt" not in style_source:
+    if "#let prose-paragraph-gap = 40pt" not in style_source:
         print("ERROR: prose paragraph gap is not centrally set to the pass2 minimum", file=sys.stderr)
         return 1
     for role in [
@@ -100,7 +100,7 @@ def main() -> int:
     for required_source in [
         "title-body-gap-factor: 0.5",
         "poem-line-gap: 1pt",
-        "commentary-paragraph-gap: 18pt",
+        "commentary-paragraph-gap: 36pt",
         "long-poem = poem-lines.len() >= 14",
         "continuation-page",
         'panic("poem top row overflow',
