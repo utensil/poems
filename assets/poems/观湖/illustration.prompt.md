@@ -1,6 +1,18 @@
-# 《观湖》插画提示词
-
-Textless literary illustration for a Typst poem book page.
-Use the poem title, section, and context as the source: 云南丽江香格里拉之旅.
-Keep the image subdued, atmospheric, and supportive of the poem text.
-Avoid calligraphy, captions, seals, decorative text, and generic ancient-China clichés.
+title: 《观湖》
+use_case: illustration-story
+asset_type: portrait 2:3 illustration for a Typst Chinese poem book page
+primary_request: Textless sampled human-reviewed-commentary illustration for 《观湖》; do not add typography.
+scene_backdrop: high viewing platform over Lugu Lake in light wet rain, with pine edge in foreground, wind-woven ripples, islands stretched across mirror-like water, and green pine shadows dissolving into mist.
+subjects_and_actions: optional tiny observer silhouette from behind at the viewing platform edge, subordinate to lake atmosphere rain and wind move through the scene: moisture enters the body, wind weaves ripples, the view recedes to islands and mist
+foreground: dark pine branches/needles and wet railing or platform edge, suggesting rain entering breath without showing a close portrait
+middle_ground: lake surface with delicate woven ripple patterns under soft wind
+background: low islands lying across mirror water, distant mountains, grey wet sky, pine-shadow green mist 氤氲
+camera_and_composition: portrait 2:3, restrained literary composition, low contrast, quiet negative space for page text
+light_and_color: Use the source-photo palette when present; otherwise use subdued literary colors matching the poem emotion.
+style: Textless contemporary Chinese literary illustration, ink-wash plus soft gouache, fine paper grain, restrained detail.
+page_layout_constraints: No text in the image; leave quiet areas so poem, pinyin, context, and commentary remain dominant and legible.
+negative_constraints: clear sunny lake; tourist selfie; generic lake without islands; hard dry outlines; text; Chinese characters; calligraphy; seals; watermark; labels; AI-art orbs; private identifiable faces
+final_image_prompt: Create a textless portrait 2:3 contemporary Chinese literary illustration for 《观湖》. Scene/backdrop: high viewing platform over Lugu Lake in light wet rain, with pine edge in foreground, wind-woven ripples, islands stretched across mirror-like water, and green pine shadows dissolving into mist.. Foreground: dark pine branches/needles and wet railing or platform edge, suggesting rain entering breath without showing a close portrait. Middle ground: lake surface with delicate woven ripple patterns under soft wind. Background: low islands lying across mirror water, distant mountains, grey wet sky, pine-shadow green mist 氤氲. Human figures and actions: optional tiny observer silhouette from behind at the viewing platform edge, subordinate to lake atmosphere; rain and wind move through the scene: moisture enters the body, wind weaves ripples, the view recedes to islands and mist. Required objects: wet rain, pine branches/shadows, lake ripples, islands, mirror water, mist. Emotion and story: body being permeated by lake weather, then dissolved into the lake’s moist distance. Composition/camera: portrait 2:3 book illustration, restrained literary composition, quiet negative space. Source-photo/place cues: Source photo path(s): guan-hu-01..04.JPG. They show Lugu Lake under grey wet sky, island shapes across mirror-like water, pine/green foreground, misty horizons, and cold blue-green lake tones; use moist air, grey sky, islands, pine shadow, lake mirror cues.. Symbolic mapping: the image begins with bodily wetness/breath, then expands through wind-woven lake ripples, islands on mirror water, and pine shadow dissolving into mist.. Style: contemporary Chinese literary illustration, ink-wash plus soft gouache, fine paper grain, muted book-compatible palette, low contrast. Do not show: clear sunny lake; tourist selfie; generic lake without islands; hard dry outlines; no text, no Chinese characters, no calligraphy, no seals, no watermark.
+source_generated_image: /Users/utensil/.codex-peri/generated_images/019e82e9-a976-7d02-b116-300972fd6a7c/ig_0daedd9e66ce5d7f016a1f14ab3ca4819697dd2e74dfbe6671.png
+must_show: wet rain/breath feeling; wind-woven ripples; islands across mirror lake; pine shadow green mist; high viewing perspective
+coverage_check: wet rain/breath feeling covered in final_image_prompt; wind-woven ripples covered in final_image_prompt; islands across mirror lake covered in final_image_prompt; pine shadow green mist covered in final_image_prompt; high viewing perspective covered in final_image_prompt

@@ -1,6 +1,18 @@
-# 《回忆》插画提示词
-
-Textless literary illustration for a Typst poem book page.
-Use the poem title, section, and context as the source: 云南丽江香格里拉之旅.
-Keep the image subdued, atmospheric, and supportive of the poem text.
-Avoid calligraphy, captions, seals, decorative text, and generic ancient-China clichés.
+title: 《回忆》
+use_case: illustration-story
+asset_type: portrait 2:3 illustration for a Typst Chinese poem book page
+primary_request: Textless sampled human-reviewed-commentary illustration for 《回忆》; do not add typography.
+scene_backdrop: quiet post-trip study/work room at night, door/window partly closed like a locked attic, with a luminous memory scene hovering beyond: daytime fairyland mountains and lake, and warm night table where companions drink and recall youth.
+subjects_and_actions: one returned speaker in the room; distant memory companions are small, blurred, non-identifying the speaker is physically locked back in the room but mentally fixed on faraway travel joy and youthful conversation
+foreground: desk/work papers and a closed or latched door/window frame, showing return to daily work and locked space
+middle_ground: seated figure in the room, non-identifying, paused from work and looking toward the memory light rather than the desk
+background: soft double memory: bright day mountain-lake fairyland and warm night drinking table with companions, both outside/through the window as方外酣欢
+camera_and_composition: portrait 2:3, restrained literary composition, low contrast, quiet negative space for page text
+light_and_color: Use the source-photo palette when present; otherwise use subdued literary colors matching the poem emotion.
+style: Textless contemporary Chinese literary illustration, ink-wash plus soft gouache, fine paper grain, restrained detail.
+page_layout_constraints: No text in the image; leave quiet areas so poem, pinyin, context, and commentary remain dominant and legible.
+negative_constraints: only office sadness; literal prison; generic nostalgia portrait; dominant alcohol still life; text; Chinese characters; calligraphy; seals; watermark; labels; AI-art orbs; private identifiable faces
+final_image_prompt: Create a textless portrait 2:3 contemporary Chinese literary illustration for 《回忆》. Scene/backdrop: quiet post-trip study/work room at night, door/window partly closed like a locked attic, with a luminous memory scene hovering beyond: daytime fairyland mountains and lake, and warm night table where companions drink and recall youth.. Foreground: desk/work papers and a closed or latched door/window frame, showing return to daily work and locked space. Middle ground: seated figure in the room, non-identifying, paused from work and looking toward the memory light rather than the desk. Background: soft double memory: bright day mountain-lake fairyland and warm night drinking table with companions, both outside/through the window as方外酣欢. Human figures and actions: one returned speaker in the room; distant memory companions are small, blurred, non-identifying; the speaker is physically locked back in the room but mentally fixed on faraway travel joy and youthful conversation. Required objects: desk papers, window/door latch, memory glow, mountain-lake scene, night cups/table without making alcohol dominant. Emotion and story: afterglow and longing: no lack in the trip, only the mind refusing to return from a complete joy. Composition/camera: portrait 2:3 book illustration, restrained literary composition, quiet negative space. Source-photo/place cues: No source photos in poem frontmatter. Use memory of the Yunnan trip as described in poem/commentary: day landscapes, night drinking/talking,方外酣欢, then return to locked study/work room.. Symbolic mapping: the body has returned to a closed work room, but thought remains locked onto day-journey fairyland and night drinking of youthful stories.. Style: contemporary Chinese literary illustration, ink-wash plus soft gouache, fine paper grain, muted book-compatible palette, low contrast. Do not show: only office sadness; literal prison; generic nostalgia portrait; dominant alcohol still life; no text, no Chinese characters, no calligraphy, no seals, no watermark.
+source_generated_image: /Users/utensil/.codex-peri/generated_images/019e82e9-a976-7d02-b116-300972fd6a7c/ig_0daedd9e66ce5d7f016a1f156cb7948196a128a524fc11c3f1.png
+must_show: returned locked room; day fairyland memory; night youthful conversation memory; speaker still thinking outward; contrast between daily work and方外 joy
+coverage_check: returned locked room covered in final_image_prompt; day fairyland memory covered in final_image_prompt; night youthful conversation memory covered in final_image_prompt; speaker still thinking outward covered in final_image_prompt; contrast between daily work and方外 joy covered in final_image_prompt

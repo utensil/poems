@@ -1,6 +1,18 @@
-# 《结游》插画提示词
-
-Textless literary illustration for a Typst poem book page.
-Use the poem title, section, and context as the source: 云南丽江香格里拉之旅.
-Keep the image subdued, atmospheric, and supportive of the poem text.
-Avoid calligraphy, captions, seals, decorative text, and generic ancient-China clichés.
+title: 《结游》
+use_case: illustration-story
+asset_type: portrait 2:3 illustration for a Typst Chinese poem book page
+primary_request: Textless sampled human-reviewed-commentary illustration for 《结游》; do not add typography.
+scene_backdrop: imagined pre-trip travel vision above a Yunnan lake: a faint route-map/web dissolves into a crane-like cloud flight over river valleys, then into vivid lake reflections and relaxed companions by water.
+subjects_and_actions: two or three non-identifying travel companions, small in scale, seen from behind/side, relaxed and joyful beside water the planned route-web gives way to imagined arrival; companions look into water where fish/ripples suggest 鱼乐 and 豁然
+foreground: subtle itinerary lines like a loose route web at the lower edge, already dissolving into water ripples, not literal text or map labels
+middle_ground: small companions near a lakeside edge watching fish and reflections, their posture suddenly open and joyful
+background: snow mountain, autumn trees, blue sky, lake surface with blue-red-green reflections, and a cloud shaped like a crane descending toward river valleys
+camera_and_composition: portrait 2:3, restrained literary composition, low contrast, quiet negative space for page text
+light_and_color: Use the source-photo palette when present; otherwise use subdued literary colors matching the poem emotion.
+style: Textless contemporary Chinese literary illustration, ink-wash plus soft gouache, fine paper grain, restrained detail.
+page_layout_constraints: No text in the image; leave quiet areas so poem, pinyin, context, and commentary remain dominant and legible.
+negative_constraints: literal text/map labels; crowded itinerary board; generic travel poster; identifiable faces; text; Chinese characters; calligraphy; seals; watermark; labels; AI-art orbs; private identifiable faces
+final_image_prompt: Create a textless portrait 2:3 contemporary Chinese literary illustration for 《结游》. Scene/backdrop: imagined pre-trip travel vision above a Yunnan lake: a faint route-map/web dissolves into a crane-like cloud flight over river valleys, then into vivid lake reflections and relaxed companions by water.. Foreground: subtle itinerary lines like a loose route web at the lower edge, already dissolving into water ripples, not literal text or map labels. Middle ground: small companions near a lakeside edge watching fish and reflections, their posture suddenly open and joyful. Background: snow mountain, autumn trees, blue sky, lake surface with blue-red-green reflections, and a cloud shaped like a crane descending toward river valleys. Human figures and actions: two or three non-identifying travel companions, small in scale, seen from behind/side, relaxed and joyful beside water; the planned route-web gives way to imagined arrival; companions look into water where fish/ripples suggest 鱼乐 and 豁然. Required objects: route-like lines without text, lake, fish/ripples, reflections, snow mountain, autumn trees, cloud-crane silhouette. Emotion and story: anticipation turning from dense planning into open, already-felt travel joy. Composition/camera: portrait 2:3 book illustration, restrained literary composition, quiet negative space. Source-photo/place cues: Source photo path(s): 2020-09-13-09-45-jie-you.JPG. It shows bright blue sky, snow mountain, autumn trees, lakeside buildings/boats, and saturated red-gold-green reflections on still water; use color/reflection/lake-mountain cues, not the exact photo composition.. Symbolic mapping: dense itinerary web opens into cloud-crane flight, lake color, and companions sharing fish-like joy; the image must move from planned constraint to open travel delight.. Style: contemporary Chinese literary illustration, ink-wash plus soft gouache, fine paper grain, muted book-compatible palette, low contrast. Do not show: literal text/map labels; crowded itinerary board; generic travel poster; identifiable faces; no text, no Chinese characters, no calligraphy, no seals, no watermark.
+source_generated_image: /Users/utensil/.codex-peri/generated_images/019e82e9-a976-7d02-b116-300972fd6a7c/ig_0daedd9e66ce5d7f016a1f13f521248196b8b600213303d11a.png
+must_show: route web dissolving; cloud-crane flight; blue-red-green water reflection; companions by water; fish/ripple joy; sudden openness
+coverage_check: route web dissolving covered in final_image_prompt; cloud-crane flight covered in final_image_prompt; blue-red-green water reflection covered in final_image_prompt; companions by water covered in final_image_prompt; fish/ripple joy covered in final_image_prompt; sudden openness covered in final_image_prompt

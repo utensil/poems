@@ -1,6 +1,18 @@
-# 《盘山》插画提示词
-
-Textless literary illustration for a Typst poem book page.
-Use the poem title, section, and context as the source: 云南丽江香格里拉之旅.
-Keep the image subdued, atmospheric, and supportive of the poem text.
-Avoid calligraphy, captions, seals, decorative text, and generic ancient-China clichés.
+title: 《盘山》
+use_case: illustration-story
+asset_type: portrait 2:3 illustration for a Typst Chinese poem book page
+primary_request: Textless sampled human-reviewed-commentary illustration for 《盘山》; do not add typography.
+scene_backdrop: rain-wet winding mountain road cut into lush Yunnan slopes, with vegetation rising to sky, folded muddy slope textures, a river far below the cliff, and road continuing between peaks.
+subjects_and_actions: no prominent human figure; optionally a tiny vehicle silhouette for scale only the viewer’s eye turns through the four directions of the poem: up to vegetation, side to mud folds, down to river, forward to long road
+foreground: edge of wet mountain road with guard stones and leaves, emphasizing travel from inside/on the road
+middle_ground: folded green slopes with muddy runnels and dense vegetation touching the low cloud sky
+background: cliff drops to a muddy river below, while the road threads forward between distant peaks
+camera_and_composition: portrait 2:3, restrained literary composition, low contrast, quiet negative space for page text
+light_and_color: Use the source-photo palette when present; otherwise use subdued literary colors matching the poem emotion.
+style: Textless contemporary Chinese literary illustration, ink-wash plus soft gouache, fine paper grain, restrained detail.
+page_layout_constraints: No text in the image; leave quiet areas so poem, pinyin, context, and commentary remain dominant and legible.
+negative_constraints: dry sunny mountain; flat road; city road; generic green hill without cliff river; text; Chinese characters; calligraphy; seals; watermark; labels; AI-art orbs; private identifiable faces
+final_image_prompt: Create a textless portrait 2:3 contemporary Chinese literary illustration for 《盘山》. Scene/backdrop: rain-wet winding mountain road cut into lush Yunnan slopes, with vegetation rising to sky, folded muddy slope textures, a river far below the cliff, and road continuing between peaks.. Foreground: edge of wet mountain road with guard stones and leaves, emphasizing travel from inside/on the road. Middle ground: folded green slopes with muddy runnels and dense vegetation touching the low cloud sky. Background: cliff drops to a muddy river below, while the road threads forward between distant peaks. Human figures and actions: no prominent human figure; optionally a tiny vehicle silhouette for scale only; the viewer’s eye turns through the four directions of the poem: up to vegetation, side to mud folds, down to river, forward to long road. Required objects: wet road, dense vegetation, folded mud runnels, cliff, river, distant winding road between peaks. Emotion and story: damp, heavy, expansive mountain-road awe; road continues after the poem stops. Composition/camera: portrait 2:3 book illustration, restrained literary composition, quiet negative space. Source-photo/place cues: Source photo path(s): pan-shan-01..04.JPG. They show wet green mountain slopes, cloudy sky, a muddy river far below, steep valley walls, and road/height perspective from a mountain route; use lush green, heavy wet atmosphere, folded slopes, cliff-river depth, not exact photo framing.. Symbolic mapping: a moving mountain-road view that looks upward to vegetation, sideways to folded mud slope, downward to river, and forward to a long road between peaks.. Style: contemporary Chinese literary illustration, ink-wash plus soft gouache, fine paper grain, muted book-compatible palette, low contrast. Do not show: dry sunny mountain; flat road; city road; generic green hill without cliff river; no text, no Chinese characters, no calligraphy, no seals, no watermark.
+source_generated_image: /Users/utensil/.codex-peri/generated_images/019e82e9-a976-7d02-b116-300972fd6a7c/ig_0daedd9e66ce5d7f016a1f1461f1188196b1e5dd19e228e975.png
+must_show: lush vegetation touching sky; folded wet mud slope; river below cliff; road between peaks; rain-wet mountain atmosphere
+coverage_check: lush vegetation touching sky covered in final_image_prompt; folded wet mud slope covered in final_image_prompt; river below cliff covered in final_image_prompt; road between peaks covered in final_image_prompt; rain-wet mountain atmosphere covered in final_image_prompt

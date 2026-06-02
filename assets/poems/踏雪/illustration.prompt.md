@@ -1,6 +1,18 @@
-# 《踏雪》插画提示词
-
-Textless literary illustration for a Typst poem book page.
-Use the poem title, section, and context as the source: 云南丽江香格里拉之旅.
-Keep the image subdued, atmospheric, and supportive of the poem text.
-Avoid calligraphy, captions, seals, decorative text, and generic ancient-China clichés.
+title: 《踏雪》
+use_case: illustration-story
+asset_type: portrait 2:3 illustration for a Typst Chinese poem book page
+primary_request: Textless sampled human-reviewed-commentary illustration for 《踏雪》; do not add typography.
+scene_backdrop: Yulong Snow Mountain high-altitude stair route in cloud and ice, with a climber continuing upward despite dizziness and breathlessness, then a view opening down to glacier below.
+subjects_and_actions: one non-identifying climber as the speaker, bundled, bent slightly from altitude reaction, not heroic poster; tiny crowd silhouettes for scale the climber keeps ascending despite blurred eyes and windbox-like breathing, then turns back from a higher point to see the glacier lower than before
+foreground: steep snow/rock stairs with a tired climber gripping rail or leaning forward, breath visible in cold air
+middle_ground: zigzag hundred-fold stair route with small bundled tourists for scale, cloud hiding the summit
+background: grey-white glacier and jagged rock peaks below/behind, clouds parting enough to show height
+camera_and_composition: portrait 2:3, restrained literary composition, low contrast, quiet negative space for page text
+light_and_color: Use the source-photo palette when present; otherwise use subdued literary colors matching the poem emotion.
+style: Textless contemporary Chinese literary illustration, ink-wash plus soft gouache, fine paper grain, restrained detail.
+page_layout_constraints: No text in the image; leave quiet areas so poem, pinyin, context, and commentary remain dominant and legible.
+negative_constraints: easy flat snowfield; ski resort mood; heroic mountaineer pose; clear lowland landscape; text; Chinese characters; calligraphy; seals; watermark; labels; AI-art orbs; private identifiable faces
+final_image_prompt: Create a textless portrait 2:3 contemporary Chinese literary illustration for 《踏雪》. Scene/backdrop: Yulong Snow Mountain high-altitude stair route in cloud and ice, with a climber continuing upward despite dizziness and breathlessness, then a view opening down to glacier below.. Foreground: steep snow/rock stairs with a tired climber gripping rail or leaning forward, breath visible in cold air. Middle ground: zigzag hundred-fold stair route with small bundled tourists for scale, cloud hiding the summit. Background: grey-white glacier and jagged rock peaks below/behind, clouds parting enough to show height. Human figures and actions: one non-identifying climber as the speaker, bundled, bent slightly from altitude reaction, not heroic poster; tiny crowd silhouettes for scale; the climber keeps ascending despite blurred eyes and windbox-like breathing, then turns back from a higher point to see the glacier lower than before. Required objects: stairs, rail, snow/ice, glacier, cloud, rock peak, cold breath. Emotion and story: strained persistence and release at the summit, measured through eyes, steps, lungs, and turning back. Composition/camera: portrait 2:3 book illustration, restrained literary composition, quiet negative space. Source-photo/place cues: Source photo path(s): ta-xue-01..02.JPG. They show Yulong Snow Mountain glacier terrain, grey rock/ice, clouds wrapping peaks, tourist stair/route and crowd scale; use high-altitude cloud, glacier, cold rock, stair ascent, crowd scale, not exact people/faces.. Symbolic mapping: a body-and-altitude struggle: cloud-confused summit, repeated stairs, windbox breathing, then looking back down at glacier from height.. Style: contemporary Chinese literary illustration, ink-wash plus soft gouache, fine paper grain, muted book-compatible palette, low contrast. Do not show: easy flat snowfield; ski resort mood; heroic mountaineer pose; clear lowland landscape; no text, no Chinese characters, no calligraphy, no seals, no watermark.
+source_generated_image: /Users/utensil/.codex-peri/generated_images/019e82e9-a976-7d02-b116-300972fd6a7c/ig_0daedd9e66ce5d7f016a1f150c3c8c81968a4c256ebf2e84db.png
+must_show: cloud-confused summit; hundred-fold stairs; breathless climber; glacier below after turning back; high-altitude cold
+coverage_check: cloud-confused summit covered in final_image_prompt; hundred-fold stairs covered in final_image_prompt; breathless climber covered in final_image_prompt; glacier below after turning back covered in final_image_prompt; high-altitude cold covered in final_image_prompt
