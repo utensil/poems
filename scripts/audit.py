@@ -60,12 +60,13 @@ def main() -> int:
     for required in [
         "冶文斋诗选",
         "宋皿",
-        "Conventions",
+        "凡例",
         "年谱",
         "代后记：在日常里写旧体诗的一点体会",
         "赏析与配图说明",
         "最综合的一种阅读体验",
-        "无需介绍详细编辑体例",
+        "无需介绍",
+        "详细编辑体例",
     ]:
         if required not in text:
             print(f"ERROR: PDF text missing {required}", file=sys.stderr)

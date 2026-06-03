@@ -264,9 +264,11 @@ def main() -> int:
     conventions_path = ROOT / "src" / "conventions.md"
     if conventions_path.exists():
         conventions = conventions_path.read_text(encoding="utf-8")
-        for snippet in ["# Conventions", "拼音", "创作背景", "赏析", "配图", "年谱"]:
+        for snippet in ["# 凡例", "拼音", "创作背景", "赏析", "年谱"]:
             if snippet not in conventions:
                 fail(errors, f"src/conventions.md missing reader convention snippet: {snippet}")
+        if "配图" not in conventions and "插图" not in conventions:
+            fail(errors, "src/conventions.md missing reader convention snippet: 配图/插图")
         for forbidden in ["frontmatter", "human-revised", "reference-quality", "`context`", "LaTeX", "Typst"]:
             if forbidden in conventions:
                 fail(errors, f"src/conventions.md still contains technical convention text: {forbidden}")
