@@ -25,7 +25,6 @@ from common import (
     UNREVIEWED_COMMENTARY,
     clean_poem_body,
     extract_postscript_markdown,
-    extract_commentary_note_markdown,
     iter_book_poems,
     load_book,
     poem_order_from_main_tex,
@@ -229,9 +228,9 @@ def main() -> int:
             fail(errors, f"{path.relative_to(ROOT)} has unsupported commentary-status {status!r}")
 
     for required in [
-        "src/fanli.md",
+        "src/conventions.md",
         "src/postscript.md",
-        "src/llm-commentary-note.md",
+        "src/commentary-and-illustration-note.md",
         "src/chronology.yaml",
         "templates/book-style.typ",
         "templates/illustrated-poem-page.typ",
@@ -262,14 +261,24 @@ def main() -> int:
         if abs(len(postscript) - len(extracted)) > 1500:
             fail(errors, "src/postscript.md length diverges from main.tex extraction")
 
-    note_path = ROOT / "src" / "llm-commentary-note.md"
+    conventions_path = ROOT / "src" / "conventions.md"
+    if conventions_path.exists():
+        conventions = conventions_path.read_text(encoding="utf-8")
+        for snippet in ["# Conventions", "拼音", "创作背景", "赏析", "配图", "年谱"]:
+            if snippet not in conventions:
+                fail(errors, f"src/conventions.md missing reader convention snippet: {snippet}")
+        for forbidden in ["frontmatter", "human-revised", "reference-quality", "`context`", "LaTeX", "Typst"]:
+            if forbidden in conventions:
+                fail(errors, f"src/conventions.md still contains technical convention text: {forbidden}")
+
+    note_path = ROOT / "src" / "commentary-and-illustration-note.md"
     if note_path.exists():
         note = note_path.read_text(encoding="utf-8")
-        extracted_note = extract_commentary_note_markdown()
         if "少年时代，我非常喜欢《唐诗鉴赏辞典》" not in note:
-            fail(errors, "src/llm-commentary-note.md missing extracted commentary-writing note")
-        if abs(len(note) - len(extracted_note)) > 300:
-            fail(errors, "src/llm-commentary-note.md length diverges from main.tex commentary note extraction")
+            fail(errors, "src/commentary-and-illustration-note.md missing commentary-writing note")
+        for snippet in ["## 赏析", "## 配图", "诗作、背景与赏析", "视觉 brief", "文学化阐释", "纪实证据"]:
+            if snippet not in note:
+                fail(errors, f"src/commentary-and-illustration-note.md missing commentary/illustration note snippet: {snippet}")
 
     manifest = ROOT / "build" / "generated" / "manifest.json"
     if manifest.exists():

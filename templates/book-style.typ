@@ -145,6 +145,8 @@
                 ]
               ]
             ]
+          } else if p.kind == "heading" {
+            block(above: 8pt, below: 10pt)[#prose-title-style(p.text, size: 15pt)]
           } else {
             block(above: 0pt, below: prose-paragraph-gap)[#h(prose-indent)#prose-body-style(p.text)]
           }

@@ -36,6 +36,11 @@ def paragraphs(markdown: str) -> list[dict[str, str]]:
             flush_para()
             flush_quote()
             continue
+        if line.startswith("## "):
+            flush_para()
+            flush_quote()
+            parts.append({"kind": "heading", "text": line.lstrip("#").strip()})
+            continue
         if line.startswith(">"):
             flush_para()
             current_quote.append(line.lstrip("> ").strip())
@@ -95,10 +100,10 @@ def typst_chronology_entries(entries: list[dict]) -> str:
 def main() -> None:
     manifest = json.loads((ROOT / "build" / "generated" / "manifest.json").read_text(encoding="utf-8"))
     chronology = yaml.safe_load((ROOT / "src" / "chronology.yaml").read_text(encoding="utf-8"))
-    fanli = (ROOT / "src" / "fanli.md").read_text(encoding="utf-8")
+    conventions = (ROOT / "src" / "conventions.md").read_text(encoding="utf-8")
     preface = (ROOT / "src" / "preface.md").read_text(encoding="utf-8")
     postscript = (ROOT / "src" / "postscript.md").read_text(encoding="utf-8")
-    llm_note = (ROOT / "src" / "llm-commentary-note.md").read_text(encoding="utf-8")
+    commentary_illustration_note = (ROOT / "src" / "commentary-and-illustration-note.md").read_text(encoding="utf-8")
 
     lines: list[str] = [
         '#import "../../templates/book-style.typ": *',
@@ -145,15 +150,15 @@ def main() -> None:
         "#pagebreak()",
         '#prose-page("序", (), placeholder: true)',
         "#pagebreak()",
-        f'#prose-page("凡例", {typst_block_array(paragraphs(fanli)[1:])})',
+        f'#prose-page("Conventions", {typst_block_array(paragraphs(conventions)[1:])})',
         "#pagebreak()",
         "#toc-page((",
         '  "序",',
-        '  "凡例",',
+        '  "Conventions",',
         *[f'  "{section["title"]}",' for section in manifest["sections"]],
         '  "年谱",',
         '  "代后记：在日常里写旧体诗的一点体会",',
-        '  "赏析编写说明",',
+        '  "赏析与配图说明",',
         "))",
         "#pagebreak()",
     ]
@@ -195,7 +200,7 @@ def main() -> None:
             "#pagebreak()",
             f'#appendix-article("代后记：在日常里写旧体诗的一点体会", {typst_block_array(paragraphs(postscript)[1:])})',
             "#pagebreak()",
-            f'#appendix-article("赏析编写说明", {typst_block_array(paragraphs(llm_note)[1:])})',
+            f'#appendix-article("赏析与配图说明", {typst_block_array(paragraphs(commentary_illustration_note)[1:])})',
         ]
     )
 

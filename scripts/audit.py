@@ -57,7 +57,7 @@ def main() -> int:
             raise SystemExit(1)
         return pages[matches[0] - 1]
 
-    for required in ["冶文斋诗选", "宋皿", "凡例", "年谱", "代后记：在日常里写旧体诗的一点体会", "赏析编写说明"]:
+    for required in ["冶文斋诗选", "宋皿", "Conventions", "年谱", "代后记：在日常里写旧体诗的一点体会", "赏析与配图说明"]:
         if required not in text:
             print(f"ERROR: PDF text missing {required}", file=sys.stderr)
             return 1
