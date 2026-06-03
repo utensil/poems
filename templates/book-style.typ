@@ -147,6 +147,18 @@
             ]
           } else if p.kind == "heading" {
             block(above: 8pt, below: 10pt)[#prose-title-style(p.text, size: 15pt)]
+          } else if p.kind == "signature" {
+            block(above: 4pt, below: prose-paragraph-gap)[
+              #align(right)[
+                #block(width: 38mm)[
+                  #set par(first-line-indent: 0pt, justify: false)
+                  #for line in p.text.split("\n") [
+                    #align(center)[#prose-body-style(line)]
+                    #v(4pt)
+                  ]
+                ]
+              ]
+            ]
           } else {
             block(above: 0pt, below: prose-paragraph-gap)[#h(prose-indent)#prose-body-style(p.text)]
           }

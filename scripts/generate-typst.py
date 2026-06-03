@@ -56,6 +56,14 @@ def paragraph_texts(markdown: str) -> list[str]:
     return [part["text"] for part in paragraphs(markdown) if part["kind"] == "para"]
 
 
+def with_signature_block(parts: list[dict[str, str]]) -> list[dict[str, str]]:
+    if len(parts) < 2:
+        return parts
+    if parts[-2]["kind"] != "para" or parts[-1]["kind"] != "para":
+        return parts
+    return parts[:-2] + [{"kind": "signature", "text": f"{parts[-2]['text']}\n{parts[-1]['text']}"}]
+
+
 def typst_block_array(parts: list[dict[str, str]]) -> str:
     if not parts:
         return "()"
@@ -148,7 +156,7 @@ def main() -> None:
         "",
         '#cover-page("冶文斋诗选", "宋皿")',
         "#pagebreak()",
-        f'#prose-page("序", {typst_block_array(paragraphs(preface)[1:])})',
+        f'#prose-page("序", {typst_block_array(with_signature_block(paragraphs(preface)[1:]))})',
         "#pagebreak()",
         f'#prose-page("凡例", {typst_block_array(paragraphs(conventions)[1:])})',
         "#pagebreak()",
