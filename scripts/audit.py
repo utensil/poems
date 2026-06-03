@@ -57,11 +57,20 @@ def main() -> int:
             raise SystemExit(1)
         return pages[matches[0] - 1]
 
-    for required in ["冶文斋诗选", "宋皿", "Conventions", "年谱", "代后记：在日常里写旧体诗的一点体会", "赏析与配图说明"]:
+    for required in [
+        "冶文斋诗选",
+        "宋皿",
+        "Conventions",
+        "年谱",
+        "代后记：在日常里写旧体诗的一点体会",
+        "赏析与配图说明",
+        "最综合的一种阅读体验",
+        "无需介绍详细编辑体例",
+    ]:
         if required not in text:
             print(f"ERROR: PDF text missing {required}", file=sys.stderr)
             return 1
-    for forbidden in ["textsf", "Typst 插画本", "十、一、", "十、二、", r"\\textsf", "LLM", "未列入年谱", "夜会、心印", "> "]:
+    for forbidden in ["textsf", "Typst 插画本", "十、一、", "十、二、", r"\\textsf", "LLM", "未列入年谱", "夜会、心印", "> ", "（待补）"]:
         if forbidden in text:
             print(f"ERROR: PDF text contains forbidden text {forbidden}", file=sys.stderr)
             return 1

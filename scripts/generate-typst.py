@@ -148,7 +148,7 @@ def main() -> None:
         "",
         '#cover-page("冶文斋诗选", "宋皿")',
         "#pagebreak()",
-        '#prose-page("序", (), placeholder: true)',
+        f'#prose-page("序", {typst_block_array(paragraphs(preface)[1:])})',
         "#pagebreak()",
         f'#prose-page("Conventions", {typst_block_array(paragraphs(conventions)[1:])})',
         "#pagebreak()",
