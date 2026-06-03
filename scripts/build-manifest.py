@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import json
 
-from common import ROOT, clean_poem_body, load_book, pinyin_overrides, read_markdown
+from common import ROOT, clean_poem_body, leading_quote_context, load_book, pinyin_overrides, read_markdown
 
 
 def main() -> None:
@@ -21,7 +21,7 @@ def main() -> None:
             rendered_section["poems"].append(
                 {
                     **poem,
-                    "context": poem_frontmatter.get("context", ""),
+                    "context": leading_quote_context(poem_body, poem_frontmatter.get("context")),
                     "body": clean_poem_body(poem_body, poem_frontmatter.get("context")),
                     "commentary-body": commentary_body.strip(),
                     "commentary-status": commentary_status,

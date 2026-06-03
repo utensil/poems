@@ -46,8 +46,8 @@ sections:
     slug: 雨澜
     order: 5
     path: src/poems/职业生涯/雨澜.md
-    commentary: null
-    commentary-status: null
+    commentary: src/commentaries/职业生涯/雨澜.md
+    commentary-status: ai-review-only
     asset: assets/poems/雨澜/illustration.png
     prompt: assets/poems/雨澜/illustration.prompt.md
     pinyin-overrides: {}

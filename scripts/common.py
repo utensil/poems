@@ -147,16 +147,40 @@ def write_markdown(path: Path, frontmatter: dict, body: str) -> None:
     path.write_text(f"---\n{rendered}\n---\n\n{body.strip()}\n", encoding="utf-8")
 
 
+def leading_quote_context(body: str, context: str | None = None) -> str:
+    quotes: list[str] = []
+    for line in body.strip().splitlines():
+        stripped = line.strip()
+        if not stripped:
+            if quotes:
+                continue
+            continue
+        if not stripped.startswith(">"):
+            break
+        quote = stripped.lstrip("> ").strip()
+        if quote:
+            quotes.append(quote)
+    if not quotes:
+        return context or ""
+    seen = {context.strip()} if context else set()
+    extra = [quote for quote in quotes if quote not in seen]
+    return "\n".join([part for part in [context or "", *extra] if part])
+
+
 def clean_poem_body(body: str, context: str | None = None) -> str:
     lines = body.strip().splitlines()
     cleaned: list[str] = []
+    in_leading_quote = True
     for line in lines:
         stripped = line.strip()
+        if in_leading_quote and stripped.startswith(">"):
+            continue
         if stripped.startswith(">"):
             quote = stripped.lstrip("> ").strip()
             if not context or quote == context.strip():
                 continue
         if stripped:
+            in_leading_quote = False
             cleaned.extend(rebreak_poem_line(clean_latex_inline(stripped)))
     return "\n".join(cleaned)
 
