@@ -148,9 +148,9 @@
           } else if p.kind == "heading" {
             block(above: 8pt, below: 10pt)[#prose-title-style(p.text, size: 15pt)]
           } else if p.kind == "signature" {
-            block(above: 4pt, below: prose-paragraph-gap)[
+            block(width: 100%, above: 4pt, below: prose-paragraph-gap)[
               #align(right)[
-                #block(width: 38mm)[
+                #box(width: 38mm)[
                   #set par(first-line-indent: 0pt, justify: false)
                   #for line in p.text.split("\n") [
                     #align(center)[#prose-body-style(line)]
