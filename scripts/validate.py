@@ -278,7 +278,7 @@ def main() -> int:
         note = note_path.read_text(encoding="utf-8")
         if "少年时代，我非常喜欢《唐诗鉴赏辞典》" not in note:
             fail(errors, "src/commentary-and-illustration-note.md missing commentary-writing note")
-        for snippet in ["## 赏析", "## 配图", "诗作、背景与赏析", "视觉 brief", "文学化阐释", "纪实证据"]:
+        for snippet in ["## 赏析", "## 配图", "诗作、背景与赏析", "视觉摘要", "提示词"]:
             if snippet not in note:
                 fail(errors, f"src/commentary-and-illustration-note.md missing commentary/illustration note snippet: {snippet}")
 
