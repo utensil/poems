@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 import re
+import shutil
 
 import yaml
 
@@ -105,6 +106,37 @@ def typst_chronology_entries(entries: list[dict]) -> str:
     return "(" + ", ".join(rendered) + ("," if len(rendered) == 1 else "") + ")"
 
 
+def part_name(index: int, title: str) -> str:
+    safe = re.sub(r"[^\w\u3400-\u9fff.-]+", "-", title, flags=re.UNICODE).strip("-")
+    return f"{index:02d}-{safe or 'chapter'}.typ"
+
+
+def render_poem_block(poem: dict) -> list[str]:
+    body_lines = [line for line in poem["body"].splitlines() if line.strip()]
+    commentary_parts = commentary_paragraphs(poem.get("commentary-body", ""))
+    if poem.get("commentary-status") in UNREVIEWED_COMMENTARY and commentary_parts:
+        if not commentary_parts[0].startswith(COMMENTARY_WARNING):
+            commentary_parts = [COMMENTARY_WARNING] + commentary_parts
+    return [
+        "#{",
+        f"  let title = {typst_string(poem['title'])}",
+        f"  let poem_lines = {typst_array(body_lines)}",
+        f"  let context_note = {typst_string(poem.get('context') or '（无背景说明）')}",
+        f"  let commentary = {typst_array(commentary_parts)}",
+        f"  let asset = {typst_string(poem['asset'])}",
+        f"  let override = {typst_dict(poem.get('pinyin-overrides') or {})}",
+        "  render-poem(title, poem_lines, context_note, commentary, asset, override)",
+        "}",
+        "#pagebreak()",
+    ]
+
+
+def write_typst(path, lines: list[str]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("\n".join(line for line in lines if line is not None) + "\n", encoding="utf-8")
+    print(f"wrote {path}")
+
+
 def main() -> None:
     manifest = json.loads((ROOT / "build" / "generated" / "manifest.json").read_text(encoding="utf-8"))
     chronology = yaml.safe_load((ROOT / "src" / "chronology.yaml").read_text(encoding="utf-8"))
@@ -113,7 +145,12 @@ def main() -> None:
     postscript = (ROOT / "src" / "postscript.md").read_text(encoding="utf-8")
     commentary_illustration_note = (ROOT / "src" / "commentary-and-illustration-note.md").read_text(encoding="utf-8")
 
-    lines: list[str] = [
+    generated_root = ROOT / "build" / "generated"
+    for stale_dir in [generated_root / "parts", generated_root / "chapters"]:
+        if stale_dir.exists():
+            shutil.rmtree(stale_dir)
+
+    helper_lines: list[str] = [
         '#import "../../templates/book-style.typ": *',
         '#import "../../templates/illustrated-poem-page.typ": illustrated-poem-page',
         '#import "../../templates/auto-pinyin/lib.typ": to-pinyin',
@@ -152,7 +189,11 @@ def main() -> None:
         "  )",
         "}",
         "",
-        '#set document(title: "冶文斋诗选", author: "宋皿")',
+    ]
+    write_typst(generated_root / "_helpers.typ", helper_lines)
+
+    frontmatter: list[str] = [
+        '#import "../_helpers.typ": *',
         "",
         '#cover-page("冶文斋诗选", "宋皿")',
         "#pagebreak()",
@@ -170,52 +211,44 @@ def main() -> None:
         "))",
         "#pagebreak()",
     ]
+    write_typst(generated_root / "parts" / "frontmatter.typ", frontmatter)
 
-    for section in manifest["sections"]:
+    chapter_paths: list[str] = []
+    for index, section in enumerate(manifest["sections"], start=1):
         title_lines = [section["title"]]
         if section["title"] == "云南丽江香格里拉之旅":
             title_lines = ["云南丽江", "香格里拉之旅"]
-        lines.extend(
-            [
-                f"#chapter-divider({typst_array(title_lines)}, {len(section['poems'])})",
-                "#pagebreak()",
-            ]
-        )
-        for poem in section["poems"]:
-            body_lines = [line for line in poem["body"].splitlines() if line.strip()]
-            commentary_parts = commentary_paragraphs(poem.get("commentary-body", ""))
-            if poem.get("commentary-status") in UNREVIEWED_COMMENTARY and commentary_parts:
-                if not commentary_parts[0].startswith(COMMENTARY_WARNING):
-                    commentary_parts = [COMMENTARY_WARNING] + commentary_parts
-            lines.extend(
-                [
-                    "#{",
-                    f"  let title = {typst_string(poem['title'])}",
-                    f"  let poem_lines = {typst_array(body_lines)}",
-                    f"  let context_note = {typst_string(poem.get('context') or '（无背景说明）')}",
-                    f"  let commentary = {typst_array(commentary_parts)}",
-                    f"  let asset = {typst_string(poem['asset'])}",
-                    f"  let override = {typst_dict(poem.get('pinyin-overrides') or {})}",
-                    "  render-poem(title, poem_lines, context_note, commentary, asset, override)",
-                    "}",
-                    "#pagebreak()",
-                ]
-            )
-
-    lines.extend(
-        [
-            f"#chronology-page({typst_chronology_entries(chronology.get('entries', []))})",
+        chapter_lines = [
+            '#import "../_helpers.typ": *',
+            "",
+            f"#chapter-divider({typst_array(title_lines)}, {len(section['poems'])})",
             "#pagebreak()",
-            f'#appendix-article("代后记：在日常里写旧体诗的一点体会", {typst_block_array(paragraphs(postscript)[1:])})',
-            "#pagebreak()",
-            f'#appendix-article("赏析与配图说明", {typst_block_array(paragraphs(commentary_illustration_note)[1:])})',
         ]
-    )
+        for poem in section["poems"]:
+            chapter_lines.extend(render_poem_block(poem))
+        path = generated_root / "chapters" / part_name(index, section["title"])
+        write_typst(path, chapter_lines)
+        chapter_paths.append(path.relative_to(generated_root).as_posix())
 
-    out = ROOT / "build" / "generated" / "book.generated.typ"
-    out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text("\n".join(line for line in lines if line is not None) + "\n", encoding="utf-8")
-    print(f"wrote {out}")
+    backmatter: list[str] = [
+        '#import "../_helpers.typ": *',
+        "",
+        f"#chronology-page({typst_chronology_entries(chronology.get('entries', []))})",
+        "#pagebreak()",
+        f'#appendix-article("代后记：在日常里写旧体诗的一点体会", {typst_block_array(paragraphs(postscript)[1:])})',
+        "#pagebreak()",
+        f'#appendix-article("赏析与配图说明", {typst_block_array(paragraphs(commentary_illustration_note)[1:])})',
+    ]
+    write_typst(generated_root / "parts" / "backmatter.typ", backmatter)
+
+    root_lines = [
+        '#set document(title: "冶文斋诗选", author: "宋皿")',
+        "",
+        '#include "parts/frontmatter.typ"',
+        *[f'#include "{path}"' for path in chapter_paths],
+        '#include "parts/backmatter.typ"',
+    ]
+    write_typst(generated_root / "book.generated.typ", root_lines)
 
 
 if __name__ == "__main__":

@@ -158,7 +158,21 @@ def main() -> int:
             print(f"ERROR: poem template lacks required split/spacing contract: {required_source}", file=sys.stderr)
             return 1
 
-    generated_source = (ROOT / "build" / "generated" / "book.generated.typ").read_text(encoding="utf-8")
+    generated_typst_paths = sorted((ROOT / "build" / "generated").glob("**/*.typ"))
+    generated_source = "\n".join(path.read_text(encoding="utf-8") for path in generated_typst_paths)
+    required_generated = [
+        ROOT / "build" / "generated" / "_helpers.typ",
+        ROOT / "build" / "generated" / "parts" / "frontmatter.typ",
+        ROOT / "build" / "generated" / "parts" / "backmatter.typ",
+    ]
+    for required_path in required_generated:
+        if required_path not in generated_typst_paths:
+            print(f"ERROR: missing generated Typst part {required_path.relative_to(ROOT)}", file=sys.stderr)
+            return 1
+    chapter_parts = sorted((ROOT / "build" / "generated" / "chapters").glob("*.typ"))
+    if len(chapter_parts) != 6:
+        print(f"ERROR: expected 6 generated chapter Typst files, got {len(chapter_parts)}", file=sys.stderr)
+        return 1
     if "LLM" in generated_source:
         print("ERROR: generated Typst still contains LLM title text", file=sys.stderr)
         return 1
