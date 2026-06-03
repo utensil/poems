@@ -148,6 +148,11 @@ def write_markdown(path: Path, frontmatter: dict, body: str) -> None:
 
 
 def leading_quote_context(body: str, context: str | None = None) -> str:
+    parts = leading_quote_context_parts(body, context)
+    return "\n".join(part["text"] for part in parts if part["text"])
+
+
+def leading_quote_context_parts(body: str, context: str | None = None) -> list[dict[str, str]]:
     quotes: list[str] = []
     for line in body.strip().splitlines():
         stripped = line.strip()
@@ -160,11 +165,16 @@ def leading_quote_context(body: str, context: str | None = None) -> str:
         quote = stripped.lstrip("> ").strip()
         if quote:
             quotes.append(quote)
+    parts: list[dict[str, str]] = []
+    if context:
+        parts.append({"kind": "para", "text": context})
     if not quotes:
-        return context or ""
+        return parts
     seen = {context.strip()} if context else set()
     extra = [quote for quote in quotes if quote not in seen]
-    return "\n".join([part for part in [context or "", *extra] if part])
+    if extra:
+        parts.append({"kind": "quote", "text": "\n".join(extra)})
+    return parts
 
 
 def clean_poem_body(body: str, context: str | None = None) -> str:

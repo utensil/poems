@@ -77,6 +77,13 @@ def typst_block_array(parts: list[dict[str, str]]) -> str:
     return f"({rendered})"
 
 
+def context_parts(poem: dict) -> list[dict[str, str]]:
+    parts = poem.get("context-parts") or []
+    if parts:
+        return parts
+    return [{"kind": "para", "text": poem.get("context") or "（无背景说明）"}]
+
+
 def commentary_paragraphs(markdown: str) -> list[str]:
     parts = []
     for part in re.split(r"\n\s*\n", re.sub(r"^---\n.*?\n---\n", "", markdown.strip(), flags=re.S)):
@@ -121,7 +128,7 @@ def render_poem_block(poem: dict) -> list[str]:
         "#{",
         f"  let title = {typst_string(poem['title'])}",
         f"  let poem_lines = {typst_array(body_lines)}",
-        f"  let context_note = {typst_string(poem.get('context') or '（无背景说明）')}",
+        f"  let context_note = {typst_block_array(context_parts(poem))}",
         f"  let commentary = {typst_array(commentary_parts)}",
         f"  let asset = {typst_string(poem['asset'])}",
         f"  let override = {typst_dict(poem.get('pinyin-overrides') or {})}",

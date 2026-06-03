@@ -189,9 +189,34 @@
   ]
 
   let para(body) = block(above: 0pt, below: commentary-paragraph-gap)[#body]
+  let context-quote-offset = 2em
+  let context-quote-style(body) = text(font: fsong, size: context-size * 0.92, tracking: 0.2pt, fill: rgb("#60463b"))[#body]
   let context-block = box(width: content-w)[
     #text(font: fsong, size: context-size, tracking: 0.3pt, fill: rgb("#60463b"))[
-      #strong[【背景】]#background-note
+      #strong[【背景】]#background-note.first().text
+    ]
+    #for p in background-note.slice(1) [
+      #if p.kind == "quote" {
+        block(above: 4pt, below: 4pt)[
+          #pad(left: context-quote-offset)[
+            #block(
+              width: 100% - context-quote-offset,
+              inset: (left: 5mm, right: 4mm, y: 2mm),
+              stroke: (left: (paint: rgb("#8c6e5d").transparentize(70%), thickness: 1pt)),
+            )[
+              #set par(first-line-indent: 0pt, leading: 0.58em, justify: false)
+              #for line in p.text.split("\n") [
+                #context-quote-style(line)
+                #linebreak()
+              ]
+            ]
+          ]
+        ]
+      } else {
+        block(above: 3pt, below: 0pt)[
+          #text(font: fsong, size: context-size, tracking: 0.3pt, fill: rgb("#60463b"))[#p.text]
+        ]
+      }
     ]
   ]
 
