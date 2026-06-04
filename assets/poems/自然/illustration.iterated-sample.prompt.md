@@ -1,0 +1,16 @@
+title: 自然
+use_case: illustration-story
+asset_type: 9:16 vertical Chinese literary book illustration, no text.
+primary_request: Create a restrained illustration for the poem 《自然》, which adapts Yeats: do not worship dusty deeds, do not thirst fiercely after truth, new dreams arise from seeking, and truth is in the opened heart. The image must support a Typst poem page with overlaid text, so keep contrast low and leave calm open text areas.
+scene_backdrop: A quiet study threshold opening toward a simple natural courtyard at dawn.
+subjects_and_actions: One non-identifiable contemplative figure, seen from behind or as a three-quarter silhouette, has stopped reaching toward clean worldly achievement objects and stands still at an open doorway.
+foreground: A closed ledger, a plain brush rest, and a folded certificate-like paper without readable writing sit cleanly but unattended in shadow.
+middle_ground: The still figure stands at the threshold, posture relaxed and non-seeking. Faint translucent dream-like reflections hover near the threshold without becoming fantasy objects.
+background: Pale morning light, a simple courtyard tree, and empty dawn sky suggesting reality opening.
+camera_and_composition: 9:16 vertical. Interior study looking outward; lower side holds objects, middle has the figure/threshold, upper area opens into light and sparse courtyard space for text.
+light_and_color: Warm grey paper tone, pale dawn gold, muted wood brown, restrained blue-green courtyard light, low contrast.
+style: Contemporary Chinese literary illustration, ink wash with soft gouache, fine paper grain, quiet and emotionally precise.
+page_layout_constraints: No text in image. Keep central and upper regions quiet enough for overlaid poem/commentary. Avoid high-contrast clutter.
+negative_constraints: No empty cup, no drinking vessel, no dusty world, no literal dust storm, no piles of dirt, no glowing orb, no hands-in-pockets pose, no hands grabbing truth, no generic nature only, no bamboo-only title illustration, no readable text, no calligraphy, no seal, no watermark.
+final_image_prompt: Create a 9:16 vertical Chinese literary illustration for 《自然》: a quiet study at dawn, clean worldly achievement tokens in the foreground such as a closed ledger, brush rest, and folded paper left unattended in shadow; a single non-identifiable figure standing still at an open doorway, stopped reaching and not using a hands-in-pockets pose; pale light entering from a simple natural courtyard; faint translucent dream-like reflections near the threshold to show new dreams arising; calm open space for poem text. Express non-seeking stillness and heart opening to reality. Use ink wash and soft gouache, warm grey paper, muted wood, pale dawn gold, restrained blue-green. No empty cup, no dusty world, no generic nature only, no bamboo-only title illustration, no text, no seal, no watermark. clean worldly achievement tokens covered in final_image_prompt; stopped reaching covered in final_image_prompt; new dreams arising covered in final_image_prompt; heart opening to reality covered in final_image_prompt; non-seeking stillness covered in final_image_prompt.
+source_generated_image: /Users/utensil/.codex-peri/generated_images/019e82e9-a976-7d02-b116-300972fd6a7c/ig_0ee3f3049ef2a167016a20082694048191acd8d032ac08515c.png
