@@ -670,7 +670,7 @@ sections:
     asset: assets/poems/穿云/illustration.png
     prompt: assets/poems/穿云/illustration.prompt.md
     pinyin-overrides:
-      冲: chòng
+      冲: chōng
   - title: 盘山
     slug: 盘山
     order: 3

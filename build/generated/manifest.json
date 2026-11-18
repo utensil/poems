@@ -1473,7 +1473,7 @@
           "asset": "assets/poems/穿云/illustration.png",
           "prompt": "assets/poems/穿云/illustration.prompt.md",
           "pinyin-overrides": {
-            "冲": "chòng"
+            "冲": "chōng"
           },
           "context": "乘机降落时观云所作。",
           "context-parts": [
