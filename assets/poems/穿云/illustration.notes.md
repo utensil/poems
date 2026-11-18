@@ -28,7 +28,7 @@ AI visual review: one white crane with readable lowered head and two feathered w
 
 ## Page verification
 
-`just audit` passed. The complete poem, context, image and settled commentary remain on page 86 of the 106-page A4 PDF, with chōng and no visible overflow. The lowered head, feathered wing sweep and solid snow ridge remain legible in the small panel; the faint enlarged wash also retains text contrast. Intended fonts are unavailable, so this checks fallback-font layout only. No delivered PDF was replaced.
+The initial image preview passed content/layout checks on page 86 of a 106-page A4 PDF, but used fallback fonts and did not verify the intended typography. After the author flagged this, the missing Apple font families were installed locally and the build was given the repository font path for bundled Zhuque. A fresh `just audit` passes with STKaiti, STFangsong, STKaitiSC-Regular and ZhuqueFangsong-Regular embedded; the audit now rejects unknown-font warnings. The complete poem, context, accepted image and settled commentary still fit page 86, with chōng and no visible overflow. The lowered head, feathered wing sweep and snow ridge remain legible; the faint enlarged wash retains text contrast. No delivered PDF was replaced.
 
 ## Earlier images in Git history
 

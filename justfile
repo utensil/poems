@@ -13,7 +13,7 @@ generate:
 
 build: validate generate
     mkdir -p build/pdf
-    typst compile --root . book.typ build/pdf/poem-book.pdf
+    typst compile --root . --font-path . book.typ build/pdf/poem-book.pdf
 
 audit:
     python3 scripts/audit.py

@@ -22,7 +22,12 @@ def main() -> int:
     run(["python3", "scripts/validate.py", "--mode", "draft"])
     run(["python3", "scripts/build-manifest.py"])
     run(["python3", "scripts/generate-typst.py"])
-    run(["typst", "compile", "--root", ".", "book.typ", "build/pdf/poem-book.pdf"])
+    compilation = run(["typst", "compile", "--root", ".", "--font-path", ".", "book.typ", "build/pdf/poem-book.pdf"])
+    if compilation.stderr:
+        print(compilation.stderr, file=sys.stderr)
+    if "unknown font family:" in compilation.stderr:
+        print("ERROR: PDF uses fallback fonts; install the named font families before accepting the render", file=sys.stderr)
+        return 1
 
     final_validation = run(["python3", "scripts/validate.py", "--mode", "final"], expect_ok=False)
     if final_validation.returncode == 0:

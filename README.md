@@ -6,6 +6,8 @@ Each poem is annotated with the context in which each poem was composed, as well
 
 With "A Little Experience of Writing Classical Chinese Poetry in Daily Life" as a postscript, which is also published on [Zhihu](https://zhuanlan.zhihu.com/p/262247462).
 
+On the `typst` branch, build the illustrated edition with `just build` and verify it with `just audit` (Python with PyYAML, Typst, and Poppler are required). Install `STKaiti`, `STFangsong`, and `Kaiti SC` locally; on macOS these are downloadable Apple fonts. The build includes the repository font path for the bundled `Zhuque Fangsong (technical preview)` font. The audit rejects unknown-font warnings rather than accepting a PDF rendered with fallback fonts. Check embedded fonts with `pdffonts build/pdf/poem-book.pdf`.
+
 # 冶文斋诗选
 
 这里维护着我历年诗作的选集。
