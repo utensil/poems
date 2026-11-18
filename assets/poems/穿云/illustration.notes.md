@@ -2,7 +2,7 @@
 image-status: generated
 prompt-source: commentary-led-white-crane-visual-brief
 brief-status: written
-review-status: generated-needs-human-review
+review-status: author-approved
 source-poem: src/poems/云南丽江香格里拉之旅/穿云.md
 source-commentary: src/commentaries/云南丽江香格里拉之旅/穿云.md
 source-images:
@@ -10,7 +10,7 @@ source-images:
 generation-tool: built-in image_gen
 generated-image-source: /Users/utensil/.codex/generated_images/01a1ec9d-97e3-76d3-8e9e-b58e07ddee7c/exec-769c13d0-6311-407d-a9dd-5e7b450ebdaf.png
 regeneration-scope: author-requested-reconsideration-after-image-rejection
-human-feedback: The replacement is not better than the original; reconsider the new commentary and regenerate. Keep canonical filenames and use Git history.
+human-feedback: Author accepted the white-crane illustration with “ok settled”; the subsequent font complaint concerns PDF typography, not the artwork.
 selected-asset: illustration.png
 selected-moment: 俯首雪山冲 — the first touch of cloud on the inclined white crane
 asset-sha256: 3d6394c8750a383593bd30ee99cbc430c0ae9715a880952d210c0dc50e28b66a
@@ -24,7 +24,7 @@ One instant: 俯首雪山冲 at first cloud contact. The spreading distant cloud
 
 Generated once with built-in image_gen from the exact final_image_prompt in illustration.prompt.md; no reference images were passed to the model. Source photograph, original illustration and rejected replacement were inspected before rewriting the brief and prompt.
 
-AI visual review: one white crane with readable lowered head and two feathered wings; nearby cloud and mist share the bird's space, with cloud peaks and rock/snow ridges distinguishable beyond. The close crane occupies more area than initially proposed, but provides the bodily viewpoint missing from the previous image. Azure is confined to a small corner; warm ivory highlights and cool grey-blue shadows establish cloud volume, with no large empty pale corner. The wing diagonal gives movement and its veiled edges retain softness. Human review remains pending.
+AI visual review: one white crane with readable lowered head and two feathered wings; nearby cloud and mist share the bird's space, with cloud peaks and rock/snow ridges distinguishable beyond. The close crane occupies more area than initially proposed, but provides the bodily viewpoint missing from the previous image. Azure is confined to a small corner; warm ivory highlights and cool grey-blue shadows establish cloud volume, with no large empty pale corner. The wing diagonal gives movement and its veiled edges retain softness. The author subsequently accepted this illustration with “ok settled”; the later PDF-font correction does not reopen the artwork.
 
 ## Page verification
 
