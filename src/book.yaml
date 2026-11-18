@@ -666,7 +666,7 @@ sections:
     order: 2
     path: src/poems/云南丽江香格里拉之旅/穿云.md
     commentary: src/commentaries/云南丽江香格里拉之旅/穿云.md
-    commentary-status: iterated
+    commentary-status: human-revised
     asset: assets/poems/穿云/illustration.png
     prompt: assets/poems/穿云/illustration.prompt.md
     pinyin-overrides:
